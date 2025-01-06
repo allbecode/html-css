@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Lista de Compras</title>
+</head>
+
+<body>
+    <header>
+        <h1>Lista de Compras</h1>
+        <a href="lista-produtos.html" >Gerenciamento de produtos</a>
+    </header>
+
+    <main>
+        <div>
+            <div class="no-print">
+                <h2>Selecione um Produto</h2>
+                <label for="product-dropdown">Produtos:</label>
+                <select id="product-dropdown">
+                    <option value="">Carregando produtos...</option>
+                </select>
+                <button id="add-to-list" class="btn">Adicionar à Lista</button>
+            </div><!-- no-print -->
+            <div class="list-container">
+                <h2>Lista de Produtos Selecionados</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Categoria</th>
+                            <th>Quantidade</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="selected-products-list">
+                        <!-- Produtos adicionados aparecerão aqui -->
+                    </tbody>
+                </table>
+                <button id="save-list" class="btn">Salvar Lista</button>
+                <button id="print-list" class="btn">Imprimir Lista</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

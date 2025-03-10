@@ -1,0 +1,118 @@
+body, html{
+    margin: 0;
+    height: 0;
+    padding: 0;
+}
+
+body{
+    font-family:'poppins';
+    margin: 20px;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.center{
+    width: 100%;
+    text-align: center;
+}
+
+.w50{
+  width: 50%;    
+}
+
+.w10{
+    width: 10%;
+}
+
+h1, h2{
+    color: #333;
+}
+
+form{
+    margin-bottom: 20px;
+}
+
+
+label{
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 7px;
+}
+
+input {
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 0.5px solid rgb(197, 196, 196);
+}
+
+input[type=text]{
+    width: 50%;
+}
+
+.right{
+    margin-left: 20px;
+    width: 25%;
+    display: inline-block;
+}
+
+.left{
+    width: 25%;
+    display: inline-block;
+}
+
+.right input[type=number]{
+    width: 95%;
+}
+
+.left input[type=number]{
+    width: 95%;
+}
+
+button{
+    width: 20%;
+    margin: 0 auto;
+    margin-top: 20px;
+    display: block;
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: #45a049;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+table, th, td{
+    border: 1px solid rgb(132, 132, 214);
+}
+
+th, td{
+    padding: 10px;
+    text-align: center;
+}
+
+th{
+    background-color: rgb(98, 98, 254);
+    color: white;
+}
+
+table td a{
+    text-decoration: none;
+    color: rgb(98, 98, 254);
+    transition:color 3s;
+}
+
+table td a:hover{
+    font-weight: 500;
+    color: rgb(230, 0, 255);
+}
+
+
+

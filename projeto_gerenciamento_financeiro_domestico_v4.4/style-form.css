@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+:root {
+    --cor1: #063042;
+    --cor2: #4384F2;
+    --cor3: #D9E6FC;
+    --cor4: #F2F7FA;
+    --font-principal: Montserrat;
+}
+
+form.form-geral {
+    margin: auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.form-geral label {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.form-geral input, select {
+    padding: 8px;
+    margin: 5px 0px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}

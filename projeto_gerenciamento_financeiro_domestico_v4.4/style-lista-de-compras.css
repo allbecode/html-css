@@ -1,0 +1,58 @@
+table input[type='button'] {
+    width: 90px;
+}
+
+.btn {
+    box-sizing: border-box;
+    background-color: var(--cor2);
+    color: var(--cor4);
+    border: 2px solid var(--cor2);
+    border-radius: 5px;
+    margin: 5px 5px;
+    padding: 10px;
+    width: 98%;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: white;
+    color: var(--cor2);
+    border: 2px solid var(--cor2);
+}
+
+.del {
+    background-color: red;
+    border: 2px solid red;
+}
+
+.del:hover {
+    background-color: white;
+    color: red;
+}
+
+@media print {
+    body {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 1.2em;
+    }
+
+    i#menu {
+        display: none;
+    }
+
+    header {
+        display: none;
+    }
+
+    .containaer {
+        display: none;
+    }
+
+    table > tbody > td{
+        padding: 10px;
+    }
+
+    .no-print {
+        display: none;
+    }
+}

@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "value": "Provisão Salarial",
+        "nome": "Provisão Salarial"
+    },
+    {
+        "id": 2,
+        "value": "Cartão Alimentação",
+        "nome": "Cartão Alimentação"
+    },
+    {
+        "id": 3,
+        "value": "Vale Transporte",
+        "nome": "Vale Transporte"
+    },
+    {
+        "id": 4,
+        "value": "Horas extras",
+        "nome": "Horas extras"
+    },
+    {
+        "id": 5,
+        "value": "13º Salário",
+        "nome": "13º Salário"
+    },
+    {
+        "id": 6,
+        "value": "Férias",
+        "nome": "Férias"
+    },
+    {
+        "id": 7,
+        "value": "PLR",
+        "nome": "PLR"
+    },
+    {
+        "id": 8,
+        "value": "IRPF - Restituição",
+        "nome": "IRPF - Restituição"
+    },
+    {
+        "id": 9,
+        "value": "Dividendos",
+        "nome": "Dividendos"
+    },
+    {
+        "id": 10,
+        "value": "Resgate de Investimento",
+        "nome": "Resgate de Investimento"
+    },
+    {
+        "id": 11,
+        "value": "Aluguel",
+        "nome": "Aluguel"
+    },
+    {
+        "id": 12,
+        "value": "Outros",
+        "nome": "Outros"
+    }
+]

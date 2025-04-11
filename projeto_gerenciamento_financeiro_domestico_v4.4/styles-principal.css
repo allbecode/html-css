@@ -1,0 +1,217 @@
+/* Configurações Globais */
+
+
+@charset "UTF-8";
+
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+:root {
+    --cor1: #063042;
+    --cor2: #4384F2;
+    --cor3: #D9E6FC;
+    --cor4: #F2F7FA;
+    --font-principal: Montserrat;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--cor4);
+    font-family: var(--font-principal), sans-serif;
+    color: var(--cor1);
+    box-sizing: border-box;
+}
+
+/* Estilização do conteúdo */
+
+h1 {
+    padding: 20px;
+    text-align: center;
+}
+
+h2 {
+    margin: 0px;
+    padding: 20px 0px;
+    text-align: center;
+}
+
+h3 {
+    padding: 20px 0px;
+    text-align: center;
+
+}
+
+main > h3:nth-of-type(1) {
+    padding: 0px 0px 20px 0px;
+}
+
+main > h2:nth-of-type(1) {
+    padding: 0px 0px 20px 0px;
+}
+
+
+
+main {
+    margin: 20px 20px;
+}
+
+/* -----------------------------# */
+
+button {
+    margin-top: 10px;
+    padding: 5px;
+    background-color: var(--cor2);
+    color: var(--cor4);
+    border: 2px solid var(--cor2);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+button:hover {
+    color: var(--cor2);
+    border: 2px solid var(--cor2);
+    background-color: var(--cor4);
+}
+
+iframe {
+    width: 97vw;
+    height: 80vh;
+    align-self: center;
+}
+
+
+
+.button {
+    display: block;
+    margin-bottom: 5px;
+    text-decoration: none;
+    border-radius: 5px;
+    color: var(--cor4);
+    padding: 5px;
+}
+
+.edit {
+    background-color: #ffc941;
+    border: 1px solid #ffc941;
+    transition: 0.5s;
+}
+
+.edit:hover {
+    background-color: white;
+    border: 1px solid #ffc941;
+    color: #ffc941;
+}
+
+.delete {
+    background-color: #ff4141;
+    border: 1px solid #ff4141;;
+    transition: 0.5s;
+}
+
+.delete:hover {
+    background-color: white;
+    border: 1px solid #ff4141;;
+    color: #ff4141;
+}
+
+.saldo {
+    background-color: var(--cor3);
+}
+
+.saldo h3 {
+    margin: 0px;
+    padding: 20px;
+    text-align: center;
+    color: var(--cor1);
+}
+
+.saldo p {
+    text-align: center;
+    padding: 10px;
+    font-weight: 700;
+}
+
+/* Ajuste do resumo financeiro */
+
+.resumo-financeiro {
+    background-color: var(--cor1);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.resumo-financeiro p {
+    color: var(--cor4);
+    flex: 1;
+    min-width: 150px;
+    padding: 10px;
+    text-align: center;
+}
+
+/* ------------------------------------ */
+
+.status-pago {
+    color: green;
+    font-weight: bold;
+}
+
+.status-nao-pago {
+    color: red;
+    font-weight: bold;
+}
+
+.execute {
+    text-align: center;
+    margin: 30px auto;
+    width: 40vw;
+    padding: 40px;
+    color: white;
+    border-radius: 10px;
+}
+
+.confirm {
+    background-color: #218838;
+}
+
+.error {
+    background-color: #b70808;
+    
+}
+
+
+.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* Estilizaçõ do Rodapé */
+footer {
+    width: 100%;
+    background-color: var(--cor1);
+    text-align: center;
+    bottom: 0px;
+    height: 20px;
+    padding: 30px 0px;
+    color: white;
+}
+
+footer>p>a {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 19px;
+    color: var(--cor3);
+    text-decoration: none;
+}
+
+footer>p>a:hover {
+    text-decoration: underline;
+}
+
+

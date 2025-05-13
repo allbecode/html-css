@@ -20,3 +20,5 @@ async function carregarOpcoesFormaPagamento() {
 // Chama a função quando a página carrega
 document.addEventListener("DOMContentLoaded", carregarOpcoesFormaPagamento);
 
+window.onload = document.getElementById('tipo').focus();
+

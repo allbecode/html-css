@@ -30,8 +30,8 @@
                 <li class="dropdown">
                     <a href="#">Nova Transação ▾</a>
                     <ul class="dropdown-menu">
-                        <li><a href="form_add_transaction.php">Nova Transação</a></li>
-                        <li><a href="dizimos.php">Dízimos e Ofertas</a></li>
+                        <li><a href="form_add_transaction.php">Adicionar Transação</a></li>
+                        <li><a href="add_contribuicoes.php">Contribuições</a></li>
                     </ul>
                 </li>
                 <li><a href="list_transactions.php">Lista de Transações</a></li>

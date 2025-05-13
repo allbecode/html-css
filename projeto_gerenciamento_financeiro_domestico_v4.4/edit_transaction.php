@@ -1,5 +1,6 @@
 <?php
 include 'db_connection.php';
+include 'header.php';
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -98,6 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <button type="submit">Atualizar</button>
     </form>
+    <?php include 'footer.php';?>
 </body>
 
 </html>

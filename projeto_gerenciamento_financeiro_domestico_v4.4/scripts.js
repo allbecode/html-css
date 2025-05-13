@@ -40,3 +40,18 @@ function anoAtual() {
     ano.innerHTML += `${anoAtual}`;
 }
 
+
+document.addEventListener('DOMContentLoaded', function () {
+    const campos = ['valor', 'ano', 'mes', 'nome']; // nomes dos inputs
+
+    campos.forEach(function (nomeCampo) {
+        const input = document.querySelector(`input[name="${nomeCampo}"]`);
+        if (input) {
+            input.addEventListener('focus', function () {
+                this.select();
+            });
+
+            // A substituição ocorre automaticamente ao digitar com o conteúdo selecionado
+        }
+    });
+});

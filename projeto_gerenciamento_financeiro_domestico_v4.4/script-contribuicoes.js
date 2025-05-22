@@ -1,3 +1,9 @@
+// Falta:
+// 
+// 1- Eliminar os comentário indevidos;
+
+
+
 document.addEventListener('DOMContentLoaded', function () {
     const selects = document.querySelectorAll('select[name="mes"], select[name="ano"], select[name="tipo_contribuicao"]');
 

@@ -36,6 +36,18 @@ div.resumo-box {
     margin: 10px 0;
 }
 
+/* ---------------------------- */
+button.no-print {
+            margin-top: 20px;
+        }
+
+        .subTotal {
+            border-top: 2px solid #063042;
+            font-weight: 700;
+        }
+
+/* ----------------------------- */
+
 @media print {
     i#menu {
         display: none;
@@ -44,4 +56,18 @@ div.resumo-box {
     .container button {
         display: none;
     }
+
+    
+    .no-print {
+        display: none !important;
+    }
+
+    body {
+        font-size: 12pt;
+    }
+
+    .subTotal {
+        border-bottom: 2px solid #063042;
+    }
+        
 }

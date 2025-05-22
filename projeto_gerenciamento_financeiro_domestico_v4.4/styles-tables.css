@@ -18,13 +18,13 @@ table {
 }
 
 thead {
+    position: sticky;
+    top: 0;
     background-color: var(--cor3);
+    /* z-index: 100; */
 }
 
 th {
-    position: sticky;
-    top: 0;
-    z-index: 100;
     width: 20vw;
     padding: 17px;
 }
@@ -69,11 +69,12 @@ tfoot td {
     display: inline;
 }
 
-.table-container thead {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
+/* .table-container thead { */
+    /* position: sticky; */
+    /* top: 0; */
+    /* z-index: 1; */
+   
+/* } */
 
 .table-container tbody {
     max-height: 350px;

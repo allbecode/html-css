@@ -33,18 +33,15 @@
     header {
         position: sticky;
         top: 0;
-    }
-
-    i#menu {
-        display: none;
-    }
-
-    header {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 15px 20px;
+        z-index: 105;
+    }
 
+    i#menu {
+        display: none;
     }
 
     header p {
@@ -63,6 +60,7 @@
 
     nav ul li {
         position: relative;
+        z-index: 102 !important;
     }
 
     nav ul li a {
@@ -84,14 +82,22 @@
         left: 0;
         background: #34495e;
         box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.453);
+        z-index: 101 !important;
     }
 
     /* --------------------------------------- */
 
     /* Estilização das Tabelas */
 
+    thead {
+        position: sticky;
+        /* top: 0; */
+        /* z-index: 1; */
+    }
+
     th {
         width: 20vw;
+        z-index: 100;
     }
 
     tr,
@@ -103,7 +109,13 @@
         padding: 10px;
     }
 
-     /* ------------------------------- */
+    .table-container {
+        width: 100%;
+        max-height: 60vh; /* Altura fixa */
+        overflow-y: auto;
+    }
+
+    /* ------------------------------- */
 
 
     /* Estilização do form-contribuição */
@@ -114,33 +126,34 @@
         background-color: white;
         border-radius: 8px;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            
+
         display: flex;
         flex-direction: row;
     }
-    
-    
-    .form-contribuicao label {        
+
+
+    .form-contribuicao label {
         padding: 10px;
         margin: 10px 0;
         font-weight: 700;
     }
-    
-    .form-contribuicao input, select {
+
+    .form-contribuicao input,
+    select {
         padding: 8px;
         margin: 0px 5px;
         border: 1px solid #ccc;
         border-radius: 5px;
     }
-    
-    
+
+
     .form-contribuicao button {
         margin: 0px 0px 0px 10px;
     }
 
     /* -------------------------------- */
 
-    form.form-dizimo{
+    form.form-dizimo {
         text-align: left;
     }
 
@@ -150,6 +163,11 @@
         width: 50%;
     }
 
+    /* Estilos da lista de transações */
+
+    
+    /* -------------------------------- */
+
 }
 
 
@@ -158,12 +176,12 @@
 @media screen and (min-width:992px) {
 
     header p {
-       display: block;
+        display: block;
     }
-    
-    
+
+
     h2 {
-        text-align: left;    
+        text-align: left;
     }
 
     h3 {
@@ -190,5 +208,5 @@
     .resumo-financeiro {
         padding: 40px 5px;
     }
-    
+
 }

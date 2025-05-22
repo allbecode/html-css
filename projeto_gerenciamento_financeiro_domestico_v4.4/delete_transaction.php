@@ -1,19 +1,19 @@
 <?php
 include 'db_connection.php';
+header('Content-Type: application/json');
 
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    
-    $sql = "DELETE FROM transacoes WHERE id = :id";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':id', $id);
-    
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
+    $id = $_POST['id'];
+
+    $stmt = $pdo->prepare("DELETE FROM transacoes WHERE id = :id");
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
     if ($stmt->execute()) {
-        header('Location: list_transactions.php');
-        exit;
+        echo json_encode(['status' => 'ok']);
     } else {
-        echo "Erro ao excluir a transação.";
+        echo json_encode(['status' => 'erro', 'mensagem' => 'Falha ao excluir.']);
     }
 } else {
-    echo "ID não fornecido.";
+    echo json_encode(['status' => 'erro', 'mensagem' => 'Requisição inválida.']);
 }
+

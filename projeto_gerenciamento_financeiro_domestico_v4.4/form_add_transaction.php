@@ -1,5 +1,11 @@
 <?php include 'header.php'; ?>
 
+<!-- 
+Falta:
+    1- Colocar o foco no campo tipo quanto o usuário clicar no botão adicionar. 
+    2- Eliminar todos os comentários indevidos.
+ -->
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -10,92 +16,13 @@
 
     <link rel="stylesheet" href="styles-principal.css">
     <link rel="stylesheet" href="style-form.css">
-    <link rel="stylesheet" href="style_relatorio_contribuicao.css">
-    <link rel="stylesheet" href="media_queries.css">
+    <link rel="stylesheet" href="style-form-add-transaction.css">
 
     <script src="scripts.js" defer></script>
     <script src="script-carrega-opcoes.js" defer></script>
     <script src="script-carrega-nome.js" defer></script>
     <script src="script-ajax.js" defer></script>
 
-    <style>
-        /* Mobile-first: elementos empilhados */
-        .container-flex {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            margin-top: 20px;
-
-        }
-
-        .form-geral {
-            flex: 1;
-        }
-
-        /* Estilo da listagem de transações */
-        .lista-transacoes-dia {
-            flex: 1;
-            background-color: #fffacd;
-            /* amarelo-claro (lemon chiffon) */
-            border: 1px solid #e6e600;
-            padding: 15px;
-            font-family: monospace;
-            color: #333;
-            text-align: center;
-            max-width: 80%;
-            overflow-x: auto;
-            max-height: 60vh;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-            margin: 0 auto;
-
-        }
-
-        .lista-transacoes-dia h3 {
-            margin-top: 0;
-            text-align: center;
-            font-size: 1.1rem;
-            border-bottom: 2px dashed #999;
-            padding-bottom: 5px;
-        }
-
-        .lista-transacoes-dia th {
-            padding: 10px 0px;
-            border-bottom: 2px dashed #999;
-        }
-
-        .lista-transacoes-dia tr {
-            list-style-type: none;
-            padding-left: 0;
-            margin: 10px 0 0 0;
-        }
-
-        .lista-transacoes-dia td {
-            padding: 5px 0;
-            border-bottom: 1.5px dashed #999;
-        }
-
-        /* Layout horizontal a partir de 768px */
-        @media (min-width: 768px) {
-            .container-flex {
-                flex-direction: row;
-                align-items: flex-start;
-                justify-content: space-between;
-
-                width: 800px;
-                margin: auto;
-            }
-
-            .form-geral,
-            .lista-transacoes-dia {
-                width: 48%;
-            }
-
-            .lista-transacoes-dia {
-                max-height: 60vh;
-                overflow-y: auto;
-            }
-        }
-    </style>
 </head>
 
 <body>

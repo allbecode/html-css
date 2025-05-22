@@ -1,4 +1,11 @@
 <?php
+
+// Falta:
+// 
+// 1- Eliminar o código que faz com que a tecla enter edite a linha;
+// **- Eliminar os comentário indevidos;
+
+
 include 'db_connection.php';
 include 'header.php';
 
@@ -56,102 +63,12 @@ $transacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <link rel="stylesheet" href="styles-principal.css">
     <link rel="stylesheet" href="styles-tables.css">
+    <link rel="stylesheet" href="style-lista-transacoes.css">
     <link rel="stylesheet" href="media_queries.css">
 
     <script src="scripts.js" defer></script>
+    <script src="script-lista-transacoes.js" defer></script>
 
-
-    <style>
-        /* Estilo mobile-first: telas pequenas */
-        .form-filtro {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            padding: 15px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            margin-bottom: 20px;
-            /* font-family: monospace; */
-        }
-
-        .form-filtro label {
-            font-weight: bold;
-            /* color: #444; */
-        }
-
-        .form-filtro input,
-        .form-filtro select,
-        .form-filtro button {
-            padding: 8px;
-            font-size: 1em;
-            border-radius: 4px;
-            border: 1px solid #bbb;
-            /* font-family: monospace; */
-        }
-
-        /* .form-filtro button { */
-            /* background-color: #f1c40f; */
-            /* border: none; */
-            /* color: #222; */
-            /* font-weight: bold; */
-            /* cursor: pointer; */
-            /* transition: background-color 0.3s; */
-        /* } */
-
-        /* .form-filtro button:hover {
-            background-color: #f39c12;
-        } */
-
-        /* Telas maiores: layout em linha */
-        /* @media (min-width: 768px) {
-
-            .form-filtro {
-                flex-direction: row;
-                flex-wrap: wrap;
-                align-items: flex-end;
-                justify-content: center;
-                gap: 15px;
-            }
-
-            .form-filtro label {
-                margin-right: 5px;
-            }
-
-            .form-filtro input,
-            .form-filtro select {
-                width: auto;
-            }
-
-            .form-filtro button {
-                height: 38px;
-                padding: 0 20px;
-            }
-        } */
-        @media (min-width: 768px) {
-            .form-filtro {
-                flex-direction: row;
-                flex-wrap: wrap;
-                align-items: center;
-                justify-content: center; /* Alinha ao centro horizontalmente */
-                gap: 15px;
-            }
-
-            .form-filtro label {
-                margin-right: 5px;
-            }
-
-            .form-filtro input,
-            .form-filtro select {
-                width: auto;
-            }
-
-            .form-filtro button {
-                height: 38px;
-                padding: 0 20px;
-                margin-bottom: 15px;
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -183,6 +100,9 @@ $transacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
         <div class="table-container">
+            <div id="mensagem-edicao" class="mensagem-flutuante" style="display: none;">
+                Clique duas vezes sobre a linha para editar as informações.
+            </div>
             <table>
                 <thead>
                     <tr>
@@ -198,31 +118,34 @@ $transacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </thead>
                 <tbody>
                     <?php foreach ($transacoes as $transacao): ?>
-                        <tr>
-                            <td>
+                        <tr data-id="<?= $transacao['id'] ?>" class="transacao-linha">
+                            <td data-field="nome">
                                 <?php echo htmlspecialchars($transacao['nome']); ?>
                             </td>
-                            <td>
+                            <td data-field="data_vencimento">
                                 <?php echo date('d/m/Y', strtotime($transacao['data_vencimento'])); ?>
                             </td>
-                            <td>
+                            <td data-field="valor">
                                 R$ <?php echo number_format($transacao['valor'], 2, ',', '.'); ?>
                             </td>
-                            <td>
+                            <td data-field="tipo">
                                 <?php echo ucfirst($transacao['tipo']); ?>
                             </td>
-                            <td>
+                            <td data-field="forma_pagamento">
                                 <?php echo $transacao['forma_pagamento']; ?>
                             </td>
-                            <td>
+                            <td data-field="descricao">
                                 <?php echo htmlspecialchars($transacao['descricao']); ?>
                             </td>
-                            <td class="<?php echo $transacao['pago'] ? 'status-pago' : 'status-nao-pago'; ?>">
+                            <td data-field="pago" class="<?php echo $transacao['pago'] ? 'status-pago' : 'status-nao-pago'; ?>">
                                 <?php echo $transacao['pago'] ? '✔' : '✖'; ?>
                             </td>
-                            <td>
-                                <a class="button edit" href="edit_transaction.php?id=<?php echo $transacao['id']; ?>">Editar</a>
-                                <a class="button delete" href="delete_transaction.php?id=<?php echo $transacao['id']; ?>" onclick="return confirm('Tem certeza que deseja excluir?');">Excluir</a>
+                            <td class="acoes">
+                                <div class="acoes-container">
+                                    <button class="button delete visible" data-id="<?= $transacao['id']; ?>">Excluir</button>
+
+                                    <button class="button salvar hidden">Salvar</button>
+                                </div>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -232,9 +155,6 @@ $transacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </main>
     <?php include 'footer.php'; ?>
 
-    <script>
-        window.onload = document.getElementById('tipo').focus();
-    </script>
 </body>
 
 </html>

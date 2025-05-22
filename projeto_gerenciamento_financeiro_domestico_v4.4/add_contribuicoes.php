@@ -1,4 +1,9 @@
 <?php
+
+// Falta:
+// 
+// 1- Eliminar os comentário indevidos;
+
 include 'db_connection.php';
 include 'header.php';
 
@@ -54,36 +59,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="style-form.css">
     <link rel="stylesheet" href="styles-tables.css">
     <link rel="stylesheet" href="style_relatorio_contribuicao.css">
+    <link rel="stylesheet" href="style-lista-transacoes.css">
     <link rel="stylesheet" href="media_queries.css">
 
     <script src="script-contribuicoes.js" defer></script>
     <script src="script-ajax.js" defer></script>
-    <script src="scripts.js"></script>
+    <script src="script-form.js"></script>
+    <!-- <script src="scripts.js"></script> -->
 </head>
 
 <body>
     <main>
         <h2>Contribuições - <?php echo str_pad($mes, 2, '0', STR_PAD_LEFT) . "/" . $ano; ?></h2>
-        <form method="POST" action="" class="form-geral" id="form-contribuicao" data-origem="contribuicao">
-            <p>Altere uma das opções para visualizar os dados. </p>
-            <label for="mes">Mês:</label>
-            <select name="mes" id="mes" required>
-                <?php for ($m = 1; $m <= 12; $m++): ?>
-                    <option value="<?= $m ?>" <?= $m == $mes ? 'selected' : '' ?>><?= $m ?></option>
-                <?php endfor; ?>
-            </select>
-
-            <label for="ano">Ano:</label>
-            <input type="number" name="ano" id="ano" value="<?= $ano ?>" required>
-
-            <label for="tipo_contribuicao">Tipo de Contribuição:</label>
-            <select id="tipo_contribuicao" name="tipo_contribuicao" required>
-                <option value="dizimo" <?= ($tipoSelecionado == 'dizimo') ? 'selected' : '' ?>>Dízimo</option>
-                <option value="oferta" <?= ($tipoSelecionado == 'oferta') ? 'selected' : '' ?>>Oferta</option>
-            </select>
-
-            <!-- <button type="submit">Consultar</button> -->
-        </form>
+        <div class="container-form">
+            <p>Altere uma das opções abaixo para visualizar os dados. </p>
+            <!-- <form method="POST" action="" class="form-filtro" id="form-contribuicao" data-origem="contribuicao"> -->
+            
+            <form method="POST" class="form-filtro" id="form-contribuicao" data-origem="contribuicao">
+                
+                <label for="mes">Mês:</label>
+                <select name="mes" id="mes" required>
+                    <?php for ($m = 1; $m <= 12; $m++): ?>
+                        <option value="<?= $m ?>" <?= $m == $mes ? 'selected' : '' ?>><?= $m ?></option>
+                    <?php endfor; ?>
+                </select>
+                <label for="ano">Ano:</label>
+                <input type="number" name="ano" id="ano" value="<?= $ano ?>" required>
+                <label for="tipo_contribuicao">Tipo de Contribuição:</label>
+                <select id="tipo_contribuicao" name="tipo_contribuicao" required>
+                    <option value="dizimo" <?= ($tipoSelecionado == 'dizimo') ? 'selected' : '' ?>>Dízimo</option>
+                    <option value="oferta" <?= ($tipoSelecionado == 'oferta') ? 'selected' : '' ?>>Oferta</option>
+                </select>
+                <!-- <button type="submit">Consultar</button> -->
+            </form>
+        </div>
 
         <?php if ($_SERVER['REQUEST_METHOD'] === 'POST'): ?>
             <?php if (!$temReceitas): ?>
@@ -177,26 +186,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <?php endif; ?>
                             <h2>Lançar nova contribuição : <?= $nomeContribuicao ?> - <?php echo str_pad($mes, 2, '0', STR_PAD_LEFT) . "/" . $ano;?></h2>
 
-                            <form id="form-transacao" method="POST" action="add_transaction.php" class="form-geral" data-origem="contribuicao">
-                                <input type="hidden" name="mes" value="<?= $mes ?>">
-                                <input type="hidden" name="ano" value="<?= $ano ?>">
-                                <input type="hidden" name="tipo" value="despesa">
-                                <input type="hidden" name="nome" value="<?= $nomeContribuicao ?>">
-                                <input type="hidden" name="data_vencimento" value="<?= $ano . '-' . str_pad($mes, 2, '0', STR_PAD_LEFT) . '-01' ?>">
-                                <label>Valor:</label>
-                                <input type="number" name="valor" step="0.01" value="<?= number_format($valorSugerido, 2, '.', '') ?>" required>
-                                <label>Forma de Pagamento:</label>
-                                <select name="forma_pagamento" required>
-                                    <option value="PIX">PIX</option>
-                                    <option value="Cheque">Cheque</option>
-                                    <option value="Boleto Bancário">Boleto Bancário</option>
-                                    <option value="Débito em Conta">Débito em Conta</option>
-                                </select>
-                                <label>Descrição:</label>
-                                <input type="text" name="descricao" required>
-                                <input type="hidden" name="pago" value="0">
-                                <button type="submit">Salvar Contribuição</button>
-                            </form>
+                            <div class="container-form">
+                                <form id="form-transacao" method="POST" action="add_transaction.php" class="form-filtro" data-origem="contribuicao">
+                                    <input type="hidden" name="mes" value="<?= $mes ?>">
+                                    <input type="hidden" name="ano" value="<?= $ano ?>">
+                                    <input type="hidden" name="tipo" value="despesa">
+                                    <input type="hidden" name="nome" value="<?= $nomeContribuicao ?>">
+                                    <input type="hidden" name="data_vencimento" value="<?= $ano . '-' . str_pad($mes, 2, '0', STR_PAD_LEFT) . '-01' ?>">
+                                    <label>Valor:</label>
+                                    <input type="number" name="valor" step="0.01" value="<?= number_format($valorSugerido, 2, '.', '') ?>" required>
+                                    <label>Forma de Pagamento:</label>
+                                    <select name="forma_pagamento" required>
+                                        <option value="PIX">PIX</option>
+                                        <option value="Cheque">Cheque</option>
+                                        <option value="Boleto Bancário">Boleto Bancário</option>
+                                        <option value="Débito em Conta">Débito em Conta</option>
+                                    </select>
+                                    <label>Descrição:</label>
+                                    <input type="text" name="descricao" required>
+                                    <input type="hidden" name="pago" value="0">
+                                    <button type="submit">Salvar Contribuição</button>
+                                </form>
+                            </div>
                         <?php endif; ?>
                     <?php endif; ?>
                 </div>

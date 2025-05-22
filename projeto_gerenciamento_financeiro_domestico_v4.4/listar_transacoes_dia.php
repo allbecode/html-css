@@ -10,6 +10,7 @@ if (count($transacoes) > 0): ?>
     <table>
         <thead>
             <tr>
+                <th>Data</th>
                 <!-- <th>Tipo</th> -->
                 <th>Nome</th>
                 <th>Valor</th>
@@ -20,6 +21,9 @@ if (count($transacoes) > 0): ?>
         <tbody>
             <?php foreach ($transacoes as $t): ?>
                 <tr class="transacoes-do-dia">
+                    <td>
+                        <?php echo date('d/m/Y', strtotime($t['data_vencimento'])); ?>
+                    </td>
                     <!-- <td><?= htmlspecialchars($t['tipo']) ?></td> -->
                     <td><?= htmlspecialchars($t['nome']) ?></td>
                     <td>R$ <?= number_format($t['valor'], 2, ',', '.') ?></td>

@@ -27,35 +27,8 @@ $total = array_sum(array_column($contribuicoes, 'valor'));
     <title>Relatório Global de Contribuições</title>
 
     <link rel="stylesheet" href="styles-principal.css">
-    <link rel="stylesheet" href="style_relatorio_dizimo.css">
+    <link rel="stylesheet" href="style_relatorio_contribuicao.css">
     <link rel="stylesheet" href="styles-tables.css">
-
-    <style>
-        
-
-        button.no-print {
-            margin-top: 20px;
-        }
-
-        .subTotal {
-            border-top: 2px solid #063042;
-            font-weight: 700;
-        }
-
-        @media print {
-            .no-print {
-                display: none !important;
-            }
-
-            body {
-                font-size: 12pt;
-            }
-
-            .subTotal {
-                border-bottom: 2px solid #063042;
-            }
-        }
-    </style>
 </head>
 
 <body class="<?= $pageClass ?>">
@@ -96,7 +69,6 @@ $total = array_sum(array_column($contribuicoes, 'valor'));
                         </tr>
                     </tfoot>
                 </table>
-                <!-- <p><strong>Total Geral:</strong> R$ <?= number_format($total, 2, ',', '.'); ?></p> -->
                 <button class="no-print" onclick="window.print()">Imprimir Relatório</button>
                 <button onclick="fecharRelatorio()">Fechar Relatório</button>
             </div>

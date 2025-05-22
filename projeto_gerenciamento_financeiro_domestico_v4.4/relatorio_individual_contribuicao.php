@@ -23,7 +23,7 @@ $descricao = $_GET['descricao'];
     <title>Relatório de Dízimo</title>
 
     <link rel="stylesheet" href="styles-principal.css">
-    <link rel="stylesheet" href="style_relatorio_dizimo.css">
+    <link rel="stylesheet" href="style_relatorio_contribuicao.css">
     <link rel="stylesheet" href="styles-tables.css">
 
     <script>

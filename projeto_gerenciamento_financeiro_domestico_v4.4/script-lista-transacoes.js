@@ -141,6 +141,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         campo.contentEditable = true;
                         campo.style.backgroundColor = '#fffbe6';
                 }
+                
+                
             });
 
             // Habilitar ESC para cancelar
@@ -288,11 +290,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 linhaSelecionadaIndex--;
                 atualizarSelecao(linhaSelecionadaIndex);
             }
-        } else if (e.key === 'Enter') {
-            if (linhaSelecionadaIndex >= 0) {
-                ativarModoEdicao(linhas[linhaSelecionadaIndex]);
-            }
         }
+        // } else if (linhaSelecionadaIndex >= 0) {
+        //         ativarModoEdicao(linhas[linhaSelecionadaIndex]);
+        //         }
     });
 
     document.addEventListener('keydown', function (e) {

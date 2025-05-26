@@ -11,6 +11,10 @@ if (!isset($data['id'])) {
     exit;
 }
 
+$data_vencimento = $data['data_vencimento']; // yyyy-mm-dd
+$mes = (int)date('n', strtotime($data_vencimento));
+$ano = (int)date('Y', strtotime($data_vencimento));
+
 $sql = "UPDATE transacoes SET 
     nome = :nome,
     data_vencimento = :data_vencimento,
@@ -18,6 +22,8 @@ $sql = "UPDATE transacoes SET
     tipo = :tipo,
     forma_pagamento = :forma_pagamento,
     descricao = :descricao,
+    mes = :mes,
+    ano = :ano,
     pago = :pago
 WHERE id = :id";
 
@@ -26,11 +32,13 @@ $stmt = $pdo->prepare($sql);
 try {
     $stmt->execute([
         ':nome' => $data['nome'],
-        ':data_vencimento' => $data['data_vencimento'],
+        ':data_vencimento' => $data_vencimento,
         ':valor' => $data['valor'],
         ':tipo' => $data['tipo'],
         ':forma_pagamento' => $data['forma_pagamento'],
         ':descricao' => $data['descricao'],
+        ':mes' => $mes,
+        ':ano' => $ano,
         ':pago' => $data['pago'],
         ':id' => $data['id']
     ]);

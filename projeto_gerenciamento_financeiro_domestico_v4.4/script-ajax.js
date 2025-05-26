@@ -23,6 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             form.reset();
                             alert('Transação adicionada com sucesso!');
                             carregarTransacoesDoDia(); // atualiza lista
+                            // Chama o foco no novo campo após a reinicialização
+                            focarPrimeiroCampo('#form-transacao');
                         } else if (origem === 'contribuicao') {
                             // Recarrega a página se for transação
                             location.reload();

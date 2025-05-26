@@ -1,11 +1,4 @@
 <?php
-
-// Falta:
-// 
-// 1- Eliminar os comentário indevidos;
-// 2- Verificar pq o relatório não está atualizando as data depois de editadas.
-
-
 include 'db_connection.php';
 include 'header.php';
 
@@ -47,98 +40,14 @@ $saldoFinal = $totalReceitas - $totalDespesas;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relatório Financeiro</title>
 
-    <link rel="stylesheet" href="styles-principal.css">
-    <!-- <link rel="stylesheet" href="style-form.css"> -->
     <link rel="stylesheet" href="styles-tables.css">
     <link rel="stylesheet" href="style-lista-transacoes.css">
-    <link rel="stylesheet" href="media_queries.css">
+    <link rel="stylesheet" href="style-report-transactions.css">
 
-    <style>
-        /* #form-mes-ano {
-            display: flex;
-            align-items: flex-end;
-            flex-wrap: wrap;
-            gap: 10px;
-            position: relative;
-        }*/
-
-        #btn-imprimir-relatorio {
-            /* margin-left: auto; */
-            padding: 6px 10px;
-            background: none;
-            /* color: #fff; */
-            border: none;
-            font-size: 25px;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
-        }
-
-        /* #btn-imprimir-relatorio:hover { */
-            /* background-color: #555; */
-        /* } */
-
-        @media print {
-
-            /* Oculta cabeçalho, rodapé, menus e formulários */
-            /* header, */
-            /* footer, */
-            nav,
-            /* #form-mes-ano, */
-            #form-contribuicao,
-            .button,
-            /* .acoes, */
-            #btn-imprimir-relatorio,
-            #menu,
-            .container-form p,
-            .mensagem-flutuante {
-                display: none !important;
-            }
-
-            /* Exibe apenas o conteúdo principal do relatório */
-            main {
-                width: 100%;
-                margin: 0;
-                padding: 0;
-            }
-
-            /* Tabela: remove estilos desnecessários e força quebra de página adequada */
-            table {
-                width: 100%;
-                font-size: 8pt;
-                border-collapse: collapse;
-                page-break-inside: auto;
-            }
-
-            thead {
-                display: table-header-group;
-            }
-
-            tr {
-                page-break-inside: avoid;
-                page-break-after: auto;
-            }
-
-            /* Remove margens automáticas que alguns navegadores adicionam */
-            body {
-                margin: 0;
-                padding: 0;
-            }
-
-            .no-print {
-                display: none;
-            }
-            @page {
-                    size: landscape;
-                }
-        }
-    </style>
-
-    <!-- <script src="script-form.js" defer></script> -->
-     <script src="script-contribuicoes.js"></script>
+    <script src="script-contribuicoes.js"></script>
 </head>
 
-<body class="relatorio-transacoes">
+<body>
     <main>
         <h2 class="no-print">Consultar Transações</h2>
         <div class="container-form">
@@ -157,17 +66,18 @@ $saldoFinal = $totalReceitas - $totalDespesas;
                 <label for="ano">Ano:</label>
                 <input type="number" name="ano" id="ano" value="<?= $ano ?>" required>
 
-                <!-- <button type="submit">Consultar</button> -->
-
                 <button type="button" id="btn-imprimir-relatorio" title="Imprimir relatório">
                     🖨️
                 </button>
             </form>
         </div>
-
-
+        <?php if (count($transacoes) === 0): ?>
+            <div class="mensagem-sem-dados">
+                Nenhuma transação registrada para o mês <strong><?php echo str_pad($mes, 2, '0', STR_PAD_LEFT) . '/' . $ano;  ?></strong>.
+            </div>
+        <?php else: ?>
         <?php if (!empty($receitas) || !empty($despesas)): ?>
-            <h1>Relatório de <?php echo $mes . '/' . $ano; ?></h1>
+            <h1>Relatório de <?php echo str_pad($mes, 2, '0', STR_PAD_LEFT) . '/' . $ano; ?></h1>
 
             <h2>Receitas</h2>
             <table>
@@ -247,6 +157,8 @@ $saldoFinal = $totalReceitas - $totalDespesas;
                 <p><strong>Saldo Final:</strong> R$ <?php echo number_format($saldoFinal, 2, ',', '.'); ?></p>
             </div>
         <?php endif; ?>
+        <?php endif;?>
+
     </main>
     <?php include 'footer.php'; ?>
 

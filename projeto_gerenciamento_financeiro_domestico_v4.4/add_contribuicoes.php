@@ -1,9 +1,5 @@
 <?php
 
-// Falta:
-// 
-// 1- Eliminar os comentário indevidos;
-
 include 'db_connection.php';
 include 'header.php';
 
@@ -26,7 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ano = $_POST['ano'];
 
     // Total de receitas
-    $stmt = $pdo->prepare("SELECT SUM(valor) FROM transacoes WHERE tipo = 'receita' AND mes = :mes AND ano = :ano");
+    $stmt = $pdo->prepare("SELECT SUM(valor) FROM transacoes 
+    WHERE tipo = 'receita' 
+    AND base_contribuicao = 1 /* valida o flag base_contribuicao */
+    AND mes = :mes AND ano = :ano");
     $stmt->execute(['mes' => $mes, 'ano' => $ano]);
     $totalReceitas = $stmt->fetchColumn() ?: 0;
 
@@ -56,25 +55,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>Contribuições - Dízimos e Ofertas</title>
     <link rel="stylesheet" href="styles-principal.css">
-    <link rel="stylesheet" href="style-form.css">
     <link rel="stylesheet" href="styles-tables.css">
     <link rel="stylesheet" href="style_relatorio_contribuicao.css">
+    <link rel="stylesheet" href="style-report-transactions.css">
     <link rel="stylesheet" href="style-lista-transacoes.css">
     <link rel="stylesheet" href="media_queries.css">
 
     <script src="script-contribuicoes.js" defer></script>
     <script src="script-ajax.js" defer></script>
     <script src="script-form.js"></script>
-    <!-- <script src="scripts.js"></script> -->
 </head>
 
 <body>
     <main>
         <h2>Contribuições - <?php echo str_pad($mes, 2, '0', STR_PAD_LEFT) . "/" . $ano; ?></h2>
         <div class="container-form">
-            <p>Altere uma das opções abaixo para visualizar os dados. </p>
-            <!-- <form method="POST" action="" class="form-filtro" id="form-contribuicao" data-origem="contribuicao"> -->
             
+            <p>Altere uma das opções abaixo para visualizar os dados. </p>
+                        
             <form method="POST" class="form-filtro" id="form-contribuicao" data-origem="contribuicao">
                 
                 <label for="mes">Mês:</label>
@@ -90,13 +88,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <option value="dizimo" <?= ($tipoSelecionado == 'dizimo') ? 'selected' : '' ?>>Dízimo</option>
                     <option value="oferta" <?= ($tipoSelecionado == 'oferta') ? 'selected' : '' ?>>Oferta</option>
                 </select>
-                <!-- <button type="submit">Consultar</button> -->
             </form>
         </div>
 
         <?php if ($_SERVER['REQUEST_METHOD'] === 'POST'): ?>
             <?php if (!$temReceitas): ?>
-                <div class="container">
+                <div class="container mensagem-sem-dados">
                     <p class="status-nao-pago">✖ Nenhuma receita cadastrada no mês <strong><?php echo str_pad($mes, 2, '0', STR_PAD_LEFT) . "/" . $ano; ?></strong>.<br>
                         Nenhuma contribuição pode ser calculada ou registrada.</p>
                 </div>

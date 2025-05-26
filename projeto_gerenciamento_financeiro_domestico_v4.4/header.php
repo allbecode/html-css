@@ -18,7 +18,7 @@
 <body onresize="mudouTamanho()">
     <header>
         <div class="logo">
-            <h1><i>GeFinD</i></h1>
+            <h1><a href="index.php"><i>GeFinD</i></a></h1>
         </div>
         <p><strong>Gerenciamento Financeiro Doméstico</strong></p>
 

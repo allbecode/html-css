@@ -1,11 +1,5 @@
 <?php include 'header.php'; ?>
 
-<!-- 
-Falta:
-    1- Colocar o foco no campo tipo quanto o usuário clicar no botão adicionar. 
-    2- Eliminar todos os comentários indevidos.
- -->
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -22,6 +16,7 @@ Falta:
     <script src="script-carrega-opcoes.js" defer></script>
     <script src="script-carrega-nome.js" defer></script>
     <script src="script-ajax.js" defer></script>
+    <script src="script-auto-focus-form.js" defer></script>
 
 </head>
 

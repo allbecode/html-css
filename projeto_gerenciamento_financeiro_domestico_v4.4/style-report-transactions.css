@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+:root {
+    --cor1: #063042;
+    --cor2: #4384F2;
+    --cor3: #D9E6FC;
+    --cor4: #F2F7FA;
+    --font-principal: Montserrat;
+}
+
+#btn-imprimir-relatorio {
+    padding: 6px 10px;
+    background: none;
+    border: none;
+    font-size: 25px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.mensagem-sem-dados {
+    background-color: white;
+    border: 1px solid var(--cor1);
+    color: var(--cor1);
+    padding: 20px;
+    margin: 11vw auto;
+    border-radius: 6px;
+    text-align: center;
+    max-width: 600px;
+    /* font-family: monospace; */
+    font-size: 16px;
+}
+
+
+
+@media print {
+
+    /* Oculta cabeçalho, rodapé, menus e formulários */
+    /* header, */
+    /* footer, */
+    nav,
+    /* #form-mes-ano, */
+    #form-contribuicao,
+    .button,
+    /* .acoes, */
+    #btn-imprimir-relatorio,
+    #menu,
+    .container-form p,
+    .no-print,
+    .mensagem-flutuante {
+        display: none !important;
+    }
+
+    /* Exibe apenas o conteúdo principal do relatório */
+    main {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Tabela: remove estilos desnecessários e força quebra de página adequada */
+    table {
+        width: 100%;
+        font-size: 8pt;
+        border-collapse: collapse;
+        page-break-inside: auto;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto;
+    }
+
+    /* Remove margens automáticas que alguns navegadores adicionam */
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    @page {
+        size: landscape;
+    }
+}

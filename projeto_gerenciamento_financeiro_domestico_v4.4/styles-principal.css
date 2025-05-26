@@ -38,6 +38,12 @@ h1 {
     text-align: center;
 }
 
+h1 > a {
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
+
 h2 {
     margin: 0px;
     padding: 20px 0px;

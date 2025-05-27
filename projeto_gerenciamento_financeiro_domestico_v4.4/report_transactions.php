@@ -45,6 +45,12 @@ $saldoFinal = $totalReceitas - $totalDespesas;
     <link rel="stylesheet" href="style-report-transactions.css">
 
     <script src="script-contribuicoes.js"></script>
+
+    <style>
+        .mensagem-sem-dados {
+            margin: 11vw auto;
+        }
+    </style>
 </head>
 
 <body>

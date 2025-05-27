@@ -36,18 +36,18 @@
     },
     {
         "id": 8,
-        "value": "IRPF - Restituição",
-        "nome": "IRPF - Restituição"
+        "value": "PIS/PASEP",
+        "nome": "PIS/PASEP"
     },
     {
         "id": 9,
-        "value": "Dividendos",
-        "nome": "Dividendos"
+        "value": "Rescisão Trabalhista",
+        "nome": "Rescisão Trabalhista"
     },
     {
         "id": 10,
-        "value": "Resgate de Investimento",
-        "nome": "Resgate de Investimento"
+        "value": "Dividendos",
+        "nome": "Dividendos"
     },
     {
         "id": 11,
@@ -56,6 +56,16 @@
     },
     {
         "id": 12,
+        "value": "IRPF - Restituição",
+        "nome": "IRPF - Restituição"
+    },
+    {
+        "id": 13,
+        "value": "Resgate de Investimento",
+        "nome": "Resgate de Investimento"
+    },
+    {
+        "id": 14,
         "value": "Outros",
         "nome": "Outros"
     }

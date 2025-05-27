@@ -1,5 +1,6 @@
 <?php
 include "db_connection.php";
+include 'utils.php';
 
 $nome = $_POST['nome'];
 $data_vencimento = $_POST['data_vencimento'];
@@ -10,25 +11,7 @@ $descricao = $_POST['descricao'];
 $ano = (int)date('Y', strtotime($data_vencimento));
 $mes = (int)date('n', strtotime($data_vencimento));
 $dataRegstro = date('Y-m-d');
-$baseContribuicao = 0;
-
-// Verifica o tipo de receita e se deverá entrar na base de contribuições.
-if ($tipo === 'receita') {
-    // Critérios: nomes válidos para cálculo de dízimo/oferta
-    $nomesValidos = [
-        'Provisão Salarial', 
-        'Cartão Alimentação', 
-        'Vale Transporte',
-        'Horas extras',
-        '13º Salário',
-        'Férias',
-        'PLR',
-        'Dividendos'
-     ];
-    if (in_array($nome, $nomesValidos)) {
-        $baseContribuicao = 1;
-    }
-}
+$baseContribuicao = ($tipo === 'receita' && contribuicao_valida($nome)) ? 1 : 0;
 
 // Se for uma receita, marcar como "paga" automaticamente
 $pago = ($tipo === 'receita') ? 1 : 0;

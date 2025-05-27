@@ -65,6 +65,7 @@ $transacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="styles-tables.css">
     <link rel="stylesheet" href="style-lista-transacoes.css">
     <link rel="stylesheet" href="media_queries.css">
+    <link rel="stylesheet" href="style-report-transactions.css">
 
     <script src="scripts.js" defer></script>
     <script src="script-lista-transacoes.js" defer></script>
@@ -98,7 +99,6 @@ $transacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </form>
         </div>
 
-
         <div class="table-container">
             <div id="mensagem-edicao" class="mensagem-flutuante" style="display: none;">
                 Clique duas vezes sobre a linha para editar as informações.
@@ -117,38 +117,50 @@ $transacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($transacoes as $transacao): ?>
-                        <tr data-id="<?= $transacao['id'] ?>" class="transacao-linha">
-                            <td data-field="nome">
-                                <?php echo htmlspecialchars($transacao['nome']); ?>
-                            </td>
-                            <td data-field="data_vencimento">
-                                <?php echo date('d/m/Y', strtotime($transacao['data_vencimento'])); ?>
-                            </td>
-                            <td data-field="valor">
-                                R$ <?php echo number_format($transacao['valor'], 2, ',', '.'); ?>
-                            </td>
-                            <td data-field="tipo">
-                                <?php echo ucfirst($transacao['tipo']); ?>
-                            </td>
-                            <td data-field="forma_pagamento">
-                                <?php echo $transacao['forma_pagamento']; ?>
-                            </td>
-                            <td data-field="descricao">
-                                <?php echo htmlspecialchars($transacao['descricao']); ?>
-                            </td>
-                            <td data-field="pago" class="<?php echo $transacao['pago'] ? 'status-pago' : 'status-nao-pago'; ?>">
-                                <?php echo $transacao['pago'] ? '✔' : '✖'; ?>
-                            </td>
-                            <td class="acoes">
-                                <div class="acoes-container">
-                                    <button class="button delete visible" data-id="<?= $transacao['id']; ?>">Excluir</button>
 
-                                    <button class="button salvar hidden">Salvar</button>
+                    <?php if (count($transacoes) > 0): ?>
+
+                        <?php foreach ($transacoes as $transacao): ?>
+                            <tr data-id="<?= $transacao['id'] ?>" class="transacao-linha">
+                                <td data-field="nome">
+                                    <?php echo htmlspecialchars($transacao['nome']); ?>
+                                </td>
+                                <td data-field="data_vencimento">
+                                    <?php echo date('d/m/Y', strtotime($transacao['data_vencimento'])); ?>
+                                </td>
+                                <td data-field="valor">
+                                    R$ <?php echo number_format($transacao['valor'], 2, ',', '.'); ?>
+                                </td>
+                                <td data-field="tipo">
+                                    <?php echo ucfirst($transacao['tipo']); ?>
+                                </td>
+                                <td data-field="forma_pagamento">
+                                    <?php echo $transacao['forma_pagamento']; ?>
+                                </td>
+                                <td data-field="descricao">
+                                    <?php echo htmlspecialchars($transacao['descricao']); ?>
+                                </td>
+                                <td data-field="pago" class="<?php echo $transacao['pago'] ? 'status-pago' : 'status-nao-pago'; ?>">
+                                    <?php echo $transacao['pago'] ? '✔' : '✖'; ?>
+                                </td>
+                                <td class="acoes">
+                                    <div class="acoes-container">
+                                        <button class="button delete visible" data-id="<?= $transacao['id']; ?>">Excluir</button>
+
+                                        <button class="button salvar hidden">Salvar</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else : ?>
+                        <tr>
+                            <td colspan="8">
+                                <div class="mensagem-sem-dados">
+                                    Nenhuma transação encontrada com <strong>o(s) parâmetrod(s)</strong> selecionado(s).
                                 </div>
                             </td>
                         </tr>
-                    <?php endforeach; ?>
+                    <?php endif ?>
                 </tbody>
             </table>
         </div>

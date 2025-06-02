@@ -1,17 +1,17 @@
 <?php
+header('Content-Type: application/json');
 include 'db_connection.php';
 
-if (isset($_POST['id'])) {
-    $id = $_POST['id'];
-    
-    $sql = "UPDATE transacoes SET pago = 1 WHERE id = :id";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':id', $id);
-    
-    if ($stmt->execute()) {
-        echo "success";
-    } else {
-        echo "error";
+$id = $_POST['id'] ?? null;
+
+if ($id) {
+    try {
+        $stmt = $pdo->prepare("UPDATE transacoes SET pago = 1 WHERE id = ?");
+        $stmt->execute([$id]);
+        echo json_encode(['status' => 'ok']);
+    } catch (PDOException $e) {
+        echo json_encode(['status' => 'erro', 'mensagem' => 'Erro no banco de dados']);
     }
+} else {
+    echo json_encode(['status' => 'erro', 'mensagem' => 'ID inválido']);
 }
-?>

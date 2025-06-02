@@ -56,9 +56,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Contribuições - Dízimos e Ofertas</title>
     <link rel="stylesheet" href="styles-principal.css">
     <link rel="stylesheet" href="styles-tables.css">
-    <link rel="stylesheet" href="style_relatorio_contribuicao.css">
     <link rel="stylesheet" href="style-report-transactions.css">
     <link rel="stylesheet" href="style-lista-transacoes.css">
+    <link rel="stylesheet" href="style_relatorio_contribuicao.css">
     <link rel="stylesheet" href="media_queries.css">
 
     <script src="script-contribuicoes.js" defer></script>
@@ -149,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                 <td>R$ <?= number_format($contrib['valor'], 2, ',', '.') ?></td>
                                                 <td>
                                                     <a href="relatorio_individual_contribuicao.php?mes=<?= $mes ?>&ano=<?= $ano ?>&nome=<?= $nomeContribuicao ?>&valor_dizimo=<?= $contrib['valor'] ?>&descricao=<?= $contrib['descricao'] ?>" target="_blank">
-                                                        <button>Reimprimir</button>
+                                                        <button title="Imprimir" class="btn">🖨️</button>
                                                     </a>
                                                 </td>
                                             </tr>
@@ -202,7 +202,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <label>Descrição:</label>
                                     <input type="text" name="descricao" required>
                                     <input type="hidden" name="pago" value="0">
-                                    <button type="submit">Salvar Contribuição</button>
+                                    <button title="Salvar Contribuição" class="btn" type="submit">💾</button>
                                 </form>
                             </div>
                         <?php endif; ?>

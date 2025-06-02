@@ -24,6 +24,7 @@ $stmt->bindParam(':mesAtual', $mesAtual);
 $stmt->bindParam(':anoAtual', $anoAtual);
 $stmt->execute();
 $despesasHoje = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$totalVencidas = array_sum(array_column($despesasVencidas, 'valor'));
 
 // Calcular saldo do mês atual
 $sqlSaldo = "SELECT 
@@ -36,6 +37,7 @@ $stmt->bindParam(':mesAtual', $mesAtual);
 $stmt->bindParam(':anoAtual', $anoAtual);
 $stmt->execute();
 $saldo = $stmt->fetch(PDO::FETCH_ASSOC);
+$totalHoje = array_sum(array_column($despesasHoje, 'valor'));
 
 $saldoAtual = $saldo['totalReceitas'] - $saldo['totalDespesas'];
 ?>
@@ -52,14 +54,14 @@ $saldoAtual = $saldo['totalReceitas'] - $saldo['totalDespesas'];
     <link rel="stylesheet" href="styles-tables.css">
     <link rel="stylesheet" href="media_queries.css">
 
-    <script src="scripts.js" defer></script>
+    <script src="script-index.js" defer></script>
 
 </head>
 
 <body>
-    
     <main>
-        <h3>Despesas Vencidas (Mês Atual: <?php echo "$mesAtual/$anoAtual"?>)</h3>
+
+        <h3>Despesas Vencidas (Mês Atual: <?php echo "$mesAtual/$anoAtual" ?>)</h3>
         <table>
             <thead>
                 <tr>
@@ -70,7 +72,8 @@ $saldoAtual = $saldo['totalReceitas'] - $saldo['totalDespesas'];
                     <th>Ação</th>
                 </tr>
             </thead>
-            <tbody>
+            <!-- <tbody> -->
+            <tbody id="tbody-vencidas">
                 <?php if (!empty($despesasVencidas)): ?>
                     <?php foreach ($despesasVencidas as $despesa): ?>
                         <tr>
@@ -78,7 +81,12 @@ $saldoAtual = $saldo['totalReceitas'] - $saldo['totalDespesas'];
                             <td><?php echo $despesa['forma_pagamento']; ?></td>
                             <td><?php echo htmlspecialchars($despesa['nome']); ?></td>
                             <td>R$ <?php echo number_format($despesa['valor'], 2, ',', '.'); ?></td>
-                            <td><button onclick="marcarComoPago(<?php echo $despesa['id']; ?>)">Marcar como Paga</button></td>
+                            <!-- <td>
+                                <button onclick="marcarComoPago(<?php echo $despesa['id']; ?>)">Marcar como Paga</button>
+                            </td> -->
+                            <td>
+                                <button class="btn-marcar" data-id="<?php echo $despesa['id']; ?>" data-valor="<?php echo $despesa['valor']; ?>">Marcar como Paga</button>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>
@@ -87,8 +95,21 @@ $saldoAtual = $saldo['totalReceitas'] - $saldo['totalDespesas'];
                     </tr>
                 <?php endif; ?>
             </tbody>
+            <tfoot>
+                <!-- <tr>
+                    <td colspan="3" style="text-align: right;">Total</td>
+                    <td colspan="2">R$ <?php echo number_format($totalVencidas, 2, ',', '.'); ?></td>
+                </tr> -->
+                <tfoot>
+                    <tr>
+                        <td colspan="5"><span id="total-vencidas">Total: &nbsp;&nbsp;R$ <?php echo number_format($totalVencidas, 2, ',', '.'); ?></span></td>
+                    </tr>
+                </tfoot>
+
+            </tfoot>
+
         </table>
-        <h3>Despesas com Vencimento Hoje (<?php echo " $diaAtual/$mesAtual "?>)</h3>
+        <h3>Despesas com Vencimento Hoje (<?php echo " $diaAtual/$mesAtual " ?>)</h3>
         <table>
             <thead>
                 <tr>
@@ -99,7 +120,7 @@ $saldoAtual = $saldo['totalReceitas'] - $saldo['totalDespesas'];
                     <th>Ação</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="tbody-hoje">
                 <?php if (!empty($despesasHoje)): ?>
                     <?php foreach ($despesasHoje as $despesa): ?>
                         <tr>
@@ -107,7 +128,12 @@ $saldoAtual = $saldo['totalReceitas'] - $saldo['totalDespesas'];
                             <td><?php echo $despesa['forma_pagamento']; ?></td>
                             <td><?php echo htmlspecialchars($despesa['nome']); ?></td>
                             <td>R$ <?php echo number_format($despesa['valor'], 2, ',', '.'); ?></td>
-                            <td><button onclick="marcarComoPago(<?php echo $despesa['id']; ?>)">Marcar como Paga</button></td>
+                            <!-- <td>
+                                <button onclick="marcarComoPago(<?php echo $despesa['id']; ?>)">Marcar como Paga</button>
+                            </td> -->
+                            <td>
+                                <button class="btn-marcar" data-id="<?php echo $despesa['id']; ?>" data-valor="<?php echo $despesa['valor']; ?>">Marcar como Paga</button>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>
@@ -116,12 +142,26 @@ $saldoAtual = $saldo['totalReceitas'] - $saldo['totalDespesas'];
                     </tr>
                 <?php endif; ?>
             </tbody>
+            <tfoot>
+                <!-- <tr>
+                    <td colspan="3" style="text-align: right;">Total</td>
+                    <td colspan="2">R$ <?php echo number_format($totalHoje, 2, ',', '.'); ?></td>
+                </tr> -->
+                <tfoot>
+                    <tr>
+                        <td colspan="5"><span id="total-hoje">Total: &nbsp;&nbsp;R$ <?php echo number_format($totalHoje, 2, ',', '.'); ?></span></td>
+                    </tr>
+                </tfoot>
+
+            </tfoot>
+
         </table>
         <div class="saldo">
-            <h3>Saldo do Mês Atual: R$ <?php echo number_format($saldoAtual, 2, ',', '.'); ?></h3>
+            <h3>Saldo restate do Mês Atual: R$ <?php echo number_format($saldoAtual, 2, ',', '.'); ?></h3>
         </div>
     </main>
-    <?php include 'footer.php';?>
+
+    <?php include 'footer.php'; ?>
 </body>
 
 </html>

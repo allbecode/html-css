@@ -69,8 +69,8 @@ $total = array_sum(array_column($contribuicoes, 'valor'));
                         </tr>
                     </tfoot>
                 </table>
-                <button class="no-print" onclick="window.print()">Imprimir Relatório</button>
-                <button onclick="fecharRelatorio()">Fechar Relatório</button>
+                <button title="Imprimir Relatório" class="no-print btn" onclick="window.print()">🖨️</button>
+                <button title="Fechar Relatório" class="btn" onclick="fecharRelatorio()">❌</button>
             </div>
         <?php else: ?>
             <p>Nenhuma contribuição encontrada para o período selecionado.</p>

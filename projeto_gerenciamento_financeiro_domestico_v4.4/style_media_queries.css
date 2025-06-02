@@ -13,7 +13,9 @@
 
 /* Telas médias */
 @media screen and (min-width: 768px) {
-
+    .container-principal {
+        height: 76vh;
+    }
 
     main h1 {
         text-align: center;
@@ -111,7 +113,8 @@
 
     .table-container {
         width: 100%;
-        max-height: 60vh; /* Altura fixa */
+        max-height: 60vh;
+        /* Altura fixa */
         overflow-y: auto;
     }
 
@@ -165,7 +168,7 @@
 
     /* Estilos da lista de transações */
 
-    
+
     /* -------------------------------- */
 
 }

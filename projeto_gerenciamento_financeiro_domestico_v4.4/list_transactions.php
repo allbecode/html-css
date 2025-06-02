@@ -145,9 +145,9 @@ $transacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 </td>
                                 <td class="acoes">
                                     <div class="acoes-container">
-                                        <button class="button delete visible" data-id="<?= $transacao['id']; ?>">Excluir</button>
+                                        <button title="Excluir" class="button delete visible" data-id="<?= $transacao['id']; ?>">🗑️</button>
 
-                                        <button class="button salvar hidden">Salvar</button>
+                                        <button title="Salvar" class="button salvar hidden">💾</button>
                                     </div>
                                 </td>
                             </tr>

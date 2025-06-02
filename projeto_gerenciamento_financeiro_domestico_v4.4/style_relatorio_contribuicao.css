@@ -23,7 +23,7 @@ div.resumo-box {
     margin: auto;
     padding: 20px;
     border: 1px solid #ddd;
-    background: #f9f9f9;
+    /* background: #f9f9f9; */
     text-align: center;
     margin-bottom: 20px;
 }
@@ -36,15 +36,29 @@ div.resumo-box {
     margin: 10px 0;
 }
 
+.btn {
+    background: none;
+    border: none !important; 
+    font-size: 35px;
+    padding: 8px 16px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: none;
+    border: none;
+}
+
 /* ---------------------------- */
 button.no-print {
-            margin-top: 20px;
-        }
+    margin-top: 20px;
+}
 
-        .subTotal {
-            border-top: 2px solid #063042;
-            font-weight: 700;
-        }
+.subTotal {
+    border-top: 2px solid #063042;
+    font-weight: 700;
+}
 
 /* ----------------------------- */
 
@@ -57,7 +71,7 @@ button.no-print {
         display: none;
     }
 
-    
+
     .no-print {
         display: none !important;
     }
@@ -69,5 +83,5 @@ button.no-print {
     .subTotal {
         border-bottom: 2px solid #063042;
     }
-        
+
 }

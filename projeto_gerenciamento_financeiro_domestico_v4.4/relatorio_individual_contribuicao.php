@@ -38,7 +38,7 @@ $descricao = $_GET['descricao'];
     <main>
         <h2>Relatório de Dízimos/Ofertas</h2>
         <div class="container">
-            <p class="info"><strong>Mês:</strong> <?= htmlspecialchars($mes) ?>/<?= htmlspecialchars($ano) ?></p>
+            <p class="info"><strong>Mês:</strong> <?= str_pad($mes, 2, '0', STR_PAD_LEFT); ?> / <?= htmlspecialchars($ano) ?></p>
             <table>
                 <caption>
                     <p><strong><?= htmlspecialchars($nome); ?>:</strong> <?= htmlspecialchars($descricao); ?></p>
@@ -72,8 +72,8 @@ $descricao = $_GET['descricao'];
                 </tfoot>
             </table>
 
-            <button onclick="window.print()">Imprimir Relatório</button>
-            <button onclick="fecharRelatorio()">Fechar Relatório</button>
+            <button title="Imprimir Relatório" class="btn" onclick="window.print()">🖨️</button>
+            <button title="Fechar Relatório" class="btn" onclick="fecharRelatorio()">❌</button>
         </div>
     </main>
     <?php include 'footer.php' ?>

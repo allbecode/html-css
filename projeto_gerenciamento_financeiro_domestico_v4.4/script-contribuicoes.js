@@ -1,9 +1,3 @@
-// Falta:
-// 
-// 1- Eliminar os comentário indevidos;
-
-
-
 document.addEventListener('DOMContentLoaded', function () {
     const selects = document.querySelectorAll('select[name="mes"], select[name="ano"], select[name="tipo_contribuicao"]');
 
@@ -14,13 +8,11 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-
 document.getElementById('tipo_contribuicao').addEventListener('change', function () {
     const tipo = this.value;
     document.getElementById('resumo_dizimo').style.display = (tipo === 'dizimo') ? 'block' : 'none';
     document.getElementById('resumo_oferta').style.display = (tipo === 'oferta') ? 'block' : 'none';
 });
-
 
 // Exibir automaticamente se já foi submetido
 window.onload = function () {
@@ -28,10 +20,6 @@ window.onload = function () {
     if (tipo === 'dizimo') document.getElementById('resumo_dizimo').style.display = 'block';
     if (tipo === 'oferta') document.getElementById('resumo_oferta').style.display = 'block';
 };
-
-
-// window.onload = document.getElementById('mes').focus();
-
 
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('form-contribuicao');
@@ -46,5 +34,3 @@ document.addEventListener('DOMContentLoaded', function () {
         form.submit();
     }
 });
-
-

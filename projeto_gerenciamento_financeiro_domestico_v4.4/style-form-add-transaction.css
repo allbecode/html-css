@@ -15,7 +15,6 @@
  .lista-transacoes-dia {
      flex: 1;
      background-color: #fffacd;
-     /* amarelo-claro (lemon chiffon) */
      border: 1px solid #e6e600;
      padding: 15px;
      font-family: monospace;
@@ -26,7 +25,6 @@
      max-height: 60vh;
      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
      margin: 0 auto;
-
  }
 
  .lista-transacoes-dia h3 {

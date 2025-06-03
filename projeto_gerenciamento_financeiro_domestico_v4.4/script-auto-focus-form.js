@@ -81,5 +81,3 @@ function focarPrimeiroCampo(formSelector = 'form', delay = 50) {
 // Chama o foco no novo campo após a reinicialização
 //        focarPrimeiroCampo('#form-transacao');
 // ...
-
-

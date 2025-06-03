@@ -1,21 +1,6 @@
-// function marcarComoPago(id) {
-//     if (confirm("Tem certeza que deseja marcar esta despesa como paga?")) {
-//         fetch("marcar_pago.php", {
-//             method: "POST",
-//             headers: { "Content-Type": "application/x-www-form-urlencoded" },
-//             body: "id=" + id
-//         })
-//         .then(response => response.text())
-//         .then(data => {
-//             if (data === "success") {
-//                 alert("Despesa marcada como paga!");
-//                 location.reload();
-//             } else {
-//                 alert("Erro ao marcar despesa como paga.");
-//             }
-//         });
-//     }
-// }
+function fecharRelatorio() {
+    window.close();
+}
 
 function mudouTamanho() {
     if (window.innerWidth >= 768) {
@@ -24,7 +9,6 @@ function mudouTamanho() {
         itens.style.display = 'none'
     }
 }
-
 
 function clickMenu() {
     if (itens.style.display == 'block') {
@@ -39,7 +23,6 @@ function anoAtual() {
     let anoAtual = new Date().getFullYear();
     ano.innerHTML += `${anoAtual}`;
 }
-
 
 document.addEventListener('DOMContentLoaded', function () {
     const campos = ['valor', 'ano', 'mes', 'nome']; // nomes dos inputs

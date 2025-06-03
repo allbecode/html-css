@@ -33,27 +33,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function atualizarTotais() {
         ['vencidas', 'hoje'].forEach(tipo => {
-            const corpo = document.querySelector(`#tbody-${tipo}`);
+            const corpo = document.getElementById(`tbody-${tipo}`);
             if (!corpo) return;
 
             const linhas = corpo.querySelectorAll('tr');
             let total = 0;
 
+            // Verifica e remove linhas ocultas de aviso se estiverem visíveis
+            const msgVazia = document.getElementById(`msg-sem-${tipo}`);
+            if (msgVazia) msgVazia.style.display = 'none';
+
             linhas.forEach(tr => {
                 const valorTd = tr.querySelector('td:nth-child(4)');
                 if (valorTd) {
-                    const texto = valorTd.textContent.replace('R$', '').trim().replace('.', '').replace(',', '.');
+                    const texto = valorTd.textContent.replace('R$', '').replace(/\./g, '').replace(',', '.');
                     const valor = parseFloat(texto);
-                    if (!isNaN(valor)) total += valor;
+                    if (!isNaN(valor)) {
+                        total += valor;
+                    }
                 }
             });
 
-            const totalSpan = document.querySelector(`#total-${tipo}`);
-            if (totalSpan) {
-                totalSpan.textContent = 'R$ ' + total.toLocaleString('pt-BR', {
+            const spanTotal = document.getElementById(`total-${tipo}`);
+            if (spanTotal) {
+                spanTotal.textContent = 'R$ ' + total.toLocaleString('pt-BR', {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2
                 });
+            }
+
+            // Se não houver linhas visíveis, exibe a mensagem
+            if (linhas.length === 0 && msgVazia) {
+                corpo.appendChild(msgVazia); // garante que está dentro do tbody
+                msgVazia.style.display = 'table-row';
             }
         });
     }

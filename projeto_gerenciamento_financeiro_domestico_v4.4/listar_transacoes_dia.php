@@ -1,4 +1,7 @@
 <?php
+
+// Conteúdo da lista de transações realizadas no dia no form de adição de transações.
+
 include 'db_connection.php';
 
 $dataHoje = date('Y-m-d');
@@ -11,10 +14,8 @@ if (count($transacoes) > 0): ?>
         <thead>
             <tr>
                 <th>Data</th>
-                <!-- <th>Tipo</th> -->
                 <th>Nome</th>
                 <th>Valor</th>
-                <!-- <th>Forma Pagamento</th> -->
                 <th>Descrição</th>
             </tr>
         </thead>
@@ -24,10 +25,8 @@ if (count($transacoes) > 0): ?>
                     <td>
                         <?php echo date('d/m/Y', strtotime($t['data_vencimento'])); ?>
                     </td>
-                    <!-- <td><?= htmlspecialchars($t['tipo']) ?></td> -->
                     <td><?= htmlspecialchars($t['nome']) ?></td>
                     <td>R$ <?= number_format($t['valor'], 2, ',', '.') ?></td>
-                    <!-- <td><?= htmlspecialchars($t['forma_pagamento']) ?></td> -->
                     <td><?= htmlspecialchars($t['descricao']) ?></td>
                 </tr>
             <?php endforeach; ?>

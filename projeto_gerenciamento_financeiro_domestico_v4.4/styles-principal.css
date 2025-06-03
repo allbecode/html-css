@@ -25,7 +25,6 @@ body {
     font-family: var(--font-principal), sans-serif;
     color: var(--cor1);
     box-sizing: border-box;
-    /* height: 100%; */
 }
 
 body.sem-menu #itens {
@@ -39,7 +38,7 @@ h1 {
     text-align: center;
 }
 
-h1 > a {
+h1>a {
     text-decoration: none;
     color: white;
     cursor: pointer;
@@ -57,11 +56,11 @@ h3 {
 
 }
 
-main > h3:nth-of-type(1) {
+main>h3:nth-of-type(1) {
     padding: 0px 0px 20px 0px;
 }
 
-main > h2:nth-of-type(1) {
+main>h2:nth-of-type(1) {
     padding: 0px 0px 20px 0px;
 }
 
@@ -69,7 +68,6 @@ main > h2:nth-of-type(1) {
 
 main {
     margin: 20px 20px;
-    /* height: 77vh; */
 }
 
 caption {
@@ -126,17 +124,11 @@ iframe {
 }
 
 .delete {
-    /* background-color: #ff4141; */
     background: none;
-    /* border: 1px solid #ff4141;; */
     border: none;
-    /* transition: 0.5s; */
 }
 
 .delete:hover {
-    /* background-color: white; */
-    /* border: 1px solid #ff4141;; */
-    /* color: #ff4141; */
     background: none;
     border: none;
 }
@@ -156,6 +148,11 @@ iframe {
     text-align: center;
     padding: 10px;
     font-weight: 700;
+}
+
+#msg-sem-vencidas,
+#msg-sem-hoje {
+    display: none;
 }
 
 /* Ajuste do resumo financeiro */
@@ -184,7 +181,6 @@ iframe {
 
 .status-nao-pago {
     color: red;
-    /* font-weight: bold; */
 }
 
 .execute {
@@ -202,7 +198,6 @@ iframe {
 
 .error {
     background-color: #b70808;
-    
 }
 
 
@@ -234,5 +229,3 @@ footer>p>a {
 footer>p>a:hover {
     text-decoration: underline;
 }
-
-

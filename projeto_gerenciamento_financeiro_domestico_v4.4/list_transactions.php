@@ -1,11 +1,5 @@
 <?php
 
-// Falta:
-// 
-// 1- Eliminar o código que faz com que a tecla enter edite a linha;
-// **- Eliminar os comentário indevidos;
-
-
 include 'db_connection.php';
 include 'header.php';
 

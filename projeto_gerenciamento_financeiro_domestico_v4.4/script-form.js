@@ -21,23 +21,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// document.addEventListener('DOMContentLoaded', function () {
-//     const form = document.getElementById('form-mes-ano');
-
-//     if (form && !location.search.includes('mes=')) {
-//         // Se ainda não há parâmetros, envia automaticamente com os valores padrão
-//         form.requestSubmit();
-//     }
-
-//     // Atualiza ao mudar mês ou ano
-//     const inputs = form.querySelectorAll('select, input');
-//     inputs.forEach(el => {
-//         el.addEventListener('change', () => {
-//             form.requestSubmit();
-//         });
-//     });
-// });
-
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('form-mes-ano');
 

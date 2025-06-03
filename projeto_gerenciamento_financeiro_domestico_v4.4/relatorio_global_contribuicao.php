@@ -29,6 +29,8 @@ $total = array_sum(array_column($contribuicoes, 'valor'));
     <link rel="stylesheet" href="styles-principal.css">
     <link rel="stylesheet" href="style_relatorio_contribuicao.css">
     <link rel="stylesheet" href="styles-tables.css">
+
+    <script src="scripts.js" defer></script>
 </head>
 
 <body class="<?= $pageClass ?>">
@@ -77,12 +79,6 @@ $total = array_sum(array_column($contribuicoes, 'valor'));
         <?php endif; ?>
     </main>
     <?php include 'footer.php' ?>
-
-    <script>
-        function fecharRelatorio() {
-            window.close();
-        }
-    </script>
 </body>
 
 </html>

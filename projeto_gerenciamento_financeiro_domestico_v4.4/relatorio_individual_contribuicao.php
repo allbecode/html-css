@@ -26,11 +26,8 @@ $descricao = $_GET['descricao'];
     <link rel="stylesheet" href="style_relatorio_contribuicao.css">
     <link rel="stylesheet" href="styles-tables.css">
 
-    <script>
-        // window.onload = function () {
-        // window.print(); // Chama o assistente de impressão assim que a página carrega
-        // };
-    </script>
+    <script src="scripts.js" defer></script>
+
 </head>
 
 <body class="<?= $pageClass ?>">
@@ -77,13 +74,6 @@ $descricao = $_GET['descricao'];
         </div>
     </main>
     <?php include 'footer.php' ?>
-
-    <script>
-        function fecharRelatorio() {
-            window.close();
-        }
-    </script>
-
 </body>
 
 </html>

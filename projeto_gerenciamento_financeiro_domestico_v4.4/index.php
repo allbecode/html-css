@@ -55,7 +55,6 @@ $saldoAtual = $saldo['totalReceitas'] - $saldo['totalDespesas'];
     <link rel="stylesheet" href="media_queries.css">
 
     <script src="script-index.js" defer></script>
-
 </head>
 
 <body>
@@ -72,8 +71,9 @@ $saldoAtual = $saldo['totalReceitas'] - $saldo['totalDespesas'];
                     <th>Ação</th>
                 </tr>
             </thead>
-            <!-- <tbody> -->
+            
             <tbody id="tbody-vencidas">
+
                 <?php if (!empty($despesasVencidas)): ?>
                     <?php foreach ($despesasVencidas as $despesa): ?>
                         <tr>
@@ -81,9 +81,6 @@ $saldoAtual = $saldo['totalReceitas'] - $saldo['totalDespesas'];
                             <td><?php echo $despesa['forma_pagamento']; ?></td>
                             <td><?php echo htmlspecialchars($despesa['nome']); ?></td>
                             <td>R$ <?php echo number_format($despesa['valor'], 2, ',', '.'); ?></td>
-                            <!-- <td>
-                                <button onclick="marcarComoPago(<?php echo $despesa['id']; ?>)">Marcar como Paga</button>
-                            </td> -->
                             <td>
                                 <button class="btn-marcar" data-id="<?php echo $despesa['id']; ?>" data-valor="<?php echo $despesa['valor']; ?>">Marcar como Paga</button>
                             </td>
@@ -95,11 +92,10 @@ $saldoAtual = $saldo['totalReceitas'] - $saldo['totalDespesas'];
                     </tr>
                 <?php endif; ?>
             </tbody>
+            <tr id="msg-sem-vencidas">
+                <td colspan="5">Nenhuma despesa vencida este mês.</td>
+            </tr>
             <tfoot>
-                <!-- <tr>
-                    <td colspan="3" style="text-align: right;">Total</td>
-                    <td colspan="2">R$ <?php echo number_format($totalVencidas, 2, ',', '.'); ?></td>
-                </tr> -->
                 <tfoot>
                     <tr>
                         <td colspan="5"><span id="total-vencidas">Total: &nbsp;&nbsp;R$ <?php echo number_format($totalVencidas, 2, ',', '.'); ?></span></td>
@@ -121,6 +117,7 @@ $saldoAtual = $saldo['totalReceitas'] - $saldo['totalDespesas'];
                 </tr>
             </thead>
             <tbody id="tbody-hoje">
+
                 <?php if (!empty($despesasHoje)): ?>
                     <?php foreach ($despesasHoje as $despesa): ?>
                         <tr>
@@ -128,9 +125,7 @@ $saldoAtual = $saldo['totalReceitas'] - $saldo['totalDespesas'];
                             <td><?php echo $despesa['forma_pagamento']; ?></td>
                             <td><?php echo htmlspecialchars($despesa['nome']); ?></td>
                             <td>R$ <?php echo number_format($despesa['valor'], 2, ',', '.'); ?></td>
-                            <!-- <td>
-                                <button onclick="marcarComoPago(<?php echo $despesa['id']; ?>)">Marcar como Paga</button>
-                            </td> -->
+
                             <td>
                                 <button class="btn-marcar" data-id="<?php echo $despesa['id']; ?>" data-valor="<?php echo $despesa['valor']; ?>">Marcar como Paga</button>
                             </td>
@@ -142,11 +137,10 @@ $saldoAtual = $saldo['totalReceitas'] - $saldo['totalDespesas'];
                     </tr>
                 <?php endif; ?>
             </tbody>
+            <tr id="msg-sem-hoje">
+                <td colspan="5">Nenhuma despesa com vencimento hoje.</td>
+            </tr>
             <tfoot>
-                <!-- <tr>
-                    <td colspan="3" style="text-align: right;">Total</td>
-                    <td colspan="2">R$ <?php echo number_format($totalHoje, 2, ',', '.'); ?></td>
-                </tr> -->
                 <tfoot>
                     <tr>
                         <td colspan="5"><span id="total-hoje">Total: &nbsp;&nbsp;R$ <?php echo number_format($totalHoje, 2, ',', '.'); ?></span></td>

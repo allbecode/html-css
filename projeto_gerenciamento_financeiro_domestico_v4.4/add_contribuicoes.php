@@ -149,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                 <td>R$ <?= number_format($contrib['valor'], 2, ',', '.') ?></td>
                                                 <td>
                                                     <a href="relatorio_individual_contribuicao.php?mes=<?= $mes ?>&ano=<?= $ano ?>&nome=<?= $nomeContribuicao ?>&valor_dizimo=<?= $contrib['valor'] ?>&descricao=<?= $contrib['descricao'] ?>" target="_blank">
-                                                        <button title="Imprimir" class="btn">🖨️</button>
+                                                        <button title="Imprimir Relatório Individual" class="btn">🖨️</button>
                                                     </a>
                                                 </td>
                                             </tr>
@@ -212,7 +212,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
     </main>
     <?php include 'footer.php' ?>
-
 </body>
 
 </html>

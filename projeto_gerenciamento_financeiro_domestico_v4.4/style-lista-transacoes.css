@@ -74,20 +74,13 @@ td.acoes {
 
 
 .button.salvar {
-    /* background-color: #2ecc71; */
     background: none;
-    /* color: white; */
-    /* border: 1px solid #2ecc71; */
     border: none;
     padding: 8px;
     cursor: pointer;
-    /* border-radius: 5px; */
 }
 
 .button.salvar:hover {
-    /* background-color: #fff; */
-    /* border: 1px solid #2ecc71; */
-    /* color: #2ecc71; */
     background: none;
     border: none;
 }

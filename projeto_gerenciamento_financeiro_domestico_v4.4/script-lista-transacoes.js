@@ -276,6 +276,4 @@ document.addEventListener('DOMContentLoaded', function () {
             atualizarSelecao(linhaSelecionadaIndex);
         }
     });
-
-
 });

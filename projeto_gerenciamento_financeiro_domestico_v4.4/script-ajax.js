@@ -2,8 +2,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     const forms = document.querySelectorAll('form');
-    // const forms = document.getElementById('form-transacao');
-
     forms.forEach(form => {
         form.addEventListener('submit', function (e) {
             e.preventDefault();

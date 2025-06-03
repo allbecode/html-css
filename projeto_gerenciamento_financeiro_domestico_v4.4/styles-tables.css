@@ -21,7 +21,6 @@ thead {
     position: sticky;
     top: 0;
     background-color: var(--cor3);
-    /* z-index: 100; */
 }
 
 th {
@@ -68,13 +67,6 @@ tfoot td {
 .table-container table {
     display: inline;
 }
-
-/* .table-container thead { */
-    /* position: sticky; */
-    /* top: 0; */
-    /* z-index: 1; */
-   
-/* } */
 
 .table-container tbody {
     max-height: 350px;

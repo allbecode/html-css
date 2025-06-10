@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const linha = this.closest('tr');
 
             if (confirm('Tem certeza que deseja excluir esta transação?')) {
-                fetch('delete_transaction.php', {
+                fetch('../actions/delete_transaction.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     body: `id=${encodeURIComponent(id)}`
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     if (tipoSelecionado) {
                         try {
-                            const response = await fetch(`${tipoSelecionado}.json?v=${Date.now()}`);
+                            const response = await fetch(`../assets/json/${tipoSelecionado}.json?v=${Date.now()}`);
                             const opcoes = await response.json();
                             const selectNome = document.createElement('select');
 
@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     return;
                 }
 
-                fetch('edit_transaction.php', {
+                fetch('../actions/edit_transaction.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

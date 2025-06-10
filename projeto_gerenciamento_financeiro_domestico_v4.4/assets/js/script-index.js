@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const valor = parseFloat(botao.dataset.valor.replace(',', '.'));
 
             if (confirm('Deseja realmente marcar esta despesa como paga?')) {
-                fetch('marcar_pago.php', {
+                fetch('../actions/marcar_pago.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'

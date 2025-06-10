@@ -1,4 +1,5 @@
 <?php
+// Conexão com DB
     $host = 'localhost';
     $dbname = 'financeiro';
     $username = 'root';

@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
 async function carregarProdutos() {
     const select = document.getElementById('produto');
     try {
-        const response = await fetch('produtos.json');
+        const response = await fetch('../assets/json/produtos.json');
         const categorias = await response.json();
 
         select.innerHTML = '<option value="">Selecione um produto</option>';

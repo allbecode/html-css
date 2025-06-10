@@ -1,50 +1,7 @@
 <?php
-
-include 'db_connection.php';
-include 'header.php';
-
-$anoAtual = date('Y');
-
-$sql = "SELECT * FROM transacoes ORDER BY data_vencimento ASC";
-$stmt = $pdo->prepare($sql);
-$stmt->execute();
-$transacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-$condicoes = [];
-$params = [];
-
-if (!empty($_GET['tipo'])) {
-    $condicoes[] = "tipo = :tipo";
-    $params[':tipo'] = $_GET['tipo'];
-}
-
-if (!empty($_GET['ano'])) {
-    $condicoes[] = "YEAR(data_vencimento) = :ano";
-    $params[':ano'] = $_GET['ano'];
-}
-
-if (!empty($_GET['mes'])) {
-    $condicoes[] = "MONTH(data_vencimento) = :mes";
-    $params[':mes'] = $_GET['mes'];
-}
-
-if (!empty($_GET['nome'])) {
-    $condicoes[] = "nome LIKE :nome";
-    $params[':nome'] = '%' . $_GET['nome'] . '%';
-}
-
-if (isset($_GET['pago']) && $_GET['pago'] !== '') {
-    $condicoes[] = "pago = :pago";
-    $params[':pago'] = $_GET['pago'];
-}
-
-$whereSQL = count($condicoes) ? 'WHERE ' . implode(' AND ', $condicoes) : '';
-
-$sql = "SELECT * FROM transacoes $whereSQL ORDER BY data_vencimento ASC";
-$stmt = $pdo->prepare($sql);
-$stmt->execute($params);
-$transacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+require_once '../controllers/controller_list_transactions.php';
+require_once '../includes/functions.php';
+include '../includes/header.php';
 ?>
 
 <!DOCTYPE html>
@@ -53,16 +10,16 @@ $transacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Transações</title>
+    <!-- <title>Lista de Transações</title> -->
 
-    <link rel="stylesheet" href="styles-principal.css">
-    <link rel="stylesheet" href="styles-tables.css">
-    <link rel="stylesheet" href="style-lista-transacoes.css">
-    <link rel="stylesheet" href="media_queries.css">
-    <link rel="stylesheet" href="style-report-transactions.css">
+    <link rel="stylesheet" href="../assets/css/styles-principal.css">
+    <link rel="stylesheet" href="../assets/css/styles-tables.css">
+    <link rel="stylesheet" href="../assets/css/style-lista-transacoes.css">
+    <link rel="stylesheet" href="../assets/css/media_queries.css">
+    <link rel="stylesheet" href="../assets/css/style-report-transactions.css">
 
-    <script src="scripts.js" defer></script>
-    <script src="script-lista-transacoes.js" defer></script>
+    <script src="../assets/js/scripts.js" defer></script>
+    <script src="../assets/js/script-lista-transacoes.js" defer></script>
 
 </head>
 
@@ -120,10 +77,10 @@ $transacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     <?php echo htmlspecialchars($transacao['nome']); ?>
                                 </td>
                                 <td data-field="data_vencimento">
-                                    <?php echo date('d/m/Y', strtotime($transacao['data_vencimento'])); ?>
+                                    <?php echo formatarDataBr($transacao['data_vencimento']); ?>
                                 </td>
                                 <td data-field="valor">
-                                    R$ <?php echo number_format($transacao['valor'], 2, ',', '.'); ?>
+                                    <?php echo formatarValor($transacao['valor']); ?>
                                 </td>
                                 <td data-field="tipo">
                                     <?php echo ucfirst($transacao['tipo']); ?>
@@ -159,7 +116,7 @@ $transacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </table>
         </div>
     </main>
-    <?php include 'footer.php'; ?>
+    <?php include '../includes/footer.php'; ?>
 
 </body>
 

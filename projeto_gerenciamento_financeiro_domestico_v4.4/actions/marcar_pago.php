@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-include 'db_connection.php';
+require_once '../includes/db_connection.php';
 
 $id = $_POST['id'] ?? null;
 

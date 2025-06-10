@@ -9,11 +9,11 @@ $anoAtual = date('Y');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <!-- <title>Rodapé</title> -->
 
-    <link rel="stylesheet" href="styles-principal.css">
-    <link rel="stylesheet" href="style-header.css">
-    <link rel="stylesheet" href="style_media_queries.css">
+    <link rel="stylesheet" href="assets/css/styles-principal.css">
+    <link rel="stylesheet" href="assets/css/style-header.css">
+    <link rel="stylesheet" href="assets/css/style_media_queries.css">
 </head>
 
 <body>

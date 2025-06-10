@@ -7,7 +7,7 @@ document.getElementById("tipo").addEventListener("change", async function () {
     if (arquivoJSON) {
         try {
             // Força o navegador a buscar uma versão atualizada do JSON
-            const response = await fetch(`${arquivoJSON}.json?v=${Date.now()}`);
+            const response = await fetch(`../assets/json/${arquivoJSON}.json?v=${Date.now()}`);
             const dados = await response.json();
 
             selectNome.innerHTML = '<option value="">Selecione...</option>';

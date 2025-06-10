@@ -1,5 +1,5 @@
 <?php
-include 'db_connection.php';
+require_once '../includes/db_connection.php';
 header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {

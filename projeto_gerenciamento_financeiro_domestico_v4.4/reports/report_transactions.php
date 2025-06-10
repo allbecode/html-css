@@ -1,35 +1,7 @@
 <?php
-include 'db_connection.php';
-include 'header.php';
-
-$receitas = [];
-$despesas = [];
-$totalReceitas = 0;
-$totalDespesas = 0;
-$saldoFinal = 0;
-$mesAtual = date('m'); // De 1 a 12
-$anoAtual = date('Y');
-$mes = $_POST['mes'] ?? $mesAtual;
-$ano = $_POST['ano'] ?? $anoAtual;
-
-$sql = "SELECT * FROM transacoes WHERE mes = :mes AND ano = :ano ORDER BY data_vencimento ASC";
-$stmt = $pdo->prepare($sql);
-$stmt->bindParam(':mes', $mes);
-$stmt->bindParam(':ano', $ano);
-$stmt->execute();
-$transacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-foreach ($transacoes as $transacao) {
-    if ($transacao['tipo'] === 'receita') {
-        $receitas[] = $transacao;
-        $totalReceitas += $transacao['valor'];
-    } else {
-        $despesas[] = $transacao;
-        $totalDespesas += $transacao['valor'];
-    }
-}
-
-$saldoFinal = $totalReceitas - $totalDespesas;
+require_once '../controllers/controller_report_transactions.php';
+require_once '../includes/functions.php';
+include '../includes/header.php';
 ?>
 
 <!DOCTYPE html>
@@ -38,13 +10,14 @@ $saldoFinal = $totalReceitas - $totalDespesas;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relatório Financeiro</title>
+    <!-- <title>Relatório Financeiro</title> -->
 
-    <link rel="stylesheet" href="styles-tables.css">
-    <link rel="stylesheet" href="style-lista-transacoes.css">
-    <link rel="stylesheet" href="style-report-transactions.css">
+    <link rel="stylesheet" href="../assets/css/styles-tables.css">
+    <link rel="stylesheet" href="../assets/css/style-lista-transacoes.css">
+    <link rel="stylesheet" href="../assets/css/style-report-transactions.css">
 
-    <script src="script-contribuicoes.js"></script>
+    <script src="../assets/js/script-contribuicoes.js"></script>
+    <script src="../assets/js/script-relatório-financeiro.js" defer  ></script>
 
 </head>
 
@@ -96,8 +69,8 @@ $saldoFinal = $totalReceitas - $totalDespesas;
                     <?php foreach ($receitas as $receita): ?>
                         <tr>
                             <td><?php echo htmlspecialchars($receita['nome']); ?></td>
-                            <td><?php echo date('d/m/Y', strtotime($receita['data_vencimento'])); ?></td>
-                            <td>R$ <?php echo number_format($receita['valor'], 2, ',', '.'); ?></td>
+                            <td><?php echo formatarDataBr($receita['data_vencimento']); ?></td>
+                            <td> <?php echo formatarValor($receita['valor']); ?></td>
                             <td><?php echo $receita['forma_pagamento']; ?></td>
                             <td><?php echo htmlspecialchars($receita['descricao']); ?></td>
                             <td class="<?php echo $receita['pago'] ? 'status-pago' : 'status-nao-pago'; ?>">
@@ -109,7 +82,7 @@ $saldoFinal = $totalReceitas - $totalDespesas;
                 <tfoot>
                     <tr>
                         <td colspan="6">
-                            Total de Receitas: R$ <?php echo number_format($totalReceitas, 2, ',', '.'); ?>
+                            Total de Receitas:  <?php echo formatarValor($totalReceitas); ?>
                         </td>
 
                     </tr>
@@ -132,8 +105,8 @@ $saldoFinal = $totalReceitas - $totalDespesas;
                     <?php foreach ($despesas as $despesa): ?>
                         <tr>
                             <td><?php echo htmlspecialchars($despesa['nome']); ?></td>
-                            <td><?php echo date('d/m/Y', strtotime($despesa['data_vencimento'])); ?></td>
-                            <td>R$ <?php echo number_format($despesa['valor'], 2, ',', '.'); ?></td>
+                            <td><?php echo formatarDataBr($despesa['data_vencimento']); ?></td>
+                            <td> <?php echo formatarValor($despesa['valor']); ?></td>
                             <td><?php echo $despesa['forma_pagamento']; ?></td>
                             <td><?php echo htmlspecialchars($despesa['descricao']); ?></td>
                             <td class="<?php echo $despesa['pago'] ? 'status-pago' : 'status-nao-pago'; ?>">
@@ -145,7 +118,7 @@ $saldoFinal = $totalReceitas - $totalDespesas;
                 <tfoot>
                     <tr>
                         <td colspan="6">
-                            Total de Despesas: R$ <?php echo number_format($totalDespesas, 2, ',', '.'); ?>
+                            Total de Despesas:  <?php echo formatarValor($totalDespesas); ?>
                         </td>
                     </tr>
                 </tfoot>
@@ -153,27 +126,15 @@ $saldoFinal = $totalReceitas - $totalDespesas;
 
             <h2>Resumo Financeiro</h2>
             <div class="resumo-financeiro">
-                <p><strong>Total de Receitas:</strong> R$ <?php echo number_format($totalReceitas, 2, ',', '.'); ?></p>
-                <p><strong>Total de Despesas:</strong> R$ <?php echo number_format($totalDespesas, 2, ',', '.'); ?></p>
-                <p><strong>Saldo Final:</strong> R$ <?php echo number_format($saldoFinal, 2, ',', '.'); ?></p>
+                <p><strong>Total de Receitas:</strong>  <?php echo formatarValor($totalReceitas); ?></p>
+                <p><strong>Total de Despesas:</strong>  <?php echo formatarValor($totalDespesas); ?></p>
+                <p><strong>Saldo Final:</strong>  <?php echo formatarValor($saldoFinal); ?></p>
             </div>
         <?php endif; ?>
         <?php endif;?>
 
     </main>
-    <?php include 'footer.php'; ?>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const botaoImprimir = document.getElementById('btn-imprimir-relatorio');
-
-            if (botaoImprimir) {
-                botaoImprimir.addEventListener('click', () => {
-                    window.print();
-                });
-            }
-        });
-    </script>
+    <?php include '../includes/footer.php'; ?>
 </body>
 
 </html>

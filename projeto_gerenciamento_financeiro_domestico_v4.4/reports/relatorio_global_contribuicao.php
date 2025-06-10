@@ -1,22 +1,7 @@
 <?php
-include 'db_connection.php';
-$pageClass = 'sem-menu';
-include 'header.php';
-
-$mes = $_GET['mes'] ?? date('m');
-$ano = $_GET['ano'] ?? date('Y');
-
-$sql = "SELECT nome, tipo, descricao, valor, data_vencimento 
-        FROM transacoes 
-        WHERE nome IN ('Dízimo', 'Oferta') AND mes = :mes AND ano = :ano ORDER BY nome ASC";
-
-$stmt = $pdo->prepare($sql);
-$stmt->bindValue(':mes', $mes, PDO::PARAM_INT);
-$stmt->bindValue(':ano', $ano, PDO::PARAM_INT);
-$stmt->execute();
-$contribuicoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-$total = array_sum(array_column($contribuicoes, 'valor'));
+require_once '../controllers/controller_relatorio_global_controbuicao.php';
+require_once '../includes/functions.php';
+include '../includes/header.php';
 ?>
 
 <!DOCTYPE html>
@@ -24,13 +9,14 @@ $total = array_sum(array_column($contribuicoes, 'valor'));
 
 <head>
     <meta charset="UTF-8">
-    <title>Relatório Global de Contribuições</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>Relatório Global de Contribuições</title> -->
 
-    <link rel="stylesheet" href="styles-principal.css">
-    <link rel="stylesheet" href="style_relatorio_contribuicao.css">
-    <link rel="stylesheet" href="styles-tables.css">
+    <link rel="stylesheet" href="../assets/css/styles-principal.css">
+    <link rel="stylesheet" href="../assets/css/style_relatorio_contribuicao.css">
+    <link rel="stylesheet" href="../assets/css/styles-tables.css">
 
-    <script src="scripts.js" defer></script>
+    <script src="../assets/js/scripts.js" defer></script>
 </head>
 
 <body class="<?= $pageClass ?>">
@@ -54,20 +40,20 @@ $total = array_sum(array_column($contribuicoes, 'valor'));
                         <?php foreach ($contribuicoes as $c): ?>
                             <tr>
                                 <td><?= htmlspecialchars($c['nome']); ?></td>
-                                <td>R$ <?= number_format(($c['valor'] / 2), 2, ',', '.'); ?></td>
-                                <td>R$ <?= number_format(($c['valor'] / 2), 2, ',', '.'); ?></td>
+                                <td> <?php echo formatarValor(($c['valor'] / 2)); ?></td>
+                                <td> <?php echo formatarValor(($c['valor'] / 2)); ?></td>
                             </tr>
                         <?php endforeach; ?>
                         <tr class="subTotal">
                             <td>Total</td>
-                            <td>R$ <?= number_format(($total / 2), 2, ',', '.'); ?></td>
-                            <td>R$ <?= number_format(($total / 2), 2, ',', '.'); ?></td>
+                            <td> <?php echo formatarValor(($total / 2)); ?></td>
+                            <td> <?php echo formatarValor(($total / 2)); ?></td>
                         </tr>
                     </tbody>
                     <tfoot>
 
                         <tr>
-                            <td colspan="3">Total Geral: R$ <?= number_format($total, 2, ',', '.'); ?></td>
+                            <td colspan="3">Total Geral:  <?php echo formatarValor($total); ?></td>
                         </tr>
                     </tfoot>
                 </table>
@@ -78,7 +64,7 @@ $total = array_sum(array_column($contribuicoes, 'valor'));
             <p>Nenhuma contribuição encontrada para o período selecionado.</p>
         <?php endif; ?>
     </main>
-    <?php include 'footer.php' ?>
+    <?php include '../includes/footer.php' ?>
 </body>
 
 </html>

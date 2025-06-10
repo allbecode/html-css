@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 function carregarTransacoesDoDia() {
-    fetch('listar_transacoes_dia.php')
+    fetch('../actions/listar_transacoes_dia.php')
         .then(res => res.text())
         .then(html => {
             const container = document.getElementById('transacoes-do-dia');

@@ -1,17 +1,7 @@
 <?php
-include 'db_connection.php';
-$pageClass = 'sem-menu';
-include 'header.php';
-
-if (!isset($_GET['mes']) || !isset($_GET['ano']) || !isset($_GET['valor_dizimo'])) {
-    die("Dados insuficientes para gerar o relatório.");
-}
-
-$mes = $_GET['mes'];
-$ano = $_GET['ano'];
-$nome = $_GET['nome'];
-$valor = $_GET['valor_dizimo'];
-$descricao = $_GET['descricao'];
+require_once '../controllers/controller_relatorio_individual_contribuicao.php';
+require_once '../includes/functions.php';
+include '../includes/header.php';
 ?>
 
 <!DOCTYPE html>
@@ -20,13 +10,13 @@ $descricao = $_GET['descricao'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relatório de Dízimo</title>
+    <!-- <title>Relatório Individual de Contribuições</title> -->
 
-    <link rel="stylesheet" href="styles-principal.css">
-    <link rel="stylesheet" href="style_relatorio_contribuicao.css">
-    <link rel="stylesheet" href="styles-tables.css">
+    <link rel="stylesheet" href="../assets/css/styles-principal.css">
+    <link rel="stylesheet" href="../assets/css/style_relatorio_contribuicao.css">
+    <link rel="stylesheet" href="../assets/css/styles-tables.css">
 
-    <script src="scripts.js" defer></script>
+    <script src="../assets/js/scripts.js" defer></script>
 
 </head>
 
@@ -53,17 +43,17 @@ $descricao = $_GET['descricao'];
                             <p class="info"><?= htmlspecialchars($nome); ?></p>
                         </td>
                         <td>
-                            <p class="info">R$ <?= number_format(($valor / 2), 2, ',', '.') ?></p>
+                            <p class="info"> <?php echo formatarValor(($valor / 2)) ?></p>
                         </td>
                         <td>
-                            <p class="info">R$ <?= number_format(($valor / 2), 2, ',', '.') ?></p>
+                            <p class="info"> <?php echo formatarValor(($valor / 2)) ?></p>
                         </td>
                     </tr>
                 </tbody>
                 <tfoot>
                     <tr>
                         <td colspan="3">
-                            <p class="info">Valor do Dízimo: R$ <?= number_format($valor, 2, ',', '.') ?></p>
+                            <p class="info">Valor do Dízimo: R$ <?php echo formatarValor($valor) ?></p>
                         </td>
                     </tr>
                 </tfoot>
@@ -73,7 +63,7 @@ $descricao = $_GET['descricao'];
             <button title="Fechar Relatório" class="btn" onclick="fecharRelatorio()">❌</button>
         </div>
     </main>
-    <?php include 'footer.php' ?>
+    <?php include '../includes/footer.php' ?>
 </body>
 
 </html>

@@ -1,7 +1,7 @@
 // Função para carregar os dados do JSON e preencher o select
 async function carregarOpcoesFormaPagamento() {
     try {
-        const response = await fetch('forma_pagamento.json'); // Carregar JSON
+        const response = await fetch('../assets/json/forma_pagamento.json'); // Carregar JSON
         const dados = await response.json(); // Converter para objeto
         
         const select = document.getElementById("forma_pagamento");

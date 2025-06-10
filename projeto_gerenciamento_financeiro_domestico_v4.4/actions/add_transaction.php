@@ -1,6 +1,7 @@
 <?php
-include "db_connection.php";
-include 'utils.php';
+// Adicionar transações
+require_once "../includes/db_connection.php";
+include '../includes/utils.php';
 
 $nome = $_POST['nome'];
 $data_vencimento = $_POST['data_vencimento'];

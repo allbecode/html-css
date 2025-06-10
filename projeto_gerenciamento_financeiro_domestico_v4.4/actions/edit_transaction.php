@@ -1,15 +1,13 @@
 <?php
 header('Content-Type: application/json');
-include 'db_connection.php';
-include 'utils.php';
-
+require_once '../includes/db_connection.php';
+include '../includes/utils.php';
 
 $data = json_decode(file_get_contents("php://input"), true);
 
 $nome = $data['nome'];
 $tipo = $data['tipo'];
 $baseContribuicao = ($tipo === 'receita' && contribuicao_valida($nome)) ? 1 : 0;
-
 
 if (!isset($data['id'])) {
     echo json_encode(['status' => 'erro', 'mensagem' => 'ID ausente.']);

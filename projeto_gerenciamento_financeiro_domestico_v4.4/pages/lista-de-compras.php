@@ -1,5 +1,5 @@
 <?php
-include 'header.php';
+include '../includes/header.php';
 $anoAtual = date('Y');
 ?>
 
@@ -8,15 +8,16 @@ $anoAtual = date('Y');
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>Lista de Compras</title> -->
 
-    <link rel="stylesheet" href="styles-principal.css">
-    <link rel="stylesheet" href="style-lista-transacoes.css">
-    <link rel="stylesheet" href="style_relatorio_contribuicao.css">
-    <link rel="stylesheet" href="style-lista-de-compras.css">
+    <link rel="stylesheet" href="../assets/css/styles-principal.css">
+    <link rel="stylesheet" href="../assets/css/style-lista-transacoes.css">
+    <link rel="stylesheet" href="../assets/css/style_relatorio_contribuicao.css">
+    <link rel="stylesheet" href="../assets/css/style-lista-de-compras.css">
 
-    <script src="script-lista-de-compras.js" defer></script>
-
-    <title>Lista de Compras</title>
+    <script src="../assets/js/script-lista-de-compras.js" defer></script>
+    
 </head>
 
 <body>
@@ -58,7 +59,7 @@ $anoAtual = date('Y');
             </div>
         </div>
     </main>
-    <?php include 'footer.php'; ?>
+    <?php include '../includes/footer.php'; ?>
 </body>
 
 </html>

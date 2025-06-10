@@ -1,4 +1,7 @@
-<?php include 'header.php'; ?>
+<?php
+    include '../includes/header.php'; 
+    require_once '../includes/functions.php';
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -6,17 +9,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciador Financeiro</title>
+    <!-- <title>Form Add Transações</title> -->
 
-    <link rel="stylesheet" href="styles-principal.css">
-    <link rel="stylesheet" href="style-form.css">
-    <link rel="stylesheet" href="style-form-add-transaction.css">
+    <link rel="stylesheet" href="../assets/css/styles-principal.css">
+    <link rel="stylesheet" href="../assets/css/style-form.css">
+    <link rel="stylesheet" href="../assets/css/style-form-add-transaction.css">
 
-    <script src="scripts.js" defer></script>
-    <script src="script-carrega-opcoes.js" defer></script>
-    <script src="script-carrega-nome.js" defer></script>
-    <script src="script-ajax.js" defer></script>
-    <script src="script-auto-focus-form.js" defer></script>
+    <script src="../assets/js/scripts.js" defer></script>
+    <script src="../assets/js/script-carrega-opcoes.js" defer></script>
+    <script src="../assets/js/script-carrega-nome.js" defer></script>
+    <script src="../assets/js/script-ajax.js" defer></script>
+    <script src="../assets/js/script-auto-focus-form.js" defer></script>
 
 </head>
 
@@ -25,7 +28,7 @@
         <div class="container-principal">
             <h2>Adicionar Receita/Despesa</h2>
             <div class="container-flex">
-                <form id="form-transacao" action="add_transaction.php" method="POST" class="form-geral" data-origem="transacao">
+                <form id="form-transacao" action="../actions/add_transaction.php" method="POST" class="form-geral" data-origem="transacao">
                     <label for="tipo">Tipo:</label>
                     <select id="tipo" name="tipo" required>
                         <option value="">Selecione um tipo</option>
@@ -58,7 +61,7 @@
         </div>
 
     </main>
-    <?php include 'footer.php'; ?>
+    <?php include '../includes/footer.php'; ?>
 </body>
 
 </html>

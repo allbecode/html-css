@@ -1,51 +1,7 @@
 <?php
-
-include 'db_connection.php';
-include 'header.php';
-
-$mesSelecionado = $_POST['mes'] ?? date('m');
-$anoSelecionado = $_POST['ano'] ?? date('Y');
-$tipoSelecionado = $_POST['tipo_contribuicao'] ?? 'dizimo';
-
-$totalReceitas = 0;
-$valorEsperadoDizimo = 0;
-$valorEsperadoOferta = 0;
-$valorDizimado = 0;
-$valorOfertado = 0;
-$valorRestanteDizimo = 0;
-$valorRestanteOferta = 0;
-$mes = date('m');
-$ano = date('Y');
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $mes = $_POST['mes'];
-    $ano = $_POST['ano'];
-
-    // Total de receitas
-    $stmt = $pdo->prepare("SELECT SUM(valor) FROM transacoes 
-    WHERE tipo = 'receita' 
-    AND base_contribuicao = 1 /* valida o flag base_contribuicao */
-    AND mes = :mes AND ano = :ano");
-    $stmt->execute(['mes' => $mes, 'ano' => $ano]);
-    $totalReceitas = $stmt->fetchColumn() ?: 0;
-
-    // Verifica se há receitas
-    $temReceitas = $totalReceitas > 0;
-
-    // Dízimo
-    $valorEsperadoDizimo = $totalReceitas * 0.10;
-    $stmt = $pdo->prepare("SELECT SUM(valor) FROM transacoes WHERE tipo = 'despesa' AND nome = 'Dízimo' AND mes = :mes AND ano = :ano");
-    $stmt->execute(['mes' => $mes, 'ano' => $ano]);
-    $valorDizimado = $stmt->fetchColumn() ?: 0;
-    $valorRestanteDizimo = max($valorEsperadoDizimo - $valorDizimado, 0);
-
-    // Oferta
-    $valorEsperadoOferta = $totalReceitas * 0.10;
-    $stmt = $pdo->prepare("SELECT SUM(valor) FROM transacoes WHERE tipo = 'despesa' AND nome = 'Oferta' AND mes = :mes AND ano = :ano");
-    $stmt->execute(['mes' => $mes, 'ano' => $ano]);
-    $valorOfertado = $stmt->fetchColumn() ?: 0;
-    $valorRestanteOferta = max($valorEsperadoOferta - $valorOfertado, 0);
-}
+include '../includes/header.php';
+require_once '../controllers/controller_contribuicoes.php';
+require_once '../includes/functions.php';
 ?>
 
 <!DOCTYPE html>
@@ -53,28 +9,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <head>
     <meta charset="UTF-8">
-    <title>Contribuições - Dízimos e Ofertas</title>
-    <link rel="stylesheet" href="styles-principal.css">
-    <link rel="stylesheet" href="styles-tables.css">
-    <link rel="stylesheet" href="style-report-transactions.css">
-    <link rel="stylesheet" href="style-lista-transacoes.css">
-    <link rel="stylesheet" href="style_relatorio_contribuicao.css">
-    <link rel="stylesheet" href="media_queries.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>Form Add Contribuições</title> -->
 
-    <script src="script-contribuicoes.js" defer></script>
-    <script src="script-ajax.js" defer></script>
-    <script src="script-form.js"></script>
+    <link rel="stylesheet" href="../assets/css/styles-principal.css">
+    <link rel="stylesheet" href="../assets/css/styles-tables.css">
+    <link rel="stylesheet" href="../assets/css/style-report-transactions.css">
+    <link rel="stylesheet" href="../assets/css/style-lista-transacoes.css">
+    <link rel="stylesheet" href="../assets/css/style_relatorio_contribuicao.css">
+    <!-- <link rel="stylesheet" href="assets/css/media_queries.css"> -->
+
+    <script src="../assets/js/script-contribuicoes.js" defer></script>
+    <script src="../assets/js/script-ajax.js" defer></script>
+    <!-- <script src="../assets/js/script-form.js" defer></script> -->
 </head>
 
 <body>
     <main>
         <h2>Contribuições - <?php echo str_pad($mes, 2, '0', STR_PAD_LEFT) . "/" . $ano; ?></h2>
         <div class="container-form">
-            
+
             <p>Altere uma das opções abaixo para visualizar os dados. </p>
-                        
+
             <form method="POST" class="form-filtro" id="form-contribuicao" data-origem="contribuicao">
-                
+
                 <label for="mes">Mês:</label>
                 <select name="mes" id="mes" required>
                     <?php for ($m = 1; $m <= 12; $m++): ?>
@@ -104,24 +62,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $nomeContribuicao = ucfirst($tipoSelecionado);
                         $valorSugerido = $tipoSelecionado === 'dizimo' ? $valorRestanteDizimo : $valorRestanteOferta;
                     ?>
-                        <h2>Histórico de Contribuições - <?= $nomeContribuicao ?> - <?php echo str_pad($mes, 2, '0', STR_PAD_LEFT) . "/" . $ano;?></h2>
+                        <h2>Histórico de Contribuições - <?= $nomeContribuicao ?> - <?php echo str_pad($mes, 2, '0', STR_PAD_LEFT) . "/" . $ano; ?></h2>
                         <div class="container">
                             <div id="resumo_dizimo" class="resumo-box">
                                 <h3>Resumo</h3>
                                 <ul>
-                                    <li><strong>Receitas do mês:</strong> R$ <?= number_format($totalReceitas, 2, ',', '.') ?></li>
-                                    <li><strong>Dízimo sugerido (10%):</strong> R$ <?= number_format($valorEsperadoDizimo, 2, ',', '.') ?></li>
-                                    <li><strong>Valor já dizimado:</strong> R$ <?= number_format($valorDizimado, 2, ',', '.') ?></li>
-                                    <li><strong>Valor restante a dizimar:</strong> R$ <?= number_format($valorRestanteDizimo, 2, ',', '.') ?></li>
+                                    <li><strong>Receitas do mês:</strong> <?php echo formatarValor($totalReceitas) ?></li>
+                                    <li><strong>Dízimo sugerido (10%):</strong> <?php echo formatarValor($valorEsperadoDizimo) ?></li>
+                                    <li><strong>Valor já dizimado:</strong> <?php echo formatarValor($valorDizimado) ?></li>
+                                    <li><strong>Valor restante a dizimar:</strong> <?php echo formatarValor($valorRestanteDizimo) ?></li>
                                 </ul>
                             </div>
                             <div id="resumo_oferta" class="resumo-box">
                                 <h3>Resumo</h3>
                                 <ul>
-                                    <li><strong>Receitas do mês:</strong> R$ <?= number_format($totalReceitas, 2, ',', '.') ?></li>
-                                    <li><strong>Oferta sugerida (10%)</strong>: R$ <?= number_format($valorEsperadoOferta, 2, ',', '.') ?></li>
-                                    <li><strong>Valor já ofertado:</strong> R$ <?= number_format($valorOfertado, 2, ',', '.') ?></li>
-                                    <li><strong>Valor restante para ofertar:</strong> R$ <?= number_format($valorRestanteOferta, 2, ',', '.') ?></li>
+                                    <li><strong>Receitas do mês:</strong> <?php echo formatarValor($totalReceitas) ?></li>
+                                    <li><strong>Oferta sugerida (10%):</strong> <?php echo formatarValor($valorEsperadoOferta) ?></li>
+                                    <li><strong>Valor já ofertado:</strong> <?php echo formatarValor($valorOfertado) ?></li>
+                                    <li><strong>Valor restante para ofertar:</strong> <?php echo formatarValor($valorRestanteOferta) ?></li>
                                 </ul>
                             </div>
 
@@ -144,11 +102,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     if (count($contribuicoes) > 0):
                                         foreach ($contribuicoes as $contrib): ?>
                                             <tr>
-                                                <td><?= date('d/m/Y', strtotime($contrib['data_vencimento'])) ?></td>
+                                                <td><?php echo formatarDataBr($contrib['data_vencimento']) ?></td>
                                                 <td><?= htmlspecialchars($contrib['descricao']) ?></td>
-                                                <td>R$ <?= number_format($contrib['valor'], 2, ',', '.') ?></td>
+                                                <td> <?php echo formatarValor($contrib['valor']) ?></td>
                                                 <td>
-                                                    <a href="relatorio_individual_contribuicao.php?mes=<?= $mes ?>&ano=<?= $ano ?>&nome=<?= $nomeContribuicao ?>&valor_dizimo=<?= $contrib['valor'] ?>&descricao=<?= $contrib['descricao'] ?>" target="_blank">
+                                                    <a href="..//reports/relatorio_individual_contribuicao.php?mes=<?= $mes ?>&ano=<?= $ano ?>&nome=<?= $nomeContribuicao ?>&valor_dizimo=<?= $contrib['valor'] ?>&descricao=<?= $contrib['descricao'] ?>" target="_blank">
                                                         <button title="Imprimir Relatório Individual" class="btn">🖨️</button>
                                                     </a>
                                                 </td>
@@ -166,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                             <?php $temContribuicoes = count($contribuicoes) > 0; ?>
                             <?php if ($temContribuicoes): ?>
-                                <a href="relatorio_global_contribuicao.php?mes=<?= $mesSelecionado ?>&ano=<?= $anoSelecionado ?>" target="_blank">
+                                <a href="../reports/relatorio_global_contribuicao.php?mes=<?= $mesSelecionado ?>&ano=<?= $anoSelecionado ?>" target="_blank">
                                     <button>Imprimir Relatório Global</button>
                                 </a>
                             <?php endif; ?>
@@ -181,10 +139,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <p><strong>⚠️ Você já atingiu o limite de 10% para <?= $nomeContribuicao ?>s neste mês.</strong></p>
                                 <hr>
                             <?php endif; ?>
-                            <h2>Lançar nova contribuição : <?= $nomeContribuicao ?> - <?php echo str_pad($mes, 2, '0', STR_PAD_LEFT) . "/" . $ano;?></h2>
+                            <h2>Lançar nova contribuição : <?= $nomeContribuicao ?> - <?php echo str_pad($mes, 2, '0', STR_PAD_LEFT) . "/" . $ano; ?></h2>
 
                             <div class="container-form">
-                                <form id="form-transacao" method="POST" action="add_transaction.php" class="form-filtro" data-origem="contribuicao">
+                                <form id="form-transacao" method="POST" action="../actions/add_transaction.php" class="form-filtro" data-origem="contribuicao">
                                     <input type="hidden" name="mes" value="<?= $mes ?>">
                                     <input type="hidden" name="ano" value="<?= $ano ?>">
                                     <input type="hidden" name="tipo" value="despesa">
@@ -211,7 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endif; ?>
         <?php endif; ?>
     </main>
-    <?php include 'footer.php' ?>
+    <?php include '../includes/footer.php' ?>
 </body>
 
 </html>

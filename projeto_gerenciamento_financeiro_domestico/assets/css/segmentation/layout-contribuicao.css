@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+/* Estilos dos resumos de contribuições (Dízimos/Ofertas) */
+
+.container {
+     background: white;
+}
+
+.resumo-box {
+    padding: 0px 20px 30px 20px;
+    display: none;
+    margin: auto;
+    width: 100%;
+}
+
+.resumo-box h3 {
+    font-size: 1.4em;
+}
+
+.resumo-box ul {
+    list-style-type: none;
+}
+
+.resumo-box li {
+    padding: 8px 0;
+}
+

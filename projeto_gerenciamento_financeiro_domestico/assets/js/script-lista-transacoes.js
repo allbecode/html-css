@@ -6,7 +6,7 @@ window.onload = () => {
 
 // Excluir transações com AJAX
 document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.button.delete').forEach(botao => {
+    document.querySelectorAll('.button-icon.delete').forEach(botao => {
         botao.addEventListener('click', function () {
             const id = this.dataset.id;
             const linha = this.closest('tr');
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (!clicado && mensagem) {
                 mensagem.style.display = 'block';
-                setTimeout(() => mensagem.style.display = 'none', 5000);
+                setTimeout(() => mensagem.style.display = 'none', 2000);
                 clicado = true;
             } else {
                 clicado = false;
@@ -64,8 +64,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     async function ativarModoEdicao(linha) {
         const campos = linha.querySelectorAll('[data-field]');
-        const botaoSalvar = linha.querySelector('.button.salvar');
-        const botaoExcluir = linha.querySelector('.button.delete');
+        const botaoSalvar = linha.querySelector('.button-icon.salvar');
+        const botaoExcluir = linha.querySelector('.button-icon.delete');
 
         if (botaoSalvar) {
             botaoSalvar.classList.remove('hidden');
@@ -166,12 +166,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Define o que acontece ao clicar no botão "Salvar"
-        document.querySelectorAll('.button.salvar').forEach(botaoSalvar => {
+        document.querySelectorAll('.button-icon.salvar').forEach(botaoSalvar => {
             botaoSalvar.onclick = () => {
                 const linha = botaoSalvar.closest('tr');
                 const id = linha.dataset.id;
                 const campos = linha.querySelectorAll('[data-field]');
-                const botaoExcluir = linha.querySelector('.button.delete');
+                const botaoExcluir = linha.querySelector('.button-icon.delete');
                 const dados = { id };
 
                 campos.forEach(campo => {

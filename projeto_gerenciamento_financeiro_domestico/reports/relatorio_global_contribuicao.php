@@ -12,9 +12,13 @@ include '../includes/header.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <title>Relatório Global de Contribuições</title> -->
 
-    <link rel="stylesheet" href="../assets/css/styles-principal.css">
-    <link rel="stylesheet" href="../assets/css/style_relatorio_contribuicao.css">
-    <link rel="stylesheet" href="../assets/css/styles-tables.css">
+    <!-- <link rel="stylesheet" href="../assets/css/styles-principal.css"> -->
+    <!-- <link rel="stylesheet" href="../assets/css/style_relatorio_contribuicao.css"> -->
+    <!-- <link rel="stylesheet" href="../assets/css/styles-tables.css"> -->
+
+    <link rel="stylesheet" href="../assets/css/segmentation/globals.css">
+    <link rel="stylesheet" href="../assets/css/segmentation/layout-tables.css">
+    <link rel="stylesheet" href="../assets/css/segmentation/relatorio-contribuicao.css">
 
     <script src="../assets/js/scripts.js" defer></script>
 </head>
@@ -57,8 +61,8 @@ include '../includes/header.php';
                         </tr>
                     </tfoot>
                 </table>
-                <button title="Imprimir Relatório" class="no-print btn" onclick="window.print()">🖨️</button>
-                <button title="Fechar Relatório" class="btn" onclick="fecharRelatorio()">❌</button>
+                <button title="Imprimir Relatório" class="no-print button-icon" onclick="window.print()">🖨️</button>
+                <button title="Fechar Relatório" class="no-print button-icon" onclick="fecharRelatorio()">❌</button>
             </div>
         <?php else: ?>
             <p>Nenhuma contribuição encontrada para o período selecionado.</p>

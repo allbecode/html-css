@@ -11,24 +11,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <title>Form Add Transações</title> -->
 
-    <link rel="stylesheet" href="../assets/css/styles-principal.css">
-    <link rel="stylesheet" href="../assets/css/style-form.css">
-    <link rel="stylesheet" href="../assets/css/style-form-add-transaction.css">
+    <!-- <link rel="stylesheet" href="../assets/css/styles-principal.css"> -->
+    <!-- <link rel="stylesheet" href="../assets/css/style-form.css"> -->
+    <!-- <link rel="stylesheet" href="../assets/css/style-form-add-transaction.css"> -->
+
+    <link rel="stylesheet" href="../assets/css/segmentation/globals.css">
+    <link rel="stylesheet" href="../assets/css/segmentation/form-global.css">
+    <link rel="stylesheet" href="../assets/css/segmentation/form-add-transacao.css">
+
 
     <script src="../assets/js/scripts.js" defer></script>
     <script src="../assets/js/script-carrega-opcoes.js" defer></script>
     <script src="../assets/js/script-carrega-nome.js" defer></script>
     <script src="../assets/js/script-ajax.js" defer></script>
     <script src="../assets/js/script-auto-focus-form.js" defer></script>
-
 </head>
 
 <body>
     <main>
-        <div class="container-principal">
+        <!-- <div class="container-principal"> -->
             <h2>Adicionar Receita/Despesa</h2>
             <div class="container-flex">
-                <form id="form-transacao" action="../actions/add_transaction.php" method="POST" class="form-geral" data-origem="transacao">
+                <form id="form-transacao" action="../actions/add_transaction.php" method="POST" class="form-transacao" data-origem="transacao">
                     <label for="tipo">Tipo:</label>
                     <select id="tipo" name="tipo" required>
                         <option value="">Selecione um tipo</option>
@@ -58,7 +62,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        <!-- </div> -->
 
     </main>
     <?php include '../includes/footer.php'; ?>

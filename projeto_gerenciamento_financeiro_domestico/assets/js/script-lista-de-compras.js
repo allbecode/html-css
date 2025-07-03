@@ -59,12 +59,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td>${produto}</td>
                     <td>${quantidade} unidade${quantidade > 1 ? 's' : ''}</td>
                     <td class="no-print">
-                        <button title="Editar Produto" class="btn-editar">✏️</button>
-                        <button title="Salvar Edição" class="btn-salvar" style="display:none;">💾</button>
-                        <button title="Excluir produto" class="btn-excluir">🗑️</button>
+                        <button title="Editar Produto" class="button-icon" id="btn-editar">✏️</button>
+                        <button title="Salvar Edição" class="button-icon" id="btn-salvar" style="display:none;">💾</button>
+                        <button title="Excluir produto" class="button-icon" id="btn-excluir">🗑️</button>
                     </td>
                 `;
-        tr.querySelector('.btn-excluir').addEventListener('click', () => {
+        tr.querySelector('#btn-excluir').addEventListener('click', () => {
             if (confirm('Tem certeza que deseja apagar este produto?')) {
                 tr.remove();
                 salvarLista();
@@ -74,8 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
         tabela.appendChild(tr);
         atualizarVisibilidadeInterface();
 
-        const btnEditar = tr.querySelector('.btn-editar');
-        const btnSalvar = tr.querySelector('.btn-salvar');
+        const btnEditar = tr.querySelector('#btn-editar');
+        const btnSalvar = tr.querySelector('#btn-salvar');
 
         btnEditar.addEventListener('click', () => {
             const tdProduto = tr.children[0];

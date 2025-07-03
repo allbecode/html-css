@@ -12,11 +12,16 @@ include '../includes/header.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <title>Lista de Transações</title> -->
 
-    <link rel="stylesheet" href="../assets/css/styles-principal.css">
-    <link rel="stylesheet" href="../assets/css/styles-tables.css">
-    <link rel="stylesheet" href="../assets/css/style-lista-transacoes.css">
-    <link rel="stylesheet" href="../assets/css/media_queries.css">
-    <link rel="stylesheet" href="../assets/css/style-report-transactions.css">
+    <!-- <link rel="stylesheet" href="../assets/css/styles-principal.css"> -->
+    <!-- <link rel="stylesheet" href="../assets/css/styles-tables.css"> -->
+    <!-- <link rel="stylesheet" href="../assets/css/style-lista-transacoes.css"> -->
+    <!-- <link rel="stylesheet" href="../assets/css/media_queries.css"> -->
+    <!-- <link rel="stylesheet" href="../assets/css/style-report-transactions.css"> -->
+
+    <link rel="stylesheet" href="../assets/css/segmentation/globals.css">
+    <link rel="stylesheet" href="../assets/css/segmentation/form-global.css">
+    <link rel="stylesheet" href="../assets/css/segmentation/layout-tables.css">
+    <link rel="stylesheet" href="../assets/css/segmentation/lista-transacoes.css">
 
     <script src="../assets/js/scripts.js" defer></script>
     <script src="../assets/js/script-lista-transacoes.js" defer></script>
@@ -27,7 +32,7 @@ include '../includes/header.php';
     <main>
         <h2>Lista de Receitas e Despesas</h2>
         <div class="container-form">
-            <form method="GET" class="form-filtro">
+            <form method="GET" class="form-geral">
                 <label for="tipo">Tipo:</label>
                 <select name="tipo" id="tipo">
                     <option value="">Todos</option>
@@ -55,7 +60,7 @@ include '../includes/header.php';
                 Clique duas vezes sobre a linha para editar as informações.
             </div>
             <table>
-                <thead>
+                <thead class="tlista">
                     <tr>
                         <th>Nome</th>
                         <th>Vencimento</th>
@@ -96,9 +101,9 @@ include '../includes/header.php';
                                 </td>
                                 <td class="acoes">
                                     <div class="acoes-container">
-                                        <button title="Excluir" class="button delete visible" data-id="<?= $transacao['id']; ?>">🗑️</button>
+                                        <button title="Excluir" class="button-icon delete visible" data-id="<?= $transacao['id']; ?>">🗑️</button>
 
-                                        <button title="Salvar" class="button salvar hidden">💾</button>
+                                        <button title="Salvar" class="button-icon salvar hidden">💾</button>
                                     </div>
                                 </td>
                             </tr>

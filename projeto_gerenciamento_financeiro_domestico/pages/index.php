@@ -16,9 +16,12 @@ include '../includes/header.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <title>Página Inicial</title> -->
 
-    <link rel="stylesheet" href="../assets/css/styles-principal.css">
-    <link rel="stylesheet" href="../assets/css/styles-tables.css">
-    <link rel="stylesheet" href="../assets/css/media_queries.css">
+    <!-- <link rel="stylesheet" href="../assets/css/styles-principal.css"> -->
+    <!-- <link rel="stylesheet" href="../assets/css/styles-tables.css"> -->
+    <!-- <link rel="stylesheet" href="../assets/css/media_queries.css"> -->
+
+    <link rel="stylesheet" href="../assets/css/segmentation/globals.css">
+    <link rel="stylesheet" href="../assets/css/segmentation/layout-tables.css">
 
     <script src="../assets/js/script-index.js" defer></script>
 </head>
@@ -111,7 +114,7 @@ include '../includes/header.php';
 
         </table>
         <div class="saldo">
-            <h3>Saldo restate do Mês Atual: <?php echo formatarValor($saldoAtual); ?></h3>
+            <p><strong>Saldo restate do Mês Atual:</strong> <?php echo formatarValor($saldoAtual); ?></p>
         </div>
     </main>
 

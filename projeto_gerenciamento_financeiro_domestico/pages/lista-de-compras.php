@@ -1,6 +1,6 @@
 <?php
 include '../includes/header.php';
-$anoAtual = date('Y');
+// $anoAtual = date('Y');
 ?>
 
 <!DOCTYPE html>
@@ -11,11 +11,16 @@ $anoAtual = date('Y');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <title>Lista de Compras</title> -->
 
-    <link rel="stylesheet" href="../assets/css/styles-principal.css">
-    <link rel="stylesheet" href="../assets/css/style-lista-transacoes.css">
-    <link rel="stylesheet" href="../assets/css/style_relatorio_contribuicao.css">
-    <link rel="stylesheet" href="../assets/css/style-lista-de-compras.css">
+    <!-- <link rel="stylesheet" href="../assets/css/styles-principal.css"> -->
+    <!-- <link rel="stylesheet" href="../assets/css/style-lista-transacoes.css"> -->
+    <!-- <link rel="stylesheet" href="../assets/css/style_relatorio_contribuicao.css"> -->
+    <!-- <link rel="stylesheet" href="../assets/css/style-lista-de-compras.css"> -->
 
+    <link rel="stylesheet" href="../assets/css/segmentation/globals.css">
+    <link rel="stylesheet" href="../assets/css/segmentation/layout-tables.css">
+    <link rel="stylesheet" href="../assets/css/segmentation/lista-compras.css">
+    <link rel="stylesheet" href="../assets/css/segmentation/form-global.css">
+    
     <script src="../assets/js/script-lista-de-compras.js" defer></script>
     
 </head>
@@ -23,7 +28,7 @@ $anoAtual = date('Y');
 <body>
     <main>
         <h2 class="no-print">Lista de Compras</h2>
-        <form id="form-produto" class="form-filtro no-print">
+        <form id="form-produto" class="form-geral no-print">
             <label for="produto">Produto:</label>
             <select id="produto" required>
                 <option value="">Selecione um produto...</option>
@@ -49,13 +54,15 @@ $anoAtual = date('Y');
                     <!-- Os produtos selacionados serão exibidos aqui -->
                 </tbody>
                 <tfoot>
-                    <td></td>
+                        <tr>
+                            <td colspan="3"></td>
+                        </tr>
                 </tfoot>
             </table>
             <p id="mensagem-vazia" style="color: gray;">Nenhum item adicionado à lista.</p>
             <div id="botoes-acoes" class="no-print" style="display: none;">
-                <button title="Imprimir Lista" class="btn-imprimir no-print" onclick="imprimirLista()">🖨️</button>
-                <button title="Limpar Lista" class="btn-limpar no-print" id="btn-limpar-lista">🧹</button>
+                <button title="Imprimir Lista" class="button-icon no-print" onclick="imprimirLista()">🖨️</button>
+                <button title="Limpar Lista" class="button-icon no-print" id="btn-limpar-lista">🧹</button>
             </div>
         </div>
     </main>

@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+nav,
+#menu {
+    display: none !important;
+}
+
+header p {
+    padding: 20px 0;
+}
+
+caption {
+    display: block;
+}
+
+caption p {
+    font-size: 1.3em;
+    padding: 20px 0;
+}
+
+.subTotal {
+    border-top: 2px solid #063042;
+    font-weight: 700;
+}
+
+/* ----------------------------- */
+
+@media screen and (min-width: 768px) {
+    
+    header p {
+        padding: 0;
+    }
+}
+
+@media print {
+
+    /* Oculta cabeçalho, rodapé, menus e formulários */
+    #form-contribuicao,
+    nav,
+    #menu,
+    .container-form p,
+    .no-print {
+        display: none !important;
+    }
+
+    caption {
+        font-weight: inherit;
+    }
+
+    caption p {
+        font-size: 1em;
+    }
+
+
+}

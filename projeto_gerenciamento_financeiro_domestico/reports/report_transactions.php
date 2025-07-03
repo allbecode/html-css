@@ -12,9 +12,15 @@ include '../includes/header.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <title>Relatório Financeiro</title> -->
 
-    <link rel="stylesheet" href="../assets/css/styles-tables.css">
-    <link rel="stylesheet" href="../assets/css/style-lista-transacoes.css">
-    <link rel="stylesheet" href="../assets/css/style-report-transactions.css">
+    <!-- <link rel="stylesheet" href="../assets/css/styles-tables.css"> -->
+    <!-- <link rel="stylesheet" href="../assets/css/style-lista-transacoes.css"> -->
+    <!-- <link rel="stylesheet" href="../assets/css/style-report-transactions.css"> -->
+
+    <link rel="stylesheet" href="../assets/css/segmentation/globals.css">
+    <link rel="stylesheet" href="../assets/css/segmentation/layout-tables.css">
+    <link rel="stylesheet" href="../assets/css/segmentation/form-global.css">
+    <link rel="stylesheet" href="../assets/css/segmentation/relatorio-transacoes.css">
+
 
     <script src="../assets/js/script-contribuicoes.js"></script>
     <script src="../assets/js/script-relatório-financeiro.js" defer  ></script>
@@ -25,8 +31,8 @@ include '../includes/header.php';
     <main>
         <h2 class="no-print">Consultar Transações</h2>
         <div class="container-form">
-            <p>Altere uma das opções abaixo para visualizar os dados. </p>
-            <form method="POST" class="form-filtro" id="form-contribuicao">
+            <p class="center">Altere uma das opções abaixo para visualizar os dados. </p>
+            <form method="POST" class="form-geral" id="form-contribuicao">
 
                 <label for="mes">Mês:</label>
                 <select id="mes" name="mes" required>
@@ -53,8 +59,9 @@ include '../includes/header.php';
         <?php if (!empty($receitas) || !empty($despesas)): ?>
             <h1>Relatório de <?php echo str_pad($mes, 2, '0', STR_PAD_LEFT) . '/' . $ano; ?></h1>
 
-            <h2>Receitas</h2>
+            <h2 class="no-print">Receitas</h2>
             <table>
+                <caption>Receitas</caption>
                 <thead>
                     <tr>
                         <th>Nome</th>
@@ -89,8 +96,9 @@ include '../includes/header.php';
                 </tfoot>
             </table>
 
-            <h2>Despesas</h2>
+            <h2 class="no-print">Despesas</h2>
             <table>
+                <caption>Despesas</caption>
                 <thead>
                     <tr>
                         <th>Nome</th>

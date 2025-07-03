@@ -1,0 +1,76 @@
+@charset "UTF-8";
+
+/* Estilo mobile-first: telas pequenas */
+
+.mensagem-flutuante {
+    position: fixed;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f1c40f;
+    color: #222;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    z-index: 999;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* ------------------------------------------- */
+
+.button-icon {
+    font-size: 20px;
+}
+
+input, select {
+    margin: 0;
+    padding: 10px 5px;
+    font-size: 15px;
+    background: white;
+    border: none;
+}
+
+/* Torna a célula um contêiner para centralização */
+td.acoes {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Flexbox para alinhar os botões no centro */
+.acoes-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.button-icon.delete,
+.button-icon.salvar {
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.button-icon.delete:hover,
+.button-icon.salvar:hover {
+    background: none;
+    border: none;
+}
+
+/* Estado visível */
+.button-icon.delete.visible,
+.button-icon.salvar.visible {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+
+}
+
+/* Estado oculto */
+.button-icon.delete.hidden,
+.button-icon.salvar.hidden {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+}
+
+
+

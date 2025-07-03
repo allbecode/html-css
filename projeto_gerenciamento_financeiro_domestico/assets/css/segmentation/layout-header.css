@@ -1,13 +1,5 @@
 @charset "UTF-8";
 
-:root {
-    --cor1: #063042;
-    --cor2: #4384F2;
-    --cor3: #D9E6FC;
-    --cor4: #F2F7FA;
-    --font-principal: Montserrat;
-}
-
 header {
     background-color: var(--cor1);
     color: white;
@@ -83,3 +75,69 @@ nav ul li a:hover {
 }
 
 
+@media screen and (min-width: 768px) {
+    /* Estilização do header */
+    header {
+        position: sticky;
+        top: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        z-index: 105;
+    }
+
+    i#menu {
+        display: none;
+    }
+
+    header p {
+        display: none;
+    }
+
+    nav {
+        display: block;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+    }
+
+    nav ul li {
+        position: relative;
+        z-index: 102 !important;
+    }
+
+    nav ul li a {
+        display: inline;
+        background: none;
+        border: none;
+    }
+
+    nav ul li a:hover {
+        background-color: #0a4965d7;
+        color: white;
+        border-radius: 5px;
+    }
+
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #34495e;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.453);
+        z-index: 101 !important;
+    }
+}
+
+
+/* Telas grandes */
+@media screen and (min-width:992px) {
+
+    header p {
+        display: block;
+    }
+}

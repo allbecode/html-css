@@ -1,15 +1,5 @@
 @charset "UTF-8";
 
-:root {
-    --cor1: #063042;
-    --cor2: #4384F2;
-    --cor3: #D9E6FC;
-    --cor4: #F2F7FA;
-    --font-principal: Montserrat;
-}
-
-
-
 #btn-imprimir-relatorio {
     padding: 6px 10px;
     background: none;
@@ -32,19 +22,47 @@
     font-size: 16px;
 }
 
+/* Ajuste do resumo financeiro */
+
+.resumo-financeiro {
+    background-color: var(--cor1);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.resumo-financeiro p {
+    color: var(--cor4);
+    flex: 1;
+    min-width: 150px;
+    padding: 10px;
+    text-align: center;
+}
+
+
+@media screen and (min-width: 768px) {
+    
+    .resumo-financeiro {
+        padding: 40px 5px;
+    }
+}
+
 
 
 @media print {
 
+    /* Remove margens automáticas que alguns navegadores adicionam */
+    body {
+        margin: 0;
+        padding: 0;
+        color: black;
+    }
+
     /* Oculta cabeçalho, rodapé, menus e formulários */
-    nav,
     #form-contribuicao,
-    .button,
-    #btn-imprimir-relatorio,
     #menu,
     .container-form p,
-    .no-print,
-    .mensagem-flutuante {
+    .no-print {
         display: none !important;
     }
 
@@ -60,7 +78,6 @@
         width: 100%;
         font-size: 8pt;
         border-collapse: collapse;
-        page-break-inside: auto;
     }
 
     thead {
@@ -72,13 +89,27 @@
         page-break-after: auto;
     }
 
-    /* Remove margens automáticas que alguns navegadores adicionam */
-    body {
-        margin: 0;
-        padding: 0;
+    th, td {
+        width: 200px;
+        padding: 10px 2px;
+    }
+
+    .resumo-financeiro{
+        background: none;
+    }
+
+    .resumo-financeiro p {
+        color: black;
+    }
+
+    footer {
+        margin-top: 10px;
     }
 
     @page {
         size: landscape;
+        @bottom-center {
+            content: "Page " counter(page) " / " counter(pages);
+        }
     }
 }

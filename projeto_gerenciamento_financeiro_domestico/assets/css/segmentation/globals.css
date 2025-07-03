@@ -1,0 +1,180 @@
+@charset "UTF-8";
+
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+:root {
+    --cor1: #063042;
+    --cor2: #4384F2;
+    --cor3: #D9E6FC;
+    --cor4: #F2F7FA;
+    --font-principal: Montserrat;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--cor4);
+    font-family: var(--font-principal), sans-serif;
+    color: var(--cor1);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+h1, h2, h3 {
+    padding: 20px 0;
+    text-align: center;
+}
+
+main {
+    margin: 20px 20px;
+}
+
+main>h3:nth-of-type(1) {
+    padding: 0px 0px 20px 0px;
+}
+
+main>h2:nth-of-type(1) {
+    padding: 0px 0px 20px 0px;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: var(--cor2);
+    color: var(--cor4);
+    border: 2px solid var(--cor2);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+button:hover {
+    color: var(--cor2);
+    border: 2px solid var(--cor2);
+    background-color: var(--cor4);
+}
+
+
+/* Classes Utilitarias */
+
+.center {
+    text-align: center;
+    padding: 15px 0;
+}
+
+.container {
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.container>p {
+    font-size: 23px;
+}
+
+.button-icon {
+    background: none;
+    border: none !important; 
+    font-size: 35px;
+    padding: 8px 16px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.saldo {
+    margin-top: 10px;
+    background-color: var(--cor1);
+}
+
+.saldo p {
+    padding: 20px;
+    text-align: center;
+    font-size: 1.3em;
+    color: var(--cor4);
+}
+
+
+/* Estado oculto */
+.hidden {
+    display: none !important; 
+}
+
+/* Estado visível */
+.visible {
+    display: block;
+}
+
+/* Status Geral */
+
+.status-pago {
+    color: green;
+    font-weight: bold;
+}
+
+.status-nao-pago {
+    color: red;
+}
+
+/* Estilo do Rodapé */
+footer {
+    width: 100%;
+    background-color: var(--cor1);
+    text-align: center;
+    bottom: 0px;
+    padding: 30px 0px;
+    color: white;
+}
+
+footer>p>a {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+footer>p>a:hover {
+    text-decoration: underline;
+}
+
+
+@media screen and (min-width: 768px) {
+    .container-principal {
+        height: 76vh;
+    }
+
+    main h1 {
+        text-align: center;
+        margin: 0px 10px;
+    }
+
+    main h2 {
+        text-align: left;
+    }
+
+    main h3 {
+        text-align: left;
+    }
+
+    .container {
+        width: 60%;
+    }
+
+
+}
+
+/* Telas grandes */
+@media screen and (min-width:992px) {
+    h2, h3 {
+        text-align: left;
+    }
+
+}

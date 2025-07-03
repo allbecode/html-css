@@ -12,12 +12,17 @@ require_once '../includes/functions.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <title>Form Add Contribuições</title> -->
 
-    <link rel="stylesheet" href="../assets/css/styles-principal.css">
-    <link rel="stylesheet" href="../assets/css/styles-tables.css">
-    <link rel="stylesheet" href="../assets/css/style-report-transactions.css">
-    <link rel="stylesheet" href="../assets/css/style-lista-transacoes.css">
-    <link rel="stylesheet" href="../assets/css/style_relatorio_contribuicao.css">
+    <!-- <link rel="stylesheet" href="../assets/css/styles-principal.css"> -->
+    <!-- <link rel="stylesheet" href="../assets/css/styles-tables.css"> -->
+    <!-- <link rel="stylesheet" href="../assets/css/style-report-transactions.css"> -->
+    <!-- <link rel="stylesheet" href="../assets/css/style-lista-transacoes.css"> -->
+    <!-- <link rel="stylesheet" href="../assets/css/style_relatorio_contribuicao.css"> -->
     <!-- <link rel="stylesheet" href="assets/css/media_queries.css"> -->
+
+    <link rel="stylesheet" href="../assets/css/segmentation/globals.css">
+    <link rel="stylesheet" href="../assets/css/segmentation/form-global.css">
+    <link rel="stylesheet" href="../assets/css/segmentation/layout-tables.css">
+    <link rel="stylesheet" href="../assets/css/segmentation/layout-contribuicao.css">
 
     <script src="../assets/js/script-contribuicoes.js" defer></script>
     <script src="../assets/js/script-ajax.js" defer></script>
@@ -29,9 +34,9 @@ require_once '../includes/functions.php';
         <h2>Contribuições - <?php echo str_pad($mes, 2, '0', STR_PAD_LEFT) . "/" . $ano; ?></h2>
         <div class="container-form">
 
-            <p>Altere uma das opções abaixo para visualizar os dados. </p>
+            <p class="center">Altere uma das opções abaixo para visualizar os dados. </p>
 
-            <form method="POST" class="form-filtro" id="form-contribuicao" data-origem="contribuicao">
+            <form method="POST" class="form-geral" id="form-contribuicao" data-origem="contribuicao">
 
                 <label for="mes">Mês:</label>
                 <select name="mes" id="mes" required>
@@ -56,7 +61,7 @@ require_once '../includes/functions.php';
                         Nenhuma contribuição pode ser calculada ou registrada.</p>
                 </div>
             <?php else : ?>
-                <div class="form-lcto-contribuicao">
+                
                     <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && in_array($_POST['tipo_contribuicao'], ['dizimo', 'oferta'])):
                         $tipoSelecionado = $_POST['tipo_contribuicao'];
                         $nomeContribuicao = ucfirst($tipoSelecionado);
@@ -107,7 +112,7 @@ require_once '../includes/functions.php';
                                                 <td> <?php echo formatarValor($contrib['valor']) ?></td>
                                                 <td>
                                                     <a href="..//reports/relatorio_individual_contribuicao.php?mes=<?= $mes ?>&ano=<?= $ano ?>&nome=<?= $nomeContribuicao ?>&valor_dizimo=<?= $contrib['valor'] ?>&descricao=<?= $contrib['descricao'] ?>" target="_blank">
-                                                        <button title="Imprimir Relatório Individual" class="btn">🖨️</button>
+                                                        <button title="Imprimir Relatório Individual" class="button-icon">🖨️</button>
                                                     </a>
                                                 </td>
                                             </tr>
@@ -131,18 +136,18 @@ require_once '../includes/functions.php';
                         </div>
                         <?php if ($valorSugerido <= 0 && $tipoSelecionado === 'dizimo'): ?>
                             <hr>
-                            <p><strong>⚠️ Você já atingiu o limite de 10% para <?= $nomeContribuicao ?>s neste mês.</strong></p>
+                            <p class="center"><strong>⚠️ Você já atingiu o limite de 10% para <?= $nomeContribuicao ?>s neste mês.</strong></p>
                             <hr>
                         <?php else: ?>
                             <?php if ($valorSugerido <= 0 && $tipoSelecionado === 'oferta'): ?>
                                 <hr>
-                                <p><strong>⚠️ Você já atingiu o limite de 10% para <?= $nomeContribuicao ?>s neste mês.</strong></p>
+                                <p class="center"><strong>⚠️ Você já atingiu o limite de 10% para <?= $nomeContribuicao ?>s neste mês.</strong></p>
                                 <hr>
                             <?php endif; ?>
                             <h2>Lançar nova contribuição : <?= $nomeContribuicao ?> - <?php echo str_pad($mes, 2, '0', STR_PAD_LEFT) . "/" . $ano; ?></h2>
 
                             <div class="container-form">
-                                <form id="form-transacao" method="POST" action="../actions/add_transaction.php" class="form-filtro" data-origem="contribuicao">
+                                <form id="form-transacao" method="POST" action="../actions/add_transaction.php" class="form-geral" data-origem="contribuicao">
                                     <input type="hidden" name="mes" value="<?= $mes ?>">
                                     <input type="hidden" name="ano" value="<?= $ano ?>">
                                     <input type="hidden" name="tipo" value="despesa">
@@ -160,12 +165,12 @@ require_once '../includes/functions.php';
                                     <label>Descrição:</label>
                                     <input type="text" name="descricao" required>
                                     <input type="hidden" name="pago" value="0">
-                                    <button title="Salvar Contribuição" class="btn" type="submit">💾</button>
+                                    <button title="Salvar Contribuição" class="button-icon" type="submit">💾</button>
                                 </form>
                             </div>
                         <?php endif; ?>
                     <?php endif; ?>
-                </div>
+                
             <?php endif; ?>
         <?php endif; ?>
     </main>

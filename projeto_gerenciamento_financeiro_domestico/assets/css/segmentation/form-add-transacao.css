@@ -1,4 +1,7 @@
- /* Mobile-first: elementos empilhados */
+@charset "UTF-8";
+
+
+/* Mobile-first: elementos empilhados */
  .container-flex {
      display: flex;
      flex-direction: column;
@@ -7,7 +10,7 @@
 
  }
 
- .form-geral {
+ #form-transacao {
      flex: 1;
  }
 
@@ -68,9 +71,9 @@
          margin: auto;
      }
 
-     .form-geral,
+     #form-transacao,
      .lista-transacoes-dia {
-         width: 48%;
+         width: 50%;
      }
 
      .lista-transacoes-dia {

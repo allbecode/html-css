@@ -81,10 +81,6 @@ table input[type=number]
         border-bottom: 2px solid var(--cor1);
     }
 
-    .no-print {
-        display: none;
-    }
-
     footer p,
     footer a {
         color: #e6e3e3;

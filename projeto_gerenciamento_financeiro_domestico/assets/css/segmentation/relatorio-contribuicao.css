@@ -34,15 +34,6 @@ caption p {
 
 @media print {
 
-    /* Oculta cabeçalho, rodapé, menus e formulários */
-    #form-contribuicao,
-    nav,
-    #menu,
-    .container-form p,
-    .no-print {
-        display: none !important;
-    }
-
     caption {
         font-weight: inherit;
     }

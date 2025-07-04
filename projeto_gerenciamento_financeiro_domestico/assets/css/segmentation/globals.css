@@ -178,3 +178,22 @@ footer>p>a:hover {
     }
 
 }
+
+/* Estilo para impressões */
+@media print {
+
+    /* Oculta cabeçalho, rodapé, menus e formulários */
+    #form-contribuicao,
+    #menu,
+    .container-form p,
+    .no-print {
+        display: none !important;
+    }
+
+    @page {
+        @bottom-center {
+            content: "Page " counter(page) " / " counter(pages);
+        }
+    }
+
+}

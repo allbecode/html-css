@@ -58,14 +58,6 @@
         color: black;
     }
 
-    /* Oculta cabeçalho, rodapé, menus e formulários */
-    #form-contribuicao,
-    #menu,
-    .container-form p,
-    .no-print {
-        display: none !important;
-    }
-
     /* Exibe apenas o conteúdo principal do relatório */
     main {
         width: 100%;
@@ -108,8 +100,5 @@
 
     @page {
         size: landscape;
-        @bottom-center {
-            content: "Page " counter(page) " / " counter(pages);
-        }
     }
 }

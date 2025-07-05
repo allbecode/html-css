@@ -1,4 +1,8 @@
 <?php
+/*
+Problema a resolver: botão salvar desaparesse se uma linha for editada duas vezes seguidas. Sedo necessária a atualização da página para que o mesmo volte a aparecer.
+*/
+
 require_once '../controllers/controller_list_transactions.php';
 require_once '../includes/functions.php';
 include '../includes/header.php';
@@ -11,12 +15,6 @@ include '../includes/header.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <title>Lista de Transações</title> -->
-
-    <!-- <link rel="stylesheet" href="../assets/css/styles-principal.css"> -->
-    <!-- <link rel="stylesheet" href="../assets/css/styles-tables.css"> -->
-    <!-- <link rel="stylesheet" href="../assets/css/style-lista-transacoes.css"> -->
-    <!-- <link rel="stylesheet" href="../assets/css/media_queries.css"> -->
-    <!-- <link rel="stylesheet" href="../assets/css/style-report-transactions.css"> -->
 
     <link rel="stylesheet" href="../assets/css/segmentation/globals.css">
     <link rel="stylesheet" href="../assets/css/segmentation/form-global.css">

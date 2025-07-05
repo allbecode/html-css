@@ -2,10 +2,6 @@
 require_once '../controllers/controller_index.php';
 require_once '../includes/functions.php';
 include '../includes/header.php';
-
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
 ?>
 
 <!DOCTYPE html>
@@ -16,10 +12,6 @@ include '../includes/header.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <title>Página Inicial</title> -->
 
-    <!-- <link rel="stylesheet" href="../assets/css/styles-principal.css"> -->
-    <!-- <link rel="stylesheet" href="../assets/css/styles-tables.css"> -->
-    <!-- <link rel="stylesheet" href="../assets/css/media_queries.css"> -->
-
     <link rel="stylesheet" href="../assets/css/segmentation/globals.css">
     <link rel="stylesheet" href="../assets/css/segmentation/layout-tables.css">
 
@@ -28,7 +20,6 @@ include '../includes/header.php';
 
 <body>
     <main>
-
         <h3>Despesas Vencidas (Mês Atual: <?php echo "$mesAtual/$anoAtual" ?>)</h3>
         <table>
             <thead>

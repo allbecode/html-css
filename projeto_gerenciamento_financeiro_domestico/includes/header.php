@@ -6,11 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciador Financeiro</title>
 
-    <!-- <link rel="stylesheet" href="../assets/css/styles-principal.css"> -->
-    <!-- <link rel="stylesheet" href="../assets/css/style-header.css"> -->
-    <!-- <link rel="stylesheet" href="../assets/css/style_media_queries.css"> -->
-
-    <link rel="stylesheet" href="../assets/css/segmentation/globals.css">
+    <!-- <link rel="stylesheet" href="../assets/css/segmentation/globals.css"> -->
     <link rel="stylesheet" href="../assets/css/segmentation/layout-header.css">
 
     <script src="https://kit.fontawesome.com/ba16269ee8.js" crossorigin="anonymous"></script>

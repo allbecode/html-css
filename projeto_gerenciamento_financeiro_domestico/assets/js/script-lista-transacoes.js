@@ -45,8 +45,6 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             linha.classList.add('selecionada');
-            linha.style.backgroundColor = '#D9E6FC';
-            linha.style.border = '5px solid #063042';
 
             if (!clicado && mensagem) {
                 mensagem.style.display = 'block';
@@ -84,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
             switch (nomeCampo) {
                 case 'data_vencimento':
                     const dataIso = valorAtual.includes('/') ? valorAtual.split('/').reverse().join('-') : valorAtual;
-                    campo.innerHTML = `<input type="date" value="${dataIso}" style="width: 140px;">`;
+                    campo.innerHTML = `<input type="date" value="${dataIso}">`;
                     break;
 
                 case 'valor':
@@ -158,10 +156,9 @@ document.addEventListener('DOMContentLoaded', function () {
                         campo.innerHTML = '<select><option>Selecione o tipo primeiro</option></select>';
                     }
                     break;
-
                 default:
                     campo.contentEditable = true;
-                    campo.style.backgroundColor = '#fffbe6';
+                    campo.style.backgroundColor = '#fff';
             }
         }
 

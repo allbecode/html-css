@@ -12,10 +12,6 @@ include '../includes/header.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <title>Relatório Financeiro</title> -->
 
-    <!-- <link rel="stylesheet" href="../assets/css/styles-tables.css"> -->
-    <!-- <link rel="stylesheet" href="../assets/css/style-lista-transacoes.css"> -->
-    <!-- <link rel="stylesheet" href="../assets/css/style-report-transactions.css"> -->
-
     <link rel="stylesheet" href="../assets/css/segmentation/globals.css">
     <link rel="stylesheet" href="../assets/css/segmentation/layout-tables.css">
     <link rel="stylesheet" href="../assets/css/segmentation/form-global.css">

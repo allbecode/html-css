@@ -1,5 +1,4 @@
 <?php 
-// include 'db_connection.php';
 $anoAtual = date('Y');
 ?>
 
@@ -11,9 +10,7 @@ $anoAtual = date('Y');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <title>Rodapé</title> -->
 
-    <link rel="stylesheet" href="assets/css/styles-principal.css">
-    <link rel="stylesheet" href="assets/css/style-header.css">
-    <link rel="stylesheet" href="assets/css/style_media_queries.css">
+    <link rel="stylesheet" href="../assets/css/segmentation/globals.css">
 </head>
 
 <body>

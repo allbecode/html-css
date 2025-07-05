@@ -2,14 +2,40 @@
 
 /* Estilo mobile-first: telas pequenas */
 
+/* Estilo para destacar a linha selecionada */
+.transacao-linha.selecionada {
+    background-color: #D9E6FC;
+    border: 3px solid #063042;
+}
+
+/* Ajuste da tabela para edição */
+.transacao-linha input[type="text"],
+.transacao-linha input[type="number"],
+.transacao-linha input[type="date"],
+.transacao-linha textarea,
+.transacao-linha select {
+    margin: 0;
+    padding: 10px 5px;
+    text-align: center;
+    font-size: 0.9rem;
+    background: white;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 4px;
+}
+
+/* Mensagem flutuante de instrução */
 .mensagem-flutuante {
     position: fixed;
-    top: 15px;
+    top: 80px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #f1c40f;
+    background-color: #f4f4f4;
     color: #222;
-    padding: 8px 15px;
+    padding: 10px 20px;
+    border: 2px solid #ccc;
+    border-left: 7px solid var(--cor2);
+    font-size: 0.9rem;
     border-radius: 5px;
     font-weight: bold;
     z-index: 999;
@@ -20,14 +46,6 @@
 
 .button-icon {
     font-size: 20px;
-}
-
-input, select {
-    margin: 0;
-    padding: 10px 5px;
-    font-size: 15px;
-    background: white;
-    border: none;
 }
 
 /* Torna a célula um contêiner para centralização */
@@ -41,7 +59,6 @@ td.acoes {
     display: flex;
     justify-content: center;
     align-items: center;
-    
 }
 
 .button-icon.delete,
@@ -58,7 +75,7 @@ td.acoes {
 /* Estado visível */
 .button-icon.delete.visible,
 .button-icon.salvar.visible {
-    display: block;
+    display: inline-block;
     opacity: 1;
     visibility: visible;
 
@@ -71,6 +88,7 @@ td.acoes {
     opacity: 0;
     visibility: hidden;
 }
+
 
 
 

@@ -1,6 +1,5 @@
 <?php
 include '../includes/header.php';
-// $anoAtual = date('Y');
 ?>
 
 <!DOCTYPE html>
@@ -10,11 +9,6 @@ include '../includes/header.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <title>Lista de Compras</title> -->
-
-    <!-- <link rel="stylesheet" href="../assets/css/styles-principal.css"> -->
-    <!-- <link rel="stylesheet" href="../assets/css/style-lista-transacoes.css"> -->
-    <!-- <link rel="stylesheet" href="../assets/css/style_relatorio_contribuicao.css"> -->
-    <!-- <link rel="stylesheet" href="../assets/css/style-lista-de-compras.css"> -->
 
     <link rel="stylesheet" href="../assets/css/segmentation/globals.css">
     <link rel="stylesheet" href="../assets/css/segmentation/layout-tables.css">

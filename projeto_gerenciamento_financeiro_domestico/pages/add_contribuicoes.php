@@ -12,13 +12,6 @@ require_once '../includes/functions.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <title>Form Add Contribuições</title> -->
 
-    <!-- <link rel="stylesheet" href="../assets/css/styles-principal.css"> -->
-    <!-- <link rel="stylesheet" href="../assets/css/styles-tables.css"> -->
-    <!-- <link rel="stylesheet" href="../assets/css/style-report-transactions.css"> -->
-    <!-- <link rel="stylesheet" href="../assets/css/style-lista-transacoes.css"> -->
-    <!-- <link rel="stylesheet" href="../assets/css/style_relatorio_contribuicao.css"> -->
-    <!-- <link rel="stylesheet" href="assets/css/media_queries.css"> -->
-
     <link rel="stylesheet" href="../assets/css/segmentation/globals.css">
     <link rel="stylesheet" href="../assets/css/segmentation/form-global.css">
     <link rel="stylesheet" href="../assets/css/segmentation/layout-tables.css">
@@ -26,7 +19,6 @@ require_once '../includes/functions.php';
 
     <script src="../assets/js/script-contribuicoes.js" defer></script>
     <script src="../assets/js/script-ajax.js" defer></script>
-    <!-- <script src="../assets/js/script-form.js" defer></script> -->
 </head>
 
 <body>

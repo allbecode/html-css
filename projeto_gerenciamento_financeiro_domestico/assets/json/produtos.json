@@ -5,9 +5,9 @@
         {"nome": "Achocolatado (un)" },
         {"nome": "Açucar (kg)"},
         {"nome": "Açucar Mascarvo (kg)"},
-        {"nome": "Amido de Milho (un)" },
+        {"nome": "Amido de Milho (cx)" },
         {"nome": "Arroz (kg)"},
-        {"nome": "Aveia em Flocos (un)"},
+        {"nome": "Aveia em Flocos (cx)"},
         {"nome": "Azeite de Oliva (un)" },
         {"nome": "Banha de Porco (un)"},
         {"nome": "Bicarbonato de Sódio (un)" },
@@ -27,6 +27,7 @@
         {"nome": "Fermento Biológico (un)"},
         {"nome": "Fermento Químico (un)" },
         {"nome": "Fubá (kg)"},
+        {"nome": "Fubá flocão (kg)"},
         {"nome": "Gelatina (un)" },
         {"nome": "Ketchup (un)"},
         {"nome": "Leite Condensado (un)" },
@@ -43,18 +44,18 @@
         {"nome": "Tapióca (g)"},
         {"nome": "Temperos (un)" },
         {"nome": "Vinagre de Álcool (L)"},
-        {"nome": "Vinagre de Maça (L)" }
+        {"nome": "Vinagre de Maçã (L)" }
      ]
     },
     {
      "categoria": "Higiene Pessoal",
      "itens": [
         {"nome": "Band-Aid (cx)" },
-        {"nome": "Barbeados (pc)"},
+        {"nome": "Barbeador (pc)"},
         {"nome": "Condicionador (un)"},
         {"nome": "Cotonetes (cx)" },
-        {"nome": "Creme de Barbear (un)"},
         {"nome": "Creme Dental (un)" },
+        {"nome": "Creme para Barbear (un)"},
         {"nome": "Creme para Pentear (un)"},
         {"nome": "Desodorante (un)" },
         {"nome": "Escova Dental (un)"},
@@ -65,7 +66,7 @@
         {"nome": "Papel Higiênico pc c/40" },
         {"nome": "Repelente (un)"},
         {"nome": "Sabonete (un)" },
-        {"nome": "Sabonete Liquido (un)"},
+        {"nome": "Sabonete Líquido (un)"},
         {"nome": "Shampoo (un)"}
      ]
     },
@@ -87,6 +88,7 @@
         {"nome": "Limpador p/ Pisos (L)" },
         {"nome": "Lustra Móveis (un)"},
         {"nome": "Óleo de Peróba (un)" },
+        {"nome": "Pastílha Sanitária (un)"},
         {"nome": "Pedra Sanitária (un)"},
         {"nome": "Removedor de Gordura (L)"},
         {"nome": "Sabão em Pedra (un)" },
@@ -100,7 +102,7 @@
      "categoria": "Bebidas",
      "itens": [
         {"nome": "Refrigerante (un)" },
-        {"nome": "Suco Liquido (L)"},
+        {"nome": "Suco Líquido (L)"},
         {"nome": "Suco em Pó (un)"}
      ]
     },
@@ -121,12 +123,12 @@
      "itens": [
         {"nome": "Comida para Pássaros (kg)" },
         {"nome": "Corda p/ Varal (m)"},
-        {"nome": "Dispenser p/ Sabonete Liquido (un)"},
+        {"nome": "Dispenser p/ Sabonete Líquido (un)"},
         {"nome": "Espanador de Pó (un)" },
         {"nome": "Espanador p/ Teto (un)"},
         {"nome": "Filtro de Tecido p/ Café (un)" },
         {"nome": "Filtro Descartável p/ Café (cx)"},
-        {"nome": "Fósforoas (cx)" },
+        {"nome": "Fósforos (cx)" },
         {"nome": "Lâmpada (un)"},
         {"nome": "Papel Alumínio (pc)" },
         {"nome": "Papel Toalha (pc)"},
@@ -135,7 +137,8 @@
         {"nome": "Rôdo p/ Pia (un)" },
         {"nome": "Saco p/ Congelar (pc)"},
         {"nome": "Vassoura (un)" },
-        {"nome": "Velas (cx)"}
+        {"nome": "Velas (cx)"},
+        {"nome": "Vela p/ filtro de barro (un)"}
      ]
     },
     {
@@ -143,7 +146,7 @@
      "itens": [
         {"nome": "Abacaxi (kg)" },
         {"nome": "Banana da Terra (kg)"},
-        {"nome": "Banana D´ Água (kg)" },
+        {"nome": "Banana D'Água (kg)" },
         {"nome": "Banana Prata (kg)"},
         {"nome": "Laranja Lima (kg)" },
         {"nome": "Laranja Pêra (kg)"},
@@ -201,7 +204,7 @@
         {"nome": "Mortadela Defumada (g)" },
         {"nome": "Peito de Peru Defumado (g)"},
         {"nome": "Presunto (g)" },
-        {"nome": "Queoijo Tipo Cotage (pt)" },
+        {"nome": "Queijo Tipo Cotage (pt)" },
         {"nome": "Queijo Tipo Frescal (kg)"},
         {"nome": "Queijo Prato (g)" },
         {"nome": "Requeijão (un)"},
@@ -211,24 +214,34 @@
     {
      "categoria": "Carnes",
      "itens": [
-        {"nome": "Bacon (g)" },
         {"nome": "Carne de Frango (kg)"},
         {"nome": "Carne Bovina (kg)"},
-        {"nome": "Carne Seca (g)" },
         {"nome": "Carne Suína (kg)"},
-        {"nome": "Emp. de Frango Steak (um)" },
-        {"nome": "Hamburger (un)"},
-        {"nome": "Linguiça Calabresa (g)" },
-        {"nome": "Linguiça Fresca Suína (kg)"},
-        {"nome": "Linguiça Fresca Suína Fina (kg)" },
-        {"nome": "Lombo Suíno Salgado (kg)"},
-        {"nome": "Nuggets (pc)" },
-        {"nome": "Orelkha Suína Salgada (g)"},
         {"nome": "Ovos - gd c/ 20" },
         {"nome": "Ovos - gd c/ 30"},
+        {"nome": "Peixe (kg)" }
+     ]
+    },
+    {
+     "categoria": "Carnes Processadas",
+     "itens": [
+        {"nome": "Emp. de Frango Steak (um)" },
+        {"nome": "Hamburger (un)"},
+        {"nome": "Linguiça Fresca Suína (kg)"},
+        {"nome": "Linguiça Fresca Suína Fina (kg)" },
+        {"nome": "Nuggets (pc)" }
+     ]
+    },
+    {
+     "categoria": "Carnes Salgadas/Defumadas",
+     "itens": [
+        {"nome": "Bacon (g)" },
+        {"nome": "Carne Seca (g)" },
+        {"nome": "Linguiça Calabresa (g)" },
+        {"nome": "Lombo Suíno Salgado (kg)"},
+        {"nome": "Orelha Suína Salgada (g)"},
         {"nome": "Paio (g)" },
         {"nome": "Pé Suíno Salgado (g)"},
-        {"nome": "Peixe (kg)" },
         {"nome": "Rabo Suíno Salgado (g)"}
      ]
     }

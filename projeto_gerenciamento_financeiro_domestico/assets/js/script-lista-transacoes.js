@@ -1,12 +1,8 @@
-// Coloca o foco na caixa de seleção "tipo" do formulário
-window.onload = () => {
-    const tipo = document.getElementById('tipo');
-    if (tipo) tipo.focus();
-};
 
-// Excluir transações com AJAX
+// Manipulação das transações com AJAX
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.button-icon.delete').forEach(botao => {
+        // Excluir transações
         botao.addEventListener('click', function () {
             const id = this.dataset.id;
             const linha = this.closest('tr');
@@ -60,6 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
         linha.addEventListener('dblclick', () => ativarModoEdicao(linha));
     });
 
+    // Editar transações
     async function ativarModoEdicao(linha) {
         const campos = linha.querySelectorAll('[data-field]');
         const botaoSalvar = linha.querySelector('.button-icon.salvar');
@@ -182,8 +179,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     } else if (nomeCampo === 'valor') {
                         const input = campo.querySelector('input[type="number"]');
                         dados[nomeCampo] = parseFloat(input?.value || 0).toFixed(2);
-                        campo.innerText = `R$ ${parseFloat(dados[nomeCampo]).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
-
+                        campo.innerText = formatarValor(dados[nomeCampo]);
                     } else if (['tipo', 'forma_pagamento', 'pago', 'nome'].includes(nomeCampo)) {
                         const select = campo.querySelector('select');
                         dados[nomeCampo] = select?.value || '';
@@ -228,14 +224,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     .catch(() => alert('Erro na comunicação com o servidor.'));
             };
         });
-
-        function formatarDataBr(dataIso) {
-            if (!dataIso || !dataIso.includes('-')) return dataIso;
-            const [ano, mes, dia] = dataIso.split('-');
-            return `${dia}/${mes}/${ano}`;
-        }
-
     }
+
+    aplicarSelecaoAoFocar();
 
     // Tecla ESC para cancelar edição
     document.addEventListener('keydown', function (e) {
@@ -253,8 +244,6 @@ document.addEventListener('DOMContentLoaded', function () {
         linhasArray.forEach((linha, i) => {
             if (i === index) {
                 linha.classList.add('selecionada');
-                linha.style.border = '5px solid #063042';
-                linha.style.backgroundColor = '#D9E6FC';
                 linha.scrollIntoView({ behavior: 'smooth', block: 'center' });
             } else {
                 linha.classList.remove('selecionada');
@@ -273,4 +262,5 @@ document.addEventListener('DOMContentLoaded', function () {
             atualizarSelecao(linhaSelecionadaIndex);
         }
     });
+ focarPrimeiroCampo();
 });

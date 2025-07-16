@@ -1,27 +1,5 @@
 @charset "UTF-8";
 
-#btn-imprimir-relatorio {
-    padding: 6px 10px;
-    background: none;
-    border: none;
-    font-size: 25px;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-}
-
-.mensagem-sem-dados {
-    margin: 11vw auto;
-    background-color: white;
-    border: 1px solid var(--cor1);
-    color: var(--cor1);
-    padding: 20px;
-    border-radius: 6px;
-    text-align: center;
-    max-width: 600px;
-    font-size: 16px;
-}
-
 /* Ajuste do resumo financeiro */
 
 .resumo-financeiro {
@@ -39,7 +17,6 @@
     text-align: center;
 }
 
-
 @media screen and (min-width: 768px) {
     
     .resumo-financeiro {
@@ -47,16 +24,7 @@
     }
 }
 
-
-
 @media print {
-
-    /* Remove margens automáticas que alguns navegadores adicionam */
-    body {
-        margin: 0;
-        padding: 0;
-        color: black;
-    }
 
     /* Exibe apenas o conteúdo principal do relatório */
     main {

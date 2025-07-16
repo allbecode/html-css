@@ -12,9 +12,10 @@ include '../includes/header.php';
 
     <link rel="stylesheet" href="../assets/css/segmentation/globals.css">
     <link rel="stylesheet" href="../assets/css/segmentation/layout-tables.css">
-    <link rel="stylesheet" href="../assets/css/segmentation/lista-compras.css">
     <link rel="stylesheet" href="../assets/css/segmentation/form-global.css">
-    
+    <link rel="stylesheet" href="../assets/css/segmentation/lista-compras.css">
+        
+    <script src="../assets/js/utils.js" defer></script>
     <script src="../assets/js/script-lista-de-compras.js" defer></script>
     
 </head>

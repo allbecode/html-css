@@ -61,7 +61,7 @@ button {
 button:hover {
     color: var(--cor2);
     border: 2px solid var(--cor2);
-    background-color: var(--cor4);
+    background:none;
 }
 
 
@@ -127,6 +127,17 @@ button:hover {
     color: red;
 }
 
+.mensagem-sem-dados {
+    margin: 11vw auto;
+    background-color: white;
+    border: 1px solid var(--cor1);
+    color: var(--cor1);
+    padding: 20px;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 16px;
+}
+
 /* Estilo do Rodapé */
 footer {
     width: 100%;
@@ -168,7 +179,6 @@ footer>p>a:hover {
         width: 60%;
     }
 
-
 }
 
 /* Telas grandes */
@@ -177,13 +187,27 @@ footer>p>a:hover {
         text-align: left;
     }
 
+    .mensagem-sem-dados {
+        max-width: 50vw;
+    }
+
 }
 
 /* Estilo para impressões */
 @media print {
 
+    * {
+        color: black !important;
+    }
+    
+    /* Remove margens automáticas que alguns navegadores adicionam */
+    body, html {
+        margin: 0px;
+        padding: 0px;
+    }
+
     /* Oculta cabeçalho, rodapé, menus e formulários */
-    #form-contribuicao,
+    #form-geral,
     #menu,
     .container-form p,
     .no-print {

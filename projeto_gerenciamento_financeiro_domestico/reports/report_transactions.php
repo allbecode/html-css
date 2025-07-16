@@ -17,10 +17,8 @@ include '../includes/header.php';
     <link rel="stylesheet" href="../assets/css/segmentation/form-global.css">
     <link rel="stylesheet" href="../assets/css/segmentation/relatorio-transacoes.css">
 
-
-    <script src="../assets/js/script-contribuicoes.js"></script>
-    <script src="../assets/js/script-relatório-financeiro.js" defer  ></script>
-
+     <script src="../assets/js/utils.js" defer></script>
+     <script src="../assets/js/script-form.js" defer></script>
 </head>
 
 <body>
@@ -28,7 +26,7 @@ include '../includes/header.php';
         <h2 class="no-print">Consultar Transações</h2>
         <div class="container-form">
             <p class="center">Altere uma das opções abaixo para visualizar os dados. </p>
-            <form method="POST" class="form-geral" id="form-contribuicao">
+            <form method="POST" class="form-geral" id="form-geral">
 
                 <label for="mes">Mês:</label>
                 <select id="mes" name="mes" required>
@@ -42,18 +40,18 @@ include '../includes/header.php';
                 <label for="ano">Ano:</label>
                 <input type="number" name="ano" id="ano" value="<?= $ano ?>" required>
 
-                <button type="button" id="btn-imprimir-relatorio" title="Imprimir relatório">
-                    🖨️
-                </button>
+                <button title="Imprimir Relatório" class=" no-print button-icon" onclick="imprimirLista()">🖨️</button>
             </form>
         </div>
         <?php if (count($transacoes) === 0): ?>
             <div class="mensagem-sem-dados">
-                Nenhuma transação registrada para o mês <strong><?php echo str_pad($mes, 2, '0', STR_PAD_LEFT) . '/' . $ano;  ?></strong>.
+                <p>
+                    ✖ Nenhuma transação registrada para o mês <strong><?php echo formatarMesEAno($mes, $ano)  ?></strong>.
+                </p>
             </div>
         <?php else: ?>
         <?php if (!empty($receitas) || !empty($despesas)): ?>
-            <h1>Relatório de <?php echo str_pad($mes, 2, '0', STR_PAD_LEFT) . '/' . $ano; ?></h1>
+            <h1>Relatório de <?php echo formatarMesEAno($mes, $ano) ?></h1>
 
             <h2 class="no-print">Receitas</h2>
             <table>
@@ -128,7 +126,7 @@ include '../includes/header.php';
                 </tfoot>
             </table>
 
-            <h2>Resumo Financeiro</h2>
+            <h2>Resumo Financeiro do Mês <?php echo formatarMesEAno($mes, $ano)?></h2>
             <div class="resumo-financeiro">
                 <p><strong>Total de Receitas:</strong>  <?php echo formatarValor($totalReceitas); ?></p>
                 <p><strong>Total de Despesas:</strong>  <?php echo formatarValor($totalDespesas); ?></p>

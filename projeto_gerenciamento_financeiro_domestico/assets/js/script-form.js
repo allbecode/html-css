@@ -1,28 +1,20 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('form-mes-ano');
-    const chave = location.pathname + '-autoEnvio';
-    const enviado = sessionStorage.getItem(chave);
+    const selects = document.querySelectorAll('select[name="mes"], input[name="ano"], select[name="tipo_contribuicao"]');
 
-    if (form && !enviado) {
-        sessionStorage.setItem(chave, 'true');
-        form.submit();
-    }
-
-    // Submete o formulário automaticamente ao alterar mês ou ano
-    const selects = form.querySelectorAll('select, input');
-    selects.forEach(el => {
-        el.addEventListener('change', () => {
-            form.submit();
+    selects.forEach(select => {
+        select.addEventListener('change', () => {
+            document.getElementById('form-geral').submit();
         });
     });
 
-    window.addEventListener('beforeunload', () => {
-        sessionStorage.removeItem(chave);
-    });
+    // Aplicar comportamento de foco e seleção automática
+    aplicarSelecaoAoFocar();
+    focarPrimeiroCampo();
 });
 
+
 document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('form-mes-ano');
+    const form = document.getElementById('form-geral');
 
     // Verifica se a URL já tem a flag ?autocarregado=1
     const urlParams = new URLSearchParams(window.location.search);

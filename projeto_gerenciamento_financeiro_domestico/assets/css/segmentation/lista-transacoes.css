@@ -44,10 +44,6 @@
 
 /* ------------------------------------------- */
 
-.button-icon {
-    font-size: 20px;
-}
-
 /* Torna a célula um contêiner para centralização */
 td.acoes {
     text-align: center;
@@ -63,6 +59,7 @@ td.acoes {
 
 .button-icon.delete,
 .button-icon.salvar {
+    font-size: 1.2rem;
     transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 

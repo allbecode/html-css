@@ -17,23 +17,25 @@ require_once '../includes/functions.php';
     <link rel="stylesheet" href="../assets/css/segmentation/layout-tables.css">
     <link rel="stylesheet" href="../assets/css/segmentation/layout-contribuicao.css">
 
-    <script src="../assets/js/script-contribuicoes.js" defer></script>
+    <script src="../assets/js/utils.js" defer></script>
     <script src="../assets/js/script-ajax.js" defer></script>
+    <script src="../assets/js/script-contribuicoes.js" defer></script>
+    <script src="../assets/js/script-form.js" defer></script>
+    
 </head>
 
 <body>
     <main>
-        <h2>Contribuições - <?php echo str_pad($mes, 2, '0', STR_PAD_LEFT) . "/" . $ano; ?></h2>
+         <h2>Contribuições - <?php echo formatarMesEAno($mes,$ano); ?></h2>
         <div class="container-form">
 
             <p class="center">Altere uma das opções abaixo para visualizar os dados. </p>
-
-            <form method="POST" class="form-geral" id="form-contribuicao" data-origem="contribuicao">
+                <form method="POST" class="form-geral" id="form-geral" data-origem="contribuicao">
 
                 <label for="mes">Mês:</label>
                 <select name="mes" id="mes" required>
                     <?php for ($m = 1; $m <= 12; $m++): ?>
-                        <option value="<?= $m ?>" <?= $m == $mes ? 'selected' : '' ?>><?= $m ?></option>
+                        <option value="<?= $m ?>" <?= $m == $mes ? 'selected' : '' ?>><?= str_pad($m, 2, '0', STR_PAD_LEFT) ?></option>
                     <?php endfor; ?>
                 </select>
                 <label for="ano">Ano:</label>
@@ -48,9 +50,10 @@ require_once '../includes/functions.php';
 
         <?php if ($_SERVER['REQUEST_METHOD'] === 'POST'): ?>
             <?php if (!$temReceitas): ?>
-                <div class="container mensagem-sem-dados">
-                    <p class="status-nao-pago">✖ Nenhuma receita cadastrada no mês <strong><?php echo str_pad($mes, 2, '0', STR_PAD_LEFT) . "/" . $ano; ?></strong>.<br>
-                        Nenhuma contribuição pode ser calculada ou registrada.</p>
+                <div class="mensagem-sem-dados">
+                    <p>
+                        ✖ Nenhuma receita cadastrada no mês <strong><?php echo formatarMesEAno($mes, $ano);?></strong>.<br>Portanto, nenhuma contribuição pôde ser calculada ou registrada.
+                    </p>
                 </div>
             <?php else : ?>
                 
@@ -112,7 +115,7 @@ require_once '../includes/functions.php';
                                     else: ?>
                                         <tr>
                                             <td colspan="4" style="text-align: center; padding: 10px;">
-                                                Nenhuma contribuição registrada para <strong><?= $nomeContribuicao ?></strong> em <strong><?= "$mes/$ano" ?></strong>.
+                                                Nenhuma contribuição registrada como <strong><?= $nomeContribuicao ?></strong> em <strong><?= "$mes/$ano" ?></strong>.
                                             </td>
                                         </tr>
                                     <?php endif; ?>
@@ -139,7 +142,7 @@ require_once '../includes/functions.php';
                             <h2>Lançar nova contribuição : <?= $nomeContribuicao ?> - <?php echo str_pad($mes, 2, '0', STR_PAD_LEFT) . "/" . $ano; ?></h2>
 
                             <div class="container-form">
-                                <form id="form-transacao" method="POST" action="../actions/add_transaction.php" class="form-geral" data-origem="contribuicao">
+                                <form id="form-geral" method="POST" action="../actions/add_transaction.php" class="form-geral" data-origem="contribuicao">
                                     <input type="hidden" name="mes" value="<?= $mes ?>">
                                     <input type="hidden" name="ano" value="<?= $ano ?>">
                                     <input type="hidden" name="tipo" value="despesa">

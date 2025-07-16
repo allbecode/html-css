@@ -15,12 +15,10 @@ require_once '../includes/functions.php';
     <link rel="stylesheet" href="../assets/css/segmentation/form-global.css">
     <link rel="stylesheet" href="../assets/css/segmentation/form-add-transacao.css">
 
-
-    <script src="../assets/js/scripts.js" defer></script>
+    <script src="../assets/js/utils.js" defer></script>
     <script src="../assets/js/script-carrega-opcoes.js" defer></script>
     <script src="../assets/js/script-carrega-nome.js" defer></script>
     <script src="../assets/js/script-ajax.js" defer></script>
-    <script src="../assets/js/script-auto-focus-form.js" defer></script>
 </head>
 
 <body>

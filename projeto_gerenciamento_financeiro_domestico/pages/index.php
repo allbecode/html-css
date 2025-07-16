@@ -15,6 +15,7 @@ include '../includes/header.php';
     <link rel="stylesheet" href="../assets/css/segmentation/globals.css">
     <link rel="stylesheet" href="../assets/css/segmentation/layout-tables.css">
 
+     <script src="../assets/js/utils.js" defer></script>
     <script src="../assets/js/script-index.js" defer></script>
 </head>
 

@@ -6,12 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciador Financeiro</title>
 
-    <!-- <link rel="stylesheet" href="../assets/css/segmentation/globals.css"> -->
     <link rel="stylesheet" href="../assets/css/segmentation/layout-header.css">
 
+    <script src="../assets/js/script-header.js" defer></script>
     <script src="https://kit.fontawesome.com/ba16269ee8.js" crossorigin="anonymous"></script>
-    <script src="../assets/js/scripts.js" defer></script>
-
 </head>
 
 <body onresize="mudouTamanho()">

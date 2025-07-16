@@ -16,6 +16,7 @@ include '../includes/header.php';
     <link rel="stylesheet" href="../assets/css/segmentation/layout-tables.css">
     <link rel="stylesheet" href="../assets/css/segmentation/relatorio-contribuicao.css">
 
+     <script src="../assets/js/utils.js" defer></script>
     <script src="../assets/js/scripts.js" defer></script>
 
 </head>
@@ -59,7 +60,7 @@ include '../includes/header.php';
                 </tfoot>
             </table>
 
-            <button title="Imprimir Relatório" class=" no-print button-icon" onclick="window.print()">🖨️</button>
+            <button title="Imprimir Relatório" class=" no-print button-icon" onclick=imprimirLista()>🖨️</button>
             <button title="Fechar Relatório" class="no-print button-icon" onclick="fecharRelatorio()">❌</button>
         </div>
     </main>

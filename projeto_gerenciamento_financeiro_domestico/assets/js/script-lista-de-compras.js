@@ -26,15 +26,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!estaNaLista(produto)) {
                 adicionarNaTabela(produto, quantidade);
                 salvarLista();
-                // select.selectedIndex = 0; // Zera o select
-                // qtd.value = 1; // Imprime "1" automaticamente no campo Qtde 
-                select.focus();
+                focarPrimeiroCampo()
             } else {
                 alert(`Este item já foi adicionado à lista.\nPor favor selecione outro produto.`);
-                select.focus();
+                focarPrimeiroCampo();
             }
 
         }
+        aplicarSelecaoAoFocar()
     });
 
     // Verificando se o item selecionado já está na lista
@@ -76,7 +75,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const btnEditar = tr.querySelector('#btn-editar');
         const btnSalvar = tr.querySelector('#btn-salvar');
+        const btnExcluir = tr.querySelector('#btn-excluir');
 
+        // Editando itens da tabela
         btnEditar.addEventListener('click', () => {
             const tdProduto = tr.children[0];
             const tdQtd = tr.children[1];
@@ -88,12 +89,21 @@ document.addEventListener('DOMContentLoaded', () => {
             tdQtd.innerHTML = `<input type="number" min="1" value="${qtdAtual}" style="width:60px;">`;
 
             btnEditar.style.display = 'none';
+            btnExcluir.style.display = 'none';
             btnSalvar.style.display = 'inline-block';
 
             // Foco no campo de texto
             const inputProduto = tdProduto.querySelector('input');
             inputProduto.focus();
             inputProduto.select(); // opcional: seleciona todo o texto
+        });
+
+        // Tecla ESC para cancelar edição
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                const emEdicao = document.querySelector('tr input, tr select');
+                if (emEdicao) location.reload();
+            }
         });
 
         btnSalvar.addEventListener('click', () => {
@@ -112,6 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
             tdQtd.textContent = `${novaQtd} unidade${novaQtd > 1 ? 's' : ''}`;
 
             btnEditar.style.display = 'inline-block';
+            btnExcluir.style.display = 'inline-block'
             btnSalvar.style.display = 'none';
 
             salvarLista();
@@ -140,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
 
-    select.focus();
+    focarPrimeiroCampo()
 
 }); // Fim - DOMContentLoaded +===================================
 
@@ -173,9 +184,3 @@ async function carregarProdutos() {
 }
 
 carregarProdutos();
-
-// Imprimindo a lista de compras
-function imprimirLista() {
-    window.print()
-    select.focus()
-}

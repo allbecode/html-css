@@ -33,3 +33,9 @@ function temReceitas($totalReceitas){
         return false;
     }
 }
+
+// Formata mês e ano
+function formatarMesEAno($mes, $ano) {
+    $data = str_pad($mes, 2, '0', STR_PAD_LEFT) . "/" . $ano; 
+    return $data;
+}

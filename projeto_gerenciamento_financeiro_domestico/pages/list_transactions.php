@@ -21,7 +21,7 @@ include '../includes/header.php';
     <link rel="stylesheet" href="../assets/css/segmentation/layout-tables.css">
     <link rel="stylesheet" href="../assets/css/segmentation/lista-transacoes.css">
 
-    <script src="../assets/js/scripts.js" defer></script>
+    <script src="../assets/js/utils.js" defer></script>
     <script src="../assets/js/script-lista-transacoes.js" defer></script>
 
 </head>
@@ -52,28 +52,31 @@ include '../includes/header.php';
                 <button type="submit">Filtrar</button>
             </form>
         </div>
-
-        <div class="table-container">
-            <div id="mensagem-edicao" class="mensagem-flutuante" style="display: none;">
-                Clique duas vezes sobre a linha para editar as informações.
+        <?php if (count($transacoes) <= 0): ?>
+            <div class="mensagem-sem-dados">
+                <p>
+                    ✖ Nenhuma transação encontrada com <strong>o(s) parâmetro(s)</strong> selecionado(s).
+                </p>
             </div>
-            <table>
-                <thead class="tlista">
-                    <tr>
-                        <th>Nome</th>
-                        <th>Vencimento</th>
-                        <th>Valor</th>
-                        <th>Tipo</th>
-                        <th>Forma de Pagamento</th>
-                        <th>Descrição</th>
-                        <th>Status</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    <?php if (count($transacoes) > 0): ?>
-
+        <?php else : ?>
+            <div class="table-container">
+                <div id="mensagem-edicao" class="mensagem-flutuante" style="display: none;">
+                    Clique duas vezes sobre a linha para editar as informações.
+                </div>
+                <table>
+                    <thead class="tlista">
+                        <tr>
+                            <th>Nome</th>
+                            <th>Vencimento</th>
+                            <th>Valor</th>
+                            <th>Tipo</th>
+                            <th>Forma de Pagamento</th>
+                            <th>Descrição</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         <?php foreach ($transacoes as $transacao): ?>
                             <tr data-id="<?= $transacao['id'] ?>" class="transacao-linha">
                                 <td data-field="nome">
@@ -106,18 +109,10 @@ include '../includes/header.php';
                                 </td>
                             </tr>
                         <?php endforeach; ?>
-                    <?php else : ?>
-                        <tr>
-                            <td colspan="8">
-                                <div class="mensagem-sem-dados">
-                                    Nenhuma transação encontrada com <strong>o(s) parâmetrod(s)</strong> selecionado(s).
-                                </div>
-                            </td>
-                        </tr>
-                    <?php endif ?>
-                </tbody>
-            </table>
-        </div>
+                    </tbody>
+                </table>
+            </div>
+        <?php endif ?>
     </main>
     <?php include '../includes/footer.php'; ?>
 

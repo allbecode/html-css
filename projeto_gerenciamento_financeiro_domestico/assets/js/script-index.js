@@ -55,11 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             const spanTotal = document.getElementById(`total-${tipo}`);
+            
             if (spanTotal) {
-                spanTotal.textContent = 'R$ ' + total.toLocaleString('pt-BR', {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                });
+                spanTotal.textContent = formatarValor(total)
             }
 
             // Se não houver linhas visíveis, exibe a mensagem

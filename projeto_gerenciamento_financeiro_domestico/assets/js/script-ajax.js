@@ -17,14 +17,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(data => {
                     if (data.status === 'ok') {
                         if (origem === 'transacao') {
-                            // Apenas limpa o formulário ou mostra feedback, sem reload
+                            // Apenas limpa o formulário e mostra feedback, sem reload se for a página add-transacao
                             form.reset();
                             alert('Transação adicionada com sucesso!');
                             carregarTransacoesDoDia(); // atualiza lista
                             // Chama o foco no novo campo após a reinicialização
                             focarPrimeiroCampo('#form-transacao');
                         } else if (origem === 'contribuicao') {
-                            // Recarrega a página se for transação
+                            // Recarrega a página se for cotribuição
                             location.reload();
                             alert("Contribuição registrada com sucesso!");
                         }
@@ -41,15 +41,3 @@ document.addEventListener('DOMContentLoaded', () => {
     // carrega ao iniciar também
     carregarTransacoesDoDia();
 });
-
-
-function carregarTransacoesDoDia() {
-    fetch('../actions/listar_transacoes_dia.php')
-        .then(res => res.text())
-        .then(html => {
-            const container = document.getElementById('transacoes-do-dia');
-            if (container) {
-                container.innerHTML = html;
-            }
-        });
-}

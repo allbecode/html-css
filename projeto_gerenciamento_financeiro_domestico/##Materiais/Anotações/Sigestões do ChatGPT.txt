@@ -1,0 +1,143 @@
+Sugestões do ChatGPT
+
+
+
+Separação da lógica em funções reutilizáveis
+
+Criar um sistema de permissões mais avançado (ex: módulos por nível)?
+
+Adicionar mais relatórios gerenciais (ex: logins por período)?
+
+Adicionar paginação ou botão "ver mais" (filtro de consulta de registros)?
+
+Botões para paginação (Próximo / Anterior)?
+
+Aplicar Filtros funcionais
+
+Criar relatórios exportáveis (PDF/Excel)?
+
+Exportar os resultados filtrados para PDF/Excel?
+
+Exportação dos resultados filtrados?
+
+Gerar gráficos com bibliotecas JS mais tarde (como Chart.js)
+
+Implementar gráficos estatísticos?
+
+--> Se quiser, posso te ajudar a montar um visualizador de logs com filtros por autor, ação ou data.
+
+Deseja isso?
+
+--> Se quiser, posso te ajudar a criar a tabela dependentes e o formulário para cadastrar dependentes associados ao usuário. Deseja isso agora?
+
+
+----------------------------------------------------------
+Dados do usuário:
+
+Nome, Sobrenome, Data de Nascimento, Sexo, Endereço, Telefone, email, Estado Civil, mostrar opçòes de estado civil numa lista suspensa. Se Casado(a), solicitar o Nome completo Conjuge, Data de Nascimento do Conjuge e Data do casamento. Se há Filho? sim/não,Quantos? O número de filhos será o número de campos onde os dados Nome completo do filho e Data de Nascimento do filho será serão solicitados.
+
+----------------------------------------------------------
+
+SQL TABELA USUARIOS
+
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL,
+    nome VARCHAR(100),
+    sobrenome VARCHAR(100),
+    data_nascimento DATE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    tipo ENUM('admin', 'usuario') DEFAULT 'usuario',
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ultimo_login DATETIME NULL
+);
+
+SQL TABELA TRANSACOES
+
+CREATE TABLE IF NOT EXISTS transacoes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NOT NULL,
+    nome VARCHAR(255) NOT NULL,
+    data_vencimento DATE NOT NULL,
+    valor DECIMAL(10,2) NOT NULL,
+    tipo ENUM('receita', 'despesa') NOT NULL,
+    ano INT(11) NOT NULL,
+    mes INT(11) NOT NULL,
+    pago BOOLEAN DEFAULT 0,
+    forma_pagamento ENUM('Boleto Bancário','Cartão de Crédito','Cheque','Crédito em Conta','Débito em Conta','Débito Automático','Espécie','PIX') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'PIX',
+    descricao VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+    data_registro DATE DEFAULT (CURRENT_DATE),
+    base_contribuicao BOOLEAN NOT NULL DEFAULT 0,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+==========================================================
+* O FOREIGN KEY com ON DELETE CASCADE garante que, ao excluir um usuário, suas transações também sejam removidas.
+===========================================================
+
+
+SQL TABELA LOGS_ACESSO
+
+CREATE TABLE logs_acesso (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    ip VARCHAR(45) NOT NULL,
+    acao VARCHAR(100) NOT NULL,
+    alvo VARCHAR(255),
+    data_hora DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+----------------------------------------------------------
+
+VERFICAÇÃO DE ERROS
+
+Adicione isso no topo do arquivo .php para forçar exibição de erro:
+
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+Assim, em vez do erro 500, você verá uma mensagem descritiva da falha.
+
+
+
+
+ESTRUTURA DO SISTEMA DE AUTENTICAÇÃO
+
+index.php/
+acsses_control
+|
+|-incliudes ____
+|               |- admin_functions.php
+|               |- auth.php
+|               |- dashboard_functions.php
+|               |- db.php
+|               |- functions.php
+|               |- layout.php
+|               |- log_functions.php
+|               |- login_functions.php
+|               |- perfil_functions.php
+|               |- session.php
+|               |- usuario.php
+|
+|
+|- pages _______
+|               |- dashboard.php
+|               |- login.php
+|               |- logout.php
+|               |- painel_admin.php
+|               |- painel.php
+|               |- perfil.php
+|               |- recuperar_senha.php
+|               |- registro.php
+|
+|
+|
+/
+
+
+
+
+

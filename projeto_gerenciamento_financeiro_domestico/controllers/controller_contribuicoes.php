@@ -1,7 +1,71 @@
 <?php
 
-require_once '../includes/db_connection.php';
+// require_once '../includes/db_connection.php';
+// require_once '../includes/functions.php';
+
+// $mesSelecionado = $_POST['mes'] ?? date('m');
+// $anoSelecionado = $_POST['ano'] ?? date('Y');
+// $tipoSelecionado = $_POST['tipo_contribuicao'] ?? 'dizimo';
+
+// $totalReceitas = 0;
+// $valorEsperadoDizimo = 0;
+// $valorEsperadoOferta = 0;
+// $valorDizimado = 0;
+// $valorOfertado = 0;
+// $valorRestanteDizimo = 0;
+// $valorRestanteOferta = 0;
+// $temReceitas = true;
+
+// $mes = date('m');
+// $ano = date('Y');
+
+// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+//     $mes = $_POST['mes'];
+//     $ano = $_POST['ano'];
+
+//     // Total de receitas
+//     $stmt = $pdo->prepare("SELECT SUM(valor) FROM transacoes 
+//     WHERE tipo = 'receita' 
+//     AND base_contribuicao = 1 /* valida o flag base_contribuicao */
+//     AND mes = :mes AND ano = :ano");
+//     $stmt->execute(['mes' => $mes, 'ano' => $ano]);
+//     $totalReceitas = $stmt->fetchColumn() ?: 0;
+
+//     // Verifica se há receitas
+//     $temReceitas = temReceitas($totalReceitas);
+
+//     // Dízimo
+//     $valorEsperadoDizimo = calcularDizimoOferta($totalReceitas);
+//     $stmt = $pdo->prepare("SELECT SUM(valor) FROM transacoes WHERE tipo = 'despesa' AND nome = 'Dízimo' AND mes = :mes AND ano = :ano");
+//     $stmt->execute(['mes' => $mes, 'ano' => $ano]);
+//     $valorDizimado = $stmt->fetchColumn() ?: 0;
+//     $valorRestanteDizimo = max($valorEsperadoDizimo - $valorDizimado, 0);
+
+//     // Oferta
+//     $valorEsperadoOferta = calcularDizimoOferta($totalReceitas);
+//     $stmt = $pdo->prepare("SELECT SUM(valor) FROM transacoes WHERE tipo = 'despesa' AND nome = 'Oferta' AND mes = :mes AND ano = :ano");
+//     $stmt->execute(['mes' => $mes, 'ano' => $ano]);
+//     $valorOfertado = $stmt->fetchColumn() ?: 0;
+//     $valorRestanteOferta = max($valorEsperadoOferta - $valorOfertado, 0);
+// }
+
+
+
+
+// require_once '../includes/db_connection.php';
+require_once '../acsses_control/includes/db.php';
 require_once '../includes/functions.php';
+require_once '../acsses_control/includes/functions.php';
+// require_once '../includes/session.php';
+require_once '../acsses_control/includes/session.php';
+
+
+if (!isUsuarioLogado()) {
+    http_response_code(403);
+    exit('Acesso negado: usuário não autenticado.');
+}
+
+$usuarioId = $_SESSION['usuario_id'] ?? null;
 
 $mesSelecionado = $_POST['mes'] ?? date('m');
 $anoSelecionado = $_POST['ano'] ?? date('Y');
@@ -16,36 +80,60 @@ $valorRestanteDizimo = 0;
 $valorRestanteOferta = 0;
 $temReceitas = true;
 
-$mes = date('m');
-$ano = date('Y');
+$mes = $mesSelecionado;
+$ano = $anoSelecionado;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $mes = $_POST['mes'];
-    $ano = $_POST['ano'];
-
-    // Total de receitas
-    $stmt = $pdo->prepare("SELECT SUM(valor) FROM transacoes 
-    WHERE tipo = 'receita' 
-    AND base_contribuicao = 1 /* valida o flag base_contribuicao */
-    AND mes = :mes AND ano = :ano");
-    $stmt->execute(['mes' => $mes, 'ano' => $ano]);
+    // Total de receitas válidas para contribuição
+    $stmt = $pdo->prepare("
+        SELECT SUM(valor) FROM transacoes 
+        WHERE usuario_id = :usuario_id
+        AND tipo = 'receita' 
+        AND base_contribuicao = 1
+        AND mes = :mes AND ano = :ano
+    ");
+    $stmt->execute([
+        'usuario_id' => $usuarioId,
+        'mes' => $mes,
+        'ano' => $ano
+    ]);
     $totalReceitas = $stmt->fetchColumn() ?: 0;
 
-    // Verifica se há receitas
     $temReceitas = temReceitas($totalReceitas);
 
-    // Dízimo
+    // Valor esperado de Dízimo
     $valorEsperadoDizimo = calcularDizimoOferta($totalReceitas);
-    $stmt = $pdo->prepare("SELECT SUM(valor) FROM transacoes WHERE tipo = 'despesa' AND nome = 'Dízimo' AND mes = :mes AND ano = :ano");
-    $stmt->execute(['mes' => $mes, 'ano' => $ano]);
+    $stmt = $pdo->prepare("
+        SELECT SUM(valor) FROM transacoes 
+        WHERE usuario_id = :usuario_id
+        AND tipo = 'despesa' 
+        AND nome = 'Dízimo' 
+        AND mes = :mes AND ano = :ano
+    ");
+    $stmt->execute([
+        'usuario_id' => $usuarioId,
+        'mes' => $mes,
+        'ano' => $ano
+    ]);
     $valorDizimado = $stmt->fetchColumn() ?: 0;
     $valorRestanteDizimo = max($valorEsperadoDizimo - $valorDizimado, 0);
 
-    // Oferta
+    // Valor esperado de Oferta
     $valorEsperadoOferta = calcularDizimoOferta($totalReceitas);
-    $stmt = $pdo->prepare("SELECT SUM(valor) FROM transacoes WHERE tipo = 'despesa' AND nome = 'Oferta' AND mes = :mes AND ano = :ano");
-    $stmt->execute(['mes' => $mes, 'ano' => $ano]);
+    $stmt = $pdo->prepare("
+        SELECT SUM(valor) FROM transacoes 
+        WHERE usuario_id = :usuario_id
+        AND tipo = 'despesa' 
+        AND nome = 'Oferta' 
+        AND mes = :mes AND ano = :ano
+    ");
+    $stmt->execute([
+        'usuario_id' => $usuarioId,
+        'mes' => $mes,
+        'ano' => $ano
+    ]);
     $valorOfertado = $stmt->fetchColumn() ?: 0;
     $valorRestanteOferta = max($valorEsperadoOferta - $valorOfertado, 0);
 }
+
 ?>

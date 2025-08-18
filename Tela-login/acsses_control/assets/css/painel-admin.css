@@ -1,0 +1,38 @@
+.admin-panel {
+    padding: 20px;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.admin-table th {
+    background: #2a7a5e;
+    color: #fff;
+    text-align: left;
+    padding: 12px;
+}
+
+.admin-table td {
+    padding: 12px;
+    border-top: 1px solid #ddd;
+}
+
+.admin-actions button {
+    background: #2a7a5e;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.admin-actions button:hover {
+    background: #21664d;
+}

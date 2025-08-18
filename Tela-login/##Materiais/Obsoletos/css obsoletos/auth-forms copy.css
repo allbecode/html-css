@@ -1,0 +1,113 @@
+/* auth-forms.css */
+/* Layout geral */
+body {
+    /* font-family: Arial, Helvetica, sans-serif; */
+    background: linear-gradient(135deg, var(--cor4), var(--cor2));
+    /* background-color: #f5f5f5; */
+    margin: 0;
+    padding: 0;
+}
+
+/* Centralização */
+.container {
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Caixa do formulário */
+.auth-box {
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Título */
+.auth-box h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+/* Campos do formulário */
+.auth-box label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    color: #444;
+}
+
+.auth-box input[type="text"],
+.auth-box input[type="email"],
+.auth-box input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+/* Botões */
+.auth-box button {
+    width: 100%;
+    padding: 10px;
+    background-color: #3b82f6; /* azul consistente */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+}
+
+.auth-box button:hover {
+    background-color: #2563eb;
+}
+
+/* Links auxiliares */
+.auth-links {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.auth-links a {
+    color: #3b82f6;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}
+
+/* Mensagens de sucesso/erro */
+.message {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+.message.success {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.message.error {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+    .auth-box {
+        padding: 20px;
+    }
+}

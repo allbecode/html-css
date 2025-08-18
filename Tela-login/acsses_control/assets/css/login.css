@@ -1,0 +1,190 @@
+/* ===== Reset básico ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, var(--cor4), var(--cor2));
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ===== Container ===== */
+.login-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 380px;
+    animation: fadeInUp 0.6s ease;
+}
+
+/* ===== Logo e título ===== */
+.login-logo {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.login-logo h1 {
+    font-size: 2rem;
+    color: #4e73df;
+    font-style: italic;
+    animation: slideFade 0.8s ease forwards;
+    opacity: 0;
+    animation-delay: 0.1s;
+}
+
+.login-logo p {
+    font-size: 0.85rem;
+    color: #555;
+    animation: slideFade 0.8s ease forwards;
+    opacity: 0;
+    animation-delay: 0.3s;
+}
+
+/* ===== Título do formulário ===== */
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    /* color: #333; */
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+    animation-delay: 0.5s;
+}
+
+/* ===== Mensagens ===== */
+.login-message {
+    padding: 0.6rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    text-align: center;
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+    animation-delay: 0.6s;
+}
+
+.login-message.success {
+    background: #d4edda;
+    color: #155724;
+}
+
+.login-message.error {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+/* ===== Inputs ===== */
+.login-container input {
+    width: 100%;
+    padding: 0.7rem;
+    margin-bottom: 0.2rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    font-size: 0.9rem;
+    transition: 0.3s ease;
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+.login-container input:nth-of-type(1) {
+    animation-delay: 0.7s;
+}
+
+.login-container input:nth-of-type(2) {
+    animation-delay: 0.85s;
+}
+
+.login-container input:nth-of-type(3) {
+    animation-delay: 0.9s;
+}
+
+.login-container input:nth-of-type(4) {
+    animation-delay: 0.95s;
+}
+
+.login-container input:nth-of-type(5) {
+    animation-delay: 0.99s;
+}
+
+.login-container input:focus {
+    border-color: #4e73df;
+    box-shadow: 0 0 4px rgba(78, 115, 223, 0.3);
+}
+
+/* ===== Botão ===== */
+.login-container button {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 6px;
+    background: #4e73df;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background 0.3s ease;
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+    animation-delay: 1s;
+}
+
+.login-container button:hover {
+    background: #3751c4;
+}
+
+/* ===== Links ===== */
+.login-links {
+    text-align: center;
+    margin-top: 1rem;
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+    animation-delay: 1.15s;
+}
+
+.login-links a {
+    color: #4e73df;
+    font-size: 0.85rem;
+    text-decoration: none;
+}
+
+.login-links a:hover {
+    text-decoration: underline;
+}
+
+/* ===== Animações ===== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideFade {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media screen and (min-width: 768px) {
+    
+    .login-container {
+        max-width: 450px;
+    }
+}

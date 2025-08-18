@@ -1,0 +1,287 @@
+[
+    {
+        "id": 1,
+        "value": "Aluguel",
+        "nome": "Aluguel"
+    },
+    {
+        "id": 2,
+        "value": "Condomínio",
+        "nome": "Condomínio"
+    },
+    {
+        "id": 3,
+        "value": "Prestação da casa",
+        "nome": "Prestação da casa"
+    },
+    {
+        "id": 4,
+        "value": "Seguro da casa",
+        "nome": "Seguro da casa"
+    },
+    {
+        "id": 5,
+        "value": "Segurança/Alarme",
+        "nome": "Segurança/Alarme"
+    },
+    {
+        "id": 6,
+        "value": "Diarista",
+        "nome": "Diarista"
+    },
+    {
+        "id": 7,
+        "value": "Prestação do carro",
+        "nome": "Prestação do carro"
+    },
+    {
+        "id": 8,
+        "value": "Seguro do carro",
+        "nome": "Seguro do carro"
+    },
+    {
+        "id": 9,
+        "value": "Estacionamento",
+        "nome": "Estacionamento"
+    },
+    {
+        "id": 10,
+        "value": "Tag de Pedágio",
+        "nome": "Tag de Pedágio"
+    },
+    {
+        "id": 11,
+        "value": "Seguro saúde",
+        "nome": "Seguro saúde"
+    },
+    {
+        "id": 12,
+        "value": "Seguro Funeral",
+        "nome": "Seguro Funeral"
+    },
+    {
+        "id": 13,
+        "value": "Colégio",
+        "nome": "Colégio"
+    },
+    {
+        "id": 14,
+        "value": "Faculdade",
+        "nome": "Faculdade"
+    },
+    {
+        "id": 15,
+        "value": "Curso",
+        "nome": "Curso"
+    },
+    {
+        "id": 16,
+        "value": "IPTU",
+        "nome": "IPTU"
+    },
+    {
+        "id": 17,
+        "value": "IPVA",
+        "nome": "IPVA"
+    },
+    {
+        "id": 18,
+        "value": "Energia Elétrica",
+        "nome": "Energia Elétrica"
+    },
+    {
+        "id": 19,
+        "value": "Fornecimento de Água",
+        "nome": "Fornecimento de Água"
+    },
+    {
+        "id": 20,
+        "value": "Telefone",
+        "nome": "Telefone"
+    },
+    {
+        "id": 21,
+        "value": "Telefone Celular",
+        "nome": "Telefone Celular"
+    },
+    {
+        "id": 22,
+        "value": "Gás",
+        "nome": "Gás"
+    },
+    {
+        "id": 23,
+        "value": "Mensalidade TV (Cabo)",
+        "nome": "Mensalidade TV (Cabo)"
+    },
+    {
+        "id": 25,
+        "value": "Mensalidade da Tv (Streaming)",
+        "nome": "Mensalidade da Tv (Streaming)"
+    },
+    {
+        "id": 26,
+        "value": "Internet",
+        "nome": "Internet"
+    },
+    {
+        "id": 27,
+        "value": "Metrô",
+        "nome": "Metrô"
+    },
+    {
+        "id": 28,
+        "value": "Ônibus",
+        "nome": "Ônibus"
+    },
+    {
+        "id": 29,
+        "value": "Combustível",
+        "nome": "Combustível"
+    },
+    {
+        "id": 30,
+        "value": "Supermercado",
+        "nome": "Supermercado"
+    },
+    {
+        "id": 31,
+        "value": "Feira",
+        "nome": "Feira"
+    },
+    {
+        "id": 32,
+        "value": "Padaria",
+        "nome": "Padaria"
+    },
+    {
+        "id": 33,
+        "value": "Cartão de credito",
+        "nome": "Cartão de credito"
+    },
+    {
+        "id": 34,
+        "value": "Cheque Especial",
+        "nome": "Cheque Especial"
+    },
+    {
+        "id": 35,
+        "value": "Crédito Pessoal",
+        "nome": "Crédito Pessoal"
+    },
+    {
+        "id": 36,
+        "value": "Crédito Consignado",
+        "nome": "Crédito Consignado"
+    },
+    {
+        "id": 37,
+        "value": "Medicamentos",
+        "nome": "Medicamentos"
+    },
+    {
+        "id": 38,
+        "value": "Cabeleireiro",
+        "nome": "Cabeleireiro"
+    },
+    {
+        "id": 39,
+        "value": "Manicure",
+        "nome": "Manicure"
+    },
+    {
+        "id": 40,
+        "value": "Esteticista",
+        "nome": "Esteticista"
+    },
+    {
+        "id": 41,
+        "value": "Academia",
+        "nome": "Academia"
+    },
+    {
+        "id": 42,
+        "value": "Clube",
+        "nome": "Clube"
+    },
+    {
+        "id": 43,
+        "value": "Médico",
+        "nome": "Médico"
+    },
+    {
+        "id": 44,
+        "value": "Dentista",
+        "nome": "Hospital"
+    },
+    {
+        "id": 45,
+        "value": "Manutenção do Carro",
+        "nome": "Manutenção do Carro"
+    },
+    {
+        "id": 46,
+        "value": "Manutenção da Casa",
+        "nome": "Manutenção da Casa"
+    },
+    {
+        "id": 47,
+        "value": "Material escolar",
+        "nome": "Material escolar"
+    },
+    {
+        "id": 48,
+        "value": "Uniforme",
+        "nome": "Uniforme"
+    },
+    {
+        "id": 49,
+        "value": "Viagem",
+        "nome": "Viagem"
+    },
+    {
+        "id": 50,
+        "value": "Cinema/teatro",
+        "nome": "Cinema/teatro"
+    },
+    {
+        "id": 51,
+        "value": "Restaurante",
+        "nome": "Restaurante"
+    },
+    {
+        "id": 52,
+        "value": "Aluguel de Filme (Streaming)",
+        "nome": "Aluguel de Filme (Streaming)"
+    },
+    {
+        "id": 53,
+        "value": "Roupas",
+        "nome": "Roupas"
+    },
+    {
+        "id": 54,
+        "value": "Calçados",
+        "nome": "Calçados"
+    },
+    {
+        "id": 55,
+        "value": "Acessórios",
+        "nome": "Acessórios"
+    },
+    {
+        "id": 56,
+        "value": "PetShpop",
+        "nome": "PetShpop"
+    },
+    {
+        "id": 57,
+        "value": "Presentes",
+        "nome": "Presentes"
+    },
+    {
+        "id": 58,
+        "value": "Outros",
+        "nome": "Outros"
+    }
+]

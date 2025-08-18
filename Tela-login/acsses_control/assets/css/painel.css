@@ -1,0 +1,19 @@
+.welcome-panel {
+    text-align: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #2a7a5e, #1e5a45);
+    color: white;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+}
+
+.welcome-panel h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.welcome-panel p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}

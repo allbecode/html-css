@@ -1,0 +1,72 @@
+@charset "UTF-8";
+
+/* Ajuste do resumo financeiro */
+
+.resumo-financeiro {
+    background-color: var(--cor1);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.resumo-financeiro p {
+    color: var(--cor4);
+    flex: 1;
+    min-width: 150px;
+    padding: 10px;
+    text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+    
+    .resumo-financeiro {
+        padding: 40px 5px;
+    }
+}
+
+@media print {
+
+    /* Exibe apenas o conteúdo principal do relatório */
+    main {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Tabela: remove estilos desnecessários e força quebra de página adequada */
+    table {
+        width: 100%;
+        font-size: 8pt;
+        border-collapse: collapse;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto;
+    }
+
+    th, td {
+        width: 200px;
+        padding: 10px 2px;
+    }
+
+    .resumo-financeiro{
+        background: none;
+    }
+
+    .resumo-financeiro p {
+        color: black;
+    }
+
+    footer {
+        margin-top: 10px;
+    }
+
+    @page {
+        size: landscape;
+    }
+}

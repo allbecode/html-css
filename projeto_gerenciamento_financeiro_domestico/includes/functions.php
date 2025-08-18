@@ -39,28 +39,3 @@ function formatarMesEAno($mes, $ano) {
     $data = str_pad($mes, 2, '0', STR_PAD_LEFT) . "/" . $ano; 
     return $data;
 }
-
-
-function isUsuarioLogado() {
-    return isset($_SESSION['usuario']) && isset($_SESSION['usuario']['id']);
-}
-
-
-function verificaUsuarioLogado(): bool {
-    // Garante que a sessão esteja iniciada
-    if (session_status() !== PHP_SESSION_ACTIVE) {
-        session_start();
-    }
-
-    return isset($_SESSION['usuario_id']) && is_numeric($_SESSION['usuario_id']);
-}
-
-// function getUsuarioId() {
-//     return $_SESSION['usuario']['id'] ?? null;
-// }
-
-function getUsuarioId(): ?int {
-    return $_SESSION['usuario_id'] ?? null;
-}
-
-

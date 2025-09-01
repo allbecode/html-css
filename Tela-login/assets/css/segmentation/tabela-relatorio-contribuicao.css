@@ -1,0 +1,59 @@
+/* ------------------------------ */
+
+/* Container para centralizar a tabela */
+.tabela-relatorio-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /* tabela fica centralizada horizontalmente, mas no topo */
+    width: 100%;
+    overflow-x: auto;
+    /* se tiver muitas colunas, ativa scroll horizontal */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Estilo da tabela */
+.tabela-relatorio {
+    border-collapse: collapse;
+    min-width: 400px;
+    /* largura mínima para evitar esmagar */
+    /* background: #fff; */
+    /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); */
+    /* border-radius: 12px; */
+    overflow: hidden;
+    text-align: center;
+}
+
+/* Cabeçalho */
+.tabela-relatorio thead {
+    background: var(--cor3);
+    /* color: white; */
+    font-weight: bold;
+}
+
+.tabela-relatorio th,
+.tabela-relatorio td {
+    padding: 12px 16px;
+    /* border: 1px solid #ddd; */
+    /* white-space: nowrap; */
+    /* evita quebra de colunas grandes */
+}
+
+/* Linhas alternadas */
+.tabela-relatorio tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.tabela-relatorio tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Responsivo para telas pequenas */
+/* @media (min-width: 768px) {
+    .tabela-relatorio {
+        font-size: 14px;
+    }
+} */
+
+/* ------------------------------ */

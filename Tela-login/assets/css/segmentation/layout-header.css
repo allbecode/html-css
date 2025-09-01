@@ -2,50 +2,51 @@
 
 header {
     background-color: var(--cor1);
-    color: white;
+    color: var(--cor4);
     text-align: center;
 }
 
 .logo h1 {
     padding: 0px;
+    font-style: italic;
 }
 
 i#menu {
     box-sizing: border-box;
-    border: 3px solid #EBE4F4;
+    border: 3px solid var(--cor4);
     font-size: 10px;
     margin: 15px 0px;
     padding: 10px;
     cursor: pointer;
     background-color: var(--cor1);
-    color: white;
+    color: var(--cor4);
     border-radius: 50%;
 }
 
 i#menu:hover {
     box-sizing: border-box;
-    background-color: white;
+    background-color: var(--cor4);
     color: var(--cor1);
-    border: 3px solid white;
+    border: 3px solid var(--cor4);
 }
 
 i#menu-user {
     box-sizing: border-box;
-    border: 3px solid #EBE4F4;
+    border: 3px solid var(--cor4);
     font-size: 10px;
     margin: 15px 0px;
     padding: 10px;
     cursor: pointer;
     background-color: var(--cor1);
-    color: white;
+    color: var(--cor4);
     border-radius: 50%;
 }
 
 i#menu-user:hover {
     box-sizing: border-box;
-    background-color: white;
+    background-color: var(--cor4);
     color: var(--cor1);
-    border: 3px solid white;
+    border: 3px solid var(--cor4);
 }
 
 nav {
@@ -58,8 +59,9 @@ nav ul li a {
     padding: 10px;
     background-color: #09496497;
     text-align: center;
-    color: white;
-    border-top: 2px solid #EBE4F4;
+    color: var(--cor4);
+    border-top: 0.5px solid var(--cor4);
+    border-bottom: 0.5px solid var(--cor4) ;
     transition: 0.5s;
 }
 
@@ -84,7 +86,8 @@ nav ul li a:hover {
 }
 
 .dropdown-menu li a:hover {
-    background-color: #4383f27c;
+    /* background-color: #4383f27c; */
+    background-color: var(--cor2);
     color: white;
 }
 
@@ -146,7 +149,7 @@ nav ul li a:hover {
         color: white;
         /* border-radius: 5px; */
         text-shadow: 2px 5px 10px #ffffff;
-        border-bottom: 2px solid #006794;
+        /* border-bottom: 2px solid #006794; */
     }
 
     .dropdown-menu {

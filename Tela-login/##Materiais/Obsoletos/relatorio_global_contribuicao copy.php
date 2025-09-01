@@ -20,7 +20,6 @@ require_once '../includes/header.php';
 
     <link rel="stylesheet" href="../assets/css/segmentation/globals.css">
     <link rel="stylesheet" href="../assets/css/segmentation/layout-tables.css">
-    <!-- <link rel="stylesheet" href="../assets/css/segmentation/tabela-relatorio-contribuicao.css"> -->
     <link rel="stylesheet" href="../assets/css/segmentation/relatorio-contribuicao.css">
     <script src="../assets/js/utils.js" defer></script>
     <script src="../assets/js/scripts.js" defer></script>
@@ -32,7 +31,6 @@ require_once '../includes/header.php';
         <h2>Relatório Global de Contribuições</h2>
 
         <?php if (!empty($contribuicoes)): ?>
-
             <div class="container">
 
                 <table>
@@ -42,7 +40,6 @@ require_once '../includes/header.php';
                     <thead>
                         <tr>
                             <th>Contribuição</th>
-                            <th>Descrição</th>
                             <?php foreach ($colunas as $coluna): ?>
                                 <th><?= htmlspecialchars($coluna) ?></th>
                             <?php endforeach; ?>
@@ -52,17 +49,15 @@ require_once '../includes/header.php';
                         <?php foreach ($contribuicoes as $c): ?>
                             <tr>
                                 <td><?= htmlspecialchars($c['nome']); ?></td>
-                                <td><?= htmlspecialchars($c['descricao']) ?></td>
                                 <?php
                                 $valorDividido = $c['valor'] / count($colunas);
                                 foreach ($colunas as $_): ?>
                                     <td><?= formatarValor($valorDividido); ?></td>
                                 <?php endforeach; ?>
                             </tr>
-
                         <?php endforeach; ?>
                         <tr class="subTotal">
-                            <td colspan="2">Sub-Total</td>
+                            <td>Total</td>
                             <?php
                             $totalDividido = $total / count($colunas);
                             foreach ($colunas as $_): ?>
@@ -72,8 +67,8 @@ require_once '../includes/header.php';
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="<?= 2 + count($colunas) ?>">
-                                <p><strong>Total Geral:</strong> <?= formatarValor($total); ?></p>
+                            <td colspan="<?= 1 + count($colunas) ?>">
+                                <strong>Total Geral:</strong> <?= formatarValor($total); ?>
                             </td>
                         </tr>
                     </tfoot>
@@ -82,7 +77,7 @@ require_once '../includes/header.php';
 
                 <div class="no-print">
                     <button title="Imprimir Relatório" class="button-icon" onclick="imprimirLista()">🖨️</button>
-                    <button title="Fechar Relatório" class="button-icon" onclick="fecharRelatorio()">❌</button>
+                    <button title="Fechar Relatório" class="button-icon" onclick="fecharRelatorio()">❌</button>    
                 </div>
             </div>
         <?php else: ?>

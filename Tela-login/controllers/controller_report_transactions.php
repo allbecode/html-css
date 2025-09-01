@@ -1,10 +1,14 @@
 <?php
-
+require_once '../acsses_control/includes/auth.php';
+require_once '../acsses_control/includes/session.php';
+require_once '../acsses_control/includes/functions.php';
 require_once '../acsses_control/includes/db.php';
 require_once '../includes/functions.php';
-require_once '../acsses_control/includes/functions.php';
 
-$usuario_id = getUsuarioId();
+// Garante que o usuário está logado
+verificaUsuarioLogado();
+
+$usuarioId = $_SESSION['usuario_id'] ?? $_SESSION['id'] ?? null; // Captura o ID do usuário logado
 
 $receitas = [];
 $despesas = [];
@@ -22,7 +26,7 @@ $sql = "SELECT * FROM transacoes
         ORDER BY data_vencimento ASC";
 
 $stmt = $pdo->prepare($sql);
-$stmt->bindParam(':usuario_id', $usuario_id, PDO::PARAM_INT);
+$stmt->bindParam(':usuario_id', $usuarioId, PDO::PARAM_INT);
 $stmt->bindParam(':mes', $mes);
 $stmt->bindParam(':ano', $ano);
 $stmt->execute();

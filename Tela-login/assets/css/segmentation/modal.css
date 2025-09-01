@@ -1,0 +1,137 @@
+
+/* Overlay que cobre a tela */
+.modal {
+  display: none; /* escondido por padrão */
+  position: fixed; /* fixo na tela */
+  z-index: 1000; /* acima de tudo */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* se precisar rolar */
+  background-color: rgba(0, 0, 0, 0.5); /* fundo escuro semi-transparente */
+}
+
+/* Conteúdo central do modal */
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto; /* centralizar vertical/horizontal */
+  padding: 20px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 900px; /* largura máxima */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.button-modal {
+  background: none;
+  font-family: var(--font-principal);
+  color: var(--cor1);
+  border: none;
+  box-sizing: border-box;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.button-modal:hover {
+  border: none;
+  font-weight: 600;
+}
+
+/* Botão fechar */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #000;
+}
+
+
+/* Animação opcional */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media screen and (min-width: 768px) {
+ 
+  .modal-content {
+    background: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    max-width: 70%;
+    width: 100%;
+    display: flex;
+    gap: 20px;
+  }
+
+  .form-grid {
+    flex: 1;
+  }
+
+  .grid-2cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+
+  .form-grid label {
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 5px;
+    /* font-weight: 500; */
+  }
+
+  .form-grid input,
+  .form-grid select,
+  .form-grid textarea {
+    width: 100%;
+    padding: 6px 8px;
+    font-size: 0.9rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+
+  .form-grid textarea {
+    min-height: 60px;
+    resize: vertical;
+  }
+
+  .full-width {
+    grid-column: span 2;
+  }
+
+  .form-actions {
+    margin-top: 15px;
+    text-align: right;
+  }
+
+  .historico {
+    flex: 1;
+    max-height: 70vh;
+    overflow-y: auto;
+    border-left: 1px solid #ccc;
+    padding-left: 15px;
+  }
+
+  .historico h3 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+  }
+
+
+}

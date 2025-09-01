@@ -54,7 +54,7 @@ require_once '../controllers/controller_contribuicoes.php';
                 <input type="number" name="ano" id="ano" value="<?= $ano ?>" required>
                 <label for="tipo_contribuicao">Tipo de Contribuição:</label>
                 <select id="tipo_contribuicao" name="tipo_contribuicao" required>
-                    <option value="dizimo" <?= ($tipoSelecionado == 'dizimo') ? 'selected' : '' ?>>Dízimo</option>
+                    <option value="dízimo" <?= ($tipoSelecionado == 'dízimo') ? 'selected' : '' ?>>Dízimo</option>
                     <option value="oferta" <?= ($tipoSelecionado == 'oferta') ? 'selected' : '' ?>>Oferta</option>
                 </select>
             </form>
@@ -69,10 +69,10 @@ require_once '../controllers/controller_contribuicoes.php';
                 </div>
             <?php else : ?>
 
-                <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && in_array($_POST['tipo_contribuicao'], ['dizimo', 'oferta'])):
+                <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && in_array($_POST['tipo_contribuicao'], ['dízimo', 'oferta'])):
                     $tipoSelecionado = $_POST['tipo_contribuicao'];
                     $nomeContribuicao = ucfirst($tipoSelecionado);
-                    $valorSugerido = $tipoSelecionado === 'dizimo' ? $valorRestanteDizimo : $valorRestanteOferta;
+                    $valorSugerido = $tipoSelecionado === 'dízimo' ? $valorRestanteDizimo : $valorRestanteOferta;
                 ?>
                     <h2>Histórico de Contribuições - <?= $nomeContribuicao ?> - <?php echo str_pad($mes, 2, '0', STR_PAD_LEFT) . "/" . $ano; ?></h2>
                     <div class="container">
@@ -150,7 +150,7 @@ require_once '../controllers/controller_contribuicoes.php';
                             </a>
                         <?php endif; ?>
                     </div>
-                    <?php if ($valorSugerido <= 0 && $tipoSelecionado === 'dizimo'): ?>
+                    <?php if ($valorSugerido <= 0 && $tipoSelecionado === 'dízimo'): ?>
                         <hr>
                         <p class="center"><strong>⚠️ Você já atingiu o limite de 10% para <?= $nomeContribuicao ?>s neste mês.</strong></p>
                         <hr>

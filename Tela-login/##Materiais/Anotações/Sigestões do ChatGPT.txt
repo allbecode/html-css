@@ -38,7 +38,9 @@ Nome, Sobrenome, Data de Nascimento, Sexo, Endereço, Telefone, email, Estado Ci
 
 ----------------------------------------------------------
 
-SQL TABELA USUARIOS
+
+<--------- SQL TABELA USUARIOS ----------------------------------->
+
 
 CREATE TABLE usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -55,7 +57,7 @@ CREATE TABLE usuarios (
     token_expira DATETIME DEFAULT NULL
 );
 
-SQL TABELA TRANSACOES
+<--------- SQL TABELA TRANSACOES --------------------------------->
 
 CREATE TABLE IF NOT EXISTS transacoes (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -78,8 +80,8 @@ CREATE TABLE IF NOT EXISTS transacoes (
 * O FOREIGN KEY com ON DELETE CASCADE garante que, ao excluir um usuário, suas transações também sejam removidas.
 ===========================================================
 
+<--------- SQL TABELA LOGS_ACESSO -------------------------------->
 
-SQL TABELA LOGS_ACESSO
 
 CREATE TABLE logs_acesso (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -89,6 +91,54 @@ CREATE TABLE logs_acesso (
     alvo VARCHAR(255),
     data_hora DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+<--------- TRANSFERIR A BASE DE DADOS ANTIGA PARA A NOVA --------->
+
+
+INSERT INTO master.transacoes (usuario_id, nome, data_vencimento, valor, tipo, ano, mes, pago, forma_pagamento, descricao, data_registro, base_contribuicao)
+SELECT 1, nome, data_vencimento, valor, tipo, ano, mes, pago, forma_pagamento, descricao, data_registro, base_contribuicao
+FROM financeiro.transacoes;
+
+
+<--------- TABELA CARROS ----------------------------------------->
+
+CREATE TABLE carros (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NOT NULL,
+    marca VARCHAR(100) NOT NULL,
+    modelo VARCHAR(100) NOT NULL,
+    ano YEAR NOT NULL,
+    placa VARCHAR(10) NOT NULL,
+    renavan VARCHAR(20),
+    apelido VARCHAR(100),
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id)REFERENCES usuarios(id) ON DELETE CASCADE,
+    UNIQUE (usuario_id, placa ),
+    UNIQUE (usuario_id, renavan)
+);
+
+<--------- TABELA MANUTENCAO_CARRO ------------------------------->
+
+CREATE TABLE manutencoes_carro (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    carro_id INT NOT NULL,
+    usuario_id INT NOT NULL,
+    tipo VARCHAR(100) NOT NULL,        -- valores carregados via JSON
+    descricao TEXT,
+    data DATE NOT NULL,
+    km INT,
+    valor DECIMAL(10,2),
+    pago BOOLEAN DEFAULT 0,            -- 0 = Não Pago, 1 = Pago
+    proxima_manut_data DATE NULL,      -- próxima manutenção por data
+    proxima_manut_km INT NULL,         -- próxima manutenção por quilometragem
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (carro_id) REFERENCES carros(id) ON DELETE CASCADE,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
+);
+
+
+
+
 
 ----------------------------------------------------------
 
@@ -169,6 +219,53 @@ acsses_control
 |
 |
 /
+
+
+
+->Estrutura da tabela manutencoes
+
+* Já existe no banco ou precisamos criar?
+Sim.
+
+* Quais campos você imagina? (ex: id, usuario_id, carro_id, data, tipo, descricao, valor, km_atual, etc.).
+CREATE TABLE manutencoes_carro (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    carro_id INT NOT NULL,
+    usuario_id INT NOT NULL,
+    tipo VARCHAR(100) NOT NULL,        -- valores carregados via JSON
+    descricao TEXT,
+    data DATE NOT NULL,
+    km INT,
+    valor DECIMAL(10,2),
+    pago BOOLEAN DEFAULT 0,            -- 0 = Não Pago, 1 = Pago
+    proxima_manut_data DATE NULL,      -- próxima manutenção por data
+    proxima_manut_km INT NULL,         -- próxima manutenção por quilometragem
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (carro_id) REFERENCES carros(id) ON DELETE CASCADE,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
+);
+
+->Regras de negócio
+
+* Uma manutenção sempre pertence a um carro cadastrado?
+Sim.
+
+* Será possível registrar manutenção sem valor (ex: troca de óleo gratuita)?
+Sim.
+
+* Deseja controlar quilometragem e/ou próxima revisão?
+Sim.
+
+->Fluxo da página
+
+* Vai funcionar como o cadastro de carros: formulário + mensagens (sucesso/erro/alert)?
+Sim.
+
+* Quer que a página tenha listagem das manutenções do carro logo abaixo do formulário (como fizemos nas transações), ou prefere uma página separada só para listar/editar manutenções?
+Na realizade tive uma ideia, seria possível implementrmos uma forma de o usuário clicar dentro do card do carro na tela de cadastro de carros e uma tela seja apresentada com o histórico de as todas as manutenções realizadas no carro (individualmente), próximas manutenções basedas na kilometragem e/ou data e botão para inclusão para novas manutenções (+)? 
+
+O que você acha, podemos fazer assim?
+
 
 
 

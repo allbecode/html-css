@@ -10,6 +10,7 @@
     --cor2: #4384F2;
     --cor3: #D9E6FC;
     --cor4: #F2F7FA;
+    --cor5: #fff;
     --font-principal: Montserrat;
 }
 
@@ -201,14 +202,15 @@ footer>p>a:hover {
 /* Estilo para impressões */
 @media print {
 
-    * {
+    /* * {
         color: black !important;
-    }
+    } */
     
     /* Remove margens automáticas que alguns navegadores adicionam */
     body, html {
         margin: 0px;
         padding: 0px;
+        color: black;
     }
 
     /* Oculta cabeçalho, rodapé, menus e formulários */
@@ -217,6 +219,11 @@ footer>p>a:hover {
     .container-form p,
     .no-print {
         display: none !important;
+    }
+
+    footer {
+        color: #ccc !important;
+        font-size: 0.5rem !important;
     }
 
     @page {

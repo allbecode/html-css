@@ -15,6 +15,8 @@ verificaUsuarioLogado();
 
 $msg = '';
 $usuario = buscarUsuarioPorUsername($_SESSION['usuario']);
+$primeiro_nome = explode(' ', trim($_SESSION['nome'] ?? $_SESSION['usuario']))[0];
+
 
 if (isset($_SESSION['mensagem_sucesso'])) {
     echo "<div class='mensagem sucesso'>{$_SESSION['mensagem_sucesso']}</div>";
@@ -27,14 +29,18 @@ if (isset($_SESSION['mensagem_erro'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
     if (isset($_POST['atualizar_email'])) {
         $email = trim($_POST['email']);
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $msg = "Email inválido!";
-        } elseif (atualizarEmail($usuario['id'], $email)) {
-            $usuario['email'] = $email;
-            registrarOperacao('atualizou email', $usuario['username']);
-            $msg = "Email atualizado!";
+        } else {
+            $msg = atualizarEmail($usuario['id'], $email);
+            if ($msg === true) {
+                $usuario['email'] = $email;
+                registrarOperacao('atualizou email', $usuario['username']);
+                $msg = "<p style='color:green;'>E-mail atualizado com sucesso!</p>";
+            }
         }
     }
 
@@ -43,11 +49,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sobrenome = trim($_POST['sobrenome']);
         $data_nasc = $_POST['data_nascimento'];
         if (atualizarNomeCompleto($usuario['id'], $nome, $sobrenome, $data_nasc)) {
+            $_SESSION['nome'] = $nome;
             $usuario['nome'] = $nome;
             $usuario['sobrenome'] = $sobrenome;
             $usuario['data_nascimento'] = $data_nasc;
-            $msg = "Dados atualizados!";
             registrarOperacao('atualizou dados', $usuario['username']);
+            
+            header("Location: perfil.php");
+            exit;
+
+            $msg = 'Dados atualizados com sucesso!';
         }
     }
 
@@ -77,19 +88,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../../assets/css/segmentation/form-global.css">
     <link rel="stylesheet" href="../../assets/css/segmentation/layout-tables.css">
     <link rel="stylesheet" href="../assets/css/dashboard.css">
-    <!-- <link rel="stylesheet" href="../assets/css/login.css"> -->
 </head>
 
 <body>
     <main>
 
         <h2>Meu Perfil</h2>
-        
-        <p style="color:green;"><?= $msg ?></p>
+
+        <p><?= $msg ?></p>
 
         <div class="dashboard-container">
             <div class="dashboard-card dados">
-                 <h2><strong><?= $bemVindo ?>, <?php echo htmlspecialchars($primeiro_nome); ?>!</strong></h2>
+                <h1><?php echo saudacao($primeiro_nome)?></h1>
                 <p><strong>Nome:</strong> <?= htmlspecialchars($usuario['nome'] . " " . $usuario['sobrenome']) ?></p>
                 <p><strong>Usuário:</strong> <?= htmlspecialchars($usuario['username']) ?></p>
                 <p><strong>Tipo:</strong> <?= $usuario['tipo'] ?></p>

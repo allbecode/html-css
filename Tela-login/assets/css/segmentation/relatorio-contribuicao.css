@@ -20,7 +20,7 @@ caption p {
 
 .subTotal {
     border-top: 2px solid #063042;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 /* ----------------------------- */
@@ -34,12 +34,25 @@ caption p {
 
 @media print {
 
+    main {
+        font-size: 0.7rem;
+    }
+
+    table {
+        white-space: wrap;
+    }
+
+    th, td {
+        max-width: 180px;
+        overflow-wrap: break-word;
+    }
+
     caption {
         font-weight: inherit;
     }
 
     caption p {
-        font-size: 1em;
+        font-size: 1.3rem;
     }
 
 

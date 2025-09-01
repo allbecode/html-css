@@ -12,7 +12,7 @@ require_once '../includes/functions.php';
 
 $mesSelecionado = $_POST['mes'] ?? date('m');
 $anoSelecionado = $_POST['ano'] ?? date('Y');
-$tipoSelecionado = $_POST['tipo_contribuicao'] ?? 'dizimo';
+$tipoSelecionado = $_POST['tipo_contribuicao'] ?? 'dízimo';
 
 $totalReceitas = 0;
 $valorEsperadoDizimo = 0;

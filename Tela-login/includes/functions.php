@@ -41,6 +41,13 @@ function formatarMesEAno($mes, $ano) {
 }
 
 
+// helper central para problema com erro no htmlspecialchars
+function esc($v): string {
+    return htmlspecialchars((string)($v ?? ''), ENT_QUOTES, 'UTF-8');
+}
+
+
+
 // function isUsuarioLogado() {
 //     return isset($_SESSION['usuario']) && isset($_SESSION['usuario']['id']);
 // }

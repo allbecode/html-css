@@ -18,20 +18,32 @@ $mes = $_GET['mes'] ?? date('m');
 $ano = $_GET['ano'] ?? date('Y');
 
 // Buscar nome do usuário logado
-$stmt = $pdo->prepare("SELECT nome FROM usuarios WHERE id = :id");
+// $stmt = $pdo->prepare("SELECT nome FROM usuarios WHERE id = :id");
+// $stmt->execute(['id' => $usuarioId]);
+// $usuarioNome = $stmt->fetchColumn() ?: 'Usuário';
+
+// Buscar nome e sobrenome do usuário logado
+$stmt = $pdo->prepare("SELECT nome, sobrenome FROM usuarios WHERE id = :id");
 $stmt->execute(['id' => $usuarioId]);
-$usuarioNome = $stmt->fetchColumn() ?: 'Usuário';
+$usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Buscar primeiro dependente (se houver)
-$stmt = $pdo->prepare("SELECT nome FROM dependentes WHERE usuario_id = :usuario_id ORDER BY id ASC LIMIT 1");
-$stmt->execute(['usuario_id' => $usuarioId]);
-$dependenteNome = $stmt->fetchColumn(); // null se não houver
-
-// Monta array com os nomes das colunas
-$colunas = [$usuarioNome];
-if ($dependenteNome) {
-    $colunas[] = $dependenteNome;
+if ($usuario) {
+    // Se existir sobrenome, concatena, caso contrário exibe só o nome
+    $usuarioNome = $usuario['sobrenome'] 
+        ? $usuario['nome'] . ' ' . $usuario['sobrenome'] 
+        : $usuario['nome'];
+} else {
+    $usuarioNome = 'Usuário';
 }
+
+// Buscar todos os dependentes do usuário logado
+$stmt = $pdo->prepare("SELECT nome FROM dependentes WHERE usuario_id = :usuario_id ORDER BY id ASC");
+$stmt->execute(['usuario_id' => $usuarioId]);
+$dependentes = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+// Monta array com os nomes das colunas (usuário + dependentes)
+$colunas = array_merge([$usuarioNome], $dependentes);
+
 
 // Buscar contribuições (agrupadas por nome)
 $sql = "SELECT nome, tipo, descricao, valor, data_vencimento 

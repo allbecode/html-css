@@ -1,4 +1,4 @@
-<?php
+<?php 
 require_once '../acsses_control/includes/functions.php';
 
 require_once '../acsses_control/includes/session.php';
@@ -12,7 +12,7 @@ verificaUsuarioLogado();
 $username = $_SESSION['usuario'];
 $tipo = $_SESSION['tipo'];
 $primeiro_nome = explode(' ', trim($_SESSION['nome'] ?? $_SESSION['usuario']))[0];
-$bemVindo = (str_ends_with(strtolower($primeiro_nome), 'a')) ? 'Bem vinda' : 'Bem vindo';
+$bemVindo = (str_ends_with(strtolower($primeiro_nome),'a')) ? 'Bem vinda' : 'Bem vindo';
 ?>
 
 <!DOCTYPE html>
@@ -40,37 +40,28 @@ $bemVindo = (str_ends_with(strtolower($primeiro_nome), 'a')) ? 'Bem vinda' : 'Be
 
         <nav id="itens">
             <ul id="nav-links">
+                <li><a href="../pages/index.php">Início</a></li>
                 <li class="dropdown">
-                    <a href="#">Financeiro</a>
+                    <a href="#">Nova Transação ▾</a>
                     <ul class="dropdown-menu">
-                        <li><a href="../pages/index.php">Início</a></li>
                         <li><a href="../pages/form_add_transaction.php">Adicionar Transação</a></li>
                         <li><a href="../pages/add_contribuicoes.php">Contribuições</a></li>
-                        <li><a href="../pages/list_transactions.php">Lista de Transações</a></li>
-                        <li><a href="../reports/report_transactions.php">Relatório</a></li>
-                        <li><a href="../pages/lista-de-compras.php">Lista de compras</a></li>
+                    </ul>
+                </li>
+                <li><a href="../pages/list_transactions.php">Lista de Transações</a></li>
+                <li><a href="../reports/report_transactions.php">Relatório</a></li>
+                <li><a href="../pages/lista-de-compras.php">Lista de compras</a></li>
+                <!-- Sub-menu usuário -->
+                <li class="dropdown">
+                    <!-- Futuro avatar -->
+                        <i class="fa-solid fa-user" id="menu-user"></i>
+                    <ul class="dropdown-menu">
+                        <br><p>Olá <strong><?php echo htmlspecialchars($primeiro_nome); ?></strong></p><br> <!-- Carregar o nome do usuário logado -->
+                        <li><a href="../acsses_control/pages/perfil.php">Meu Perfil</a></li>
+                        <li><a href="../acsses_control/pages/logout.php">Sair</a></li>
+                    </ul>
                 </li>
             </ul>
-
-            <li class="dropdown">
-                <a href="#">Manutenção do Carro</a>
-                <ul class="dropdown-menu">
-                    <li><a href="../pages/cadastro_carros.php">Cadastrar Carro</a></li>
-                    <li><a href="../actions/add_manutencao.php">Cadastrar Manutenção</a></li>
-                </ul>
-            </li>
-
-            <!-- Sub-menu usuário -->
-            <li class="dropdown">
-                <!-- Futuro avatar -->
-                <i class="fa-solid fa-user" id="menu-user"></i>
-                <ul class="dropdown-menu">
-                    <br>
-                    <p>Olá <strong><?php echo htmlspecialchars($primeiro_nome); ?></strong></p><br>
-                    <li><a href="../acsses_control/pages/perfil.php">Meu Perfil</a></li>
-                    <li><a href="../acsses_control/pages/logout.php">Sair</a></li>
-                </ul>
-            </li>
         </nav>
     </header>
 </body>

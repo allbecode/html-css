@@ -37,5 +37,6 @@ if (!$mes || !$ano || !$valor || !$nome) {
 
 // Carrega o nome do usuário e do dependente (se houver)
 $dadosUsuario  = buscarUsuarioEDependente($usuarioId);
-$nomeUsuario   = $dadosUsuario['usuario'] ?? 'Usuário';
-$nomeDependente = $dadosUsuario['dependente'] ?? null; // Pode ser null
+$nomeUsuario   = $dadosUsuario['usuario'] ?? 'Usuario';
+$dependentes = $dadosUsuario['dependentes'] ?? []; // Pode ser null
+

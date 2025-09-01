@@ -1,13 +1,16 @@
 <?php 
-
+require_once '../acsses_control/includes/auth.php';
+require_once '../acsses_control/includes/session.php';
+require_once '../acsses_control/includes/functions.php';
 require_once '../acsses_control/includes/db.php';
 require_once '../includes/functions.php';
-require_once '../acsses_control/includes/functions.php';
-session_start(); // Garante que a sessão está ativa
+
+// Garante que o usuário está logado
+verificaUsuarioLogado();
 
 $anoAtual = date('Y');
 
-$usuarioId = $_SESSION['usuario_id']; // Captura o ID do usuário logado
+$usuarioId = $_SESSION['usuario_id'] ?? $_SESSION['id'] ?? null; // Captura o ID do usuário logado
 
 $condicoes = ["usuario_id = :usuario_id"]; // Filtro obrigatório
 $params = [':usuario_id' => $usuarioId];

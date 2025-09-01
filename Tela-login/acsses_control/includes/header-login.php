@@ -10,8 +10,9 @@ verificaUsuarioLogado();
 
 $username = $_SESSION['usuario'];
 $tipo = $_SESSION['tipo'];
-$primeiro_nome = explode(' ', trim($_SESSION['nome'] ?? $_SESSION['usuario']))[0];
-$bemVindo = (str_ends_with(strtolower($primeiro_nome), 'a')) ? 'Bem vinda' : 'Bem vindo';
+
+// $primeiro_nome = explode(' ', trim($_SESSION['nome'] ?? $_SESSION['usuario']))[0];
+// $bemVindo = (str_ends_with(strtolower($primeiro_nome), 'a')) ? 'Bem vinda' : 'Bem vindo';
 
 ?>
 

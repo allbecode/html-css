@@ -40,6 +40,10 @@ $carros = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="../assets/css/segmentation/carros.css">
     <link rel="stylesheet" href="../assets/css/segmentation/modal.css">
 
+    <style>
+
+    </style>
+
     <script src="../assets//js//script-manutencoes.js" defer></script>
 
 </head>
@@ -119,7 +123,7 @@ $carros = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                         <input type="text" name="apelido" value="<?= esc($carro['apelido']) ?>">
                                     </td>
                                     <td data-label="Ações">
-                                        <input type="hidden" name="id" value="<?= $c['id'] ?>">
+                                        <input type="hidden" name="id" value="<?= $carro['id'] ?>">
                                         <button class="button-icon" type="submit" title="Salvar">💾</button>
                                         <a class="button-icon" href="cadastro_carros.php" title="Cancelar">❌</a>
                                     </td>
@@ -136,13 +140,13 @@ $carros = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <td data-label="Apelido"><?= esc($carro['apelido']) ?></td>
                                 <td data-label="Ações">
                                     <a class="button-icon" href="cadastro_carros.php?edit=<?= $carro['id'] ?>" title="Editar">✏️</a>
+                                   
                                     <a class="button-icon" href="../actions/delete_carro.php?id=<?= $carro['id'] ?>"
                                         onclick="return confirm('Excluir este carro?')" title="Excluir">🗑️</a>
 
-
-                                    <!-- Botão dentro do card do carro -->
-                                    <button class="btn-manutencoes button-icon" data-carro-id="<?= $carro['id'] ?>" title="Manutenções">🔧️</button>
-
+                                    <a class="button-icon"
+                                        href="../pages/list_manutencoes.php?carro_id=<?= $carro['id'] ?>"
+                                        title="Manutenções">🔧️</a>
                                 </td>
                             </tr>
                         <?php endif; ?>
@@ -152,166 +156,6 @@ $carros = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </table>
         </div>
     </main>
-
-    <!-- Modal de cadastro de manutenção -->
-    <div id="modalManutencoes" class="modal">
-
-        <div class="modal-content">
-
-            <span class="close" id="closeModalNova">&times;</span>
-
-            <h3>Manutenções do Carro</h3>
-
-            <!-- <span class="close" id="closeModalNova">&times;</span> -->
-
-            <!-- Formulário -->
-            <form id="formManutencao" class="form-grid">
-                <div class="grid-2cols">
-
-
-
-                    <!-- Linha 1 -->
-
-                    <input type="hidden" name="carro_id" id="carro_id">
-
-                    <div>
-                        <label for="data">Data:</label>
-                        <input type="date" name="data" id="data" required>
-                    </div>
-
-                    <div>
-                        <label for="tipo">Tipo:</label>
-                        <select name="tipo" id="tipo_manutencao" required></select>
-                    </div>
-
-                    <!-- Linha 2 -->
-
-                    <div>
-                        <label for="km">KM:</label>
-                        <input type="number" name="km" id="km">
-                    </div>
-
-                    <div>
-                        <label for="valor">Valor:</label>
-                        <input type="number" step="0.01" name="valor" id="valor">
-                    </div>
-
-                    <!-- Linha 3 -->
-
-                    <div>
-                        <label for="proxima_manut_data">Próxima manut. (Data):</label>
-                        <input type="date" name="proxima_manut_data" id="proxima_manut_data">
-                    </div>
-
-                    <div>
-                        <label for="proxima_manut_km">Próxima manut. (KM):</label>
-                        <input type="number" name="proxima_manut_km" id="proxima_manut_km">
-                    </div>
-
-                    <!-- Linha 4 -->
-
-                    <div>
-                        <label for="pago">Pago:</label>
-                        <select name="pago" id="pago">
-                            <option value="0">Não</option>
-                            <option value="1">Sim</option>
-                        </select>
-                    </div>
-
-                    <div class="full-width">
-                        <label for="descricao">Descrição:</label>
-                        <textarea name="descricao" id="descricao"></textarea>
-                    </div>
-                </div>
-
-                <!-- Botão -->
-
-                <div class="form-actions">
-                    <button type="submit">Salvar</button>
-                </div>
-            </form>
-
-            <!-- Histórico -->
-
-            <div class="hitorico">
-
-                <h3>Histórico de Manutenções</h3>
-
-                <div id="listaManutencoes">
-                    <!-- Lista/Tabela de histórico renderizada dinamicamente -->
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Modal de edição -->
-    <div id="modalEditarManutencao" class="modal">
-
-        <div class="modal-content">
-
-            <span class="close" id="closeModalEditar">&times;</span>
-
-            <h2>Editar Manutenção</h2>
-
-            <!-- Formulário -->
-
-            <form id="formEditarManutencao" class="form-grid">
-                <div class="grid-2cols">
-                    <input type="hidden" name="id" id="editar_id">
-
-                    <!-- Linha 1 -->
-                    <div>
-                        <label for="editar_data">Data</label>
-                        <input type="date" name="data" id="editar_data" required>
-
-                        <label for="editar_tipo">Tipo</label>
-                        <select name="tipo" id="editar_tipo" required></select>
-                    </div>
-
-                    <!-- Linha 2 -->
-                    <div>
-                        <label for="editar_km">Km</label>
-                        <input type="number" name="km" id="editar_km">
-
-                        <label for="editar_valor">Valor</label>
-                        <input type="number" step="0.01" name="valor" id="editar_valor">
-                    </div>
-
-                    <div>
-                        <label for="editar_proxima_data">Próxima Manutenção (Data)</label>
-                        <input type="date" name="proxima_manut_data" id="editar_proxima_data">
-
-                        <label for="proxima_manut_km">Próxima Manutenção (Km)</label>
-                        <input type="number" name="proxima_manut_km" id="editar_proxima_km">
-                    </div>
-
-                    <!-- Linha 4 -->
-                    <div>
-                        <label for="editar_pago">Pago?</label>
-                        <select name="pago" id="editar_pago">
-                            <option value="0">Não</option>
-                            <option value="1">Sim</option>
-                        </select>
-                    </div>
-
-                    <div class="full-width">
-                        <label for="editar_descricao">Descrição</label>
-                        <textarea name="descricao" id="editar_descricao"></textarea>
-                    </div>
-                </div>
-
-                <!-- Botão -->
-                <div class="form-actions">
-                    <button type="submit">Salvar Alterações</button>
-                    <a href="" ></a>
-                </div>
-            </form>
-
-        </div>
-    </div>
-
-
 
     <?php include '../includes/footer.php'; ?>
 

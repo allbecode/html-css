@@ -31,6 +31,9 @@ Deseja isso?
 --> Se quiser, posso te ajudar a criar a tabela dependentes e o formulário para cadastrar dependentes associados ao usuário. Deseja isso agora?
 
 
+Quer que eu prepare também um alerta estilizado no modal (igual ao de edição) em vez de usar alert() para as mensagens de exclusão?
+
+
 ----------------------------------------------------------
 Dados do usuário:
 
@@ -136,6 +139,24 @@ CREATE TABLE manutencoes_carro (
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );
 
+
+DESCRIBE manutencoes_carro; (mostra a estrutura da tabela no MySQL)
+
+
+Field               Type            Null    Key     Default     Extra
+id	                int(11)	        NO	    PRI	    NULL	    auto_increment	
+carro_id	        int(11)	        NO	    MUL	    NULL		
+usuario_id	        int(11)	        NO	    MUL	    NULL		
+tipo_id	            int(11)	        NO		NULL		
+descricao	        text	        YES		NULL		
+data	            date	        NO		NULL		
+km	                int(11)	        YES		NULL		
+valor	            decimal(10,2)	YES		NULL		
+local	            varchar(100)	YES		NULL		
+pago	            tinyint(1)	    YES		0		
+proxima_manut_data	date	        YES		NULL		
+proxima_manut_km	int(11)	        YES		NULL		
+criado_em	        timestamp	    NO		current_timestamp()		
 
 
 

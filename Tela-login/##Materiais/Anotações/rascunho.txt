@@ -1,0 +1,61 @@
+Vamnos alterar novamente a modelagem da apresentação das manutenções. Decidi criar uma página para listar as manutenções realizadas, mas não haverá somente a lista das manutenções, nesta página o nome do carro será exibido no cabeçalho e logo abaixo o caminho percorrido pelo usuário para que o mesmo posso se localizar dentro do sistema. Haverá um menu lateral contendo as opções histórico, nova mautenção, lembretes, veículos, relatórios. Haverá também um card contendo um resumo dos custos com o veículo no último mês e no mês corrente.
+
+Vamos começar com esta primeira página.
+
+
+└───
+
+=======================================================================
+
+
+// Adicionar manutenção ao registro financeiro
+
+        $ano = (int)date('Y', strtotime($dados['data']));
+        $mes = (int)date('n', strtotime($dados['data']));
+        $dataRegistro = date('Y-m-d');
+
+        $dadosFinanceiros = [
+            'usuario_id'        => $usuarioId,
+            'nome'              => 'Manutenção do Carro',
+            'data_vencimento'   => !empty($dados['data']) ? $dados['data'] : null,
+            'valor'             => isset($dados['valor']) && $dados['valor'] !== '' ? (float)$dados['valor'] : null,
+            'tipo'              => 'Despesa',
+            'forma_pagamento'   => 'PIX',
+            'descricao'         => !empty($dados['descricao']) ? $dados['descricao'] : null,
+            'ano'               => $ano,
+            'mes'               => $mes,
+            'pago'              => isset($dados['pago']) ? 1 : 0,
+            'data_registro'     => $dataRegistro,
+            'base_contribuicao' => 0,
+        ];
+
+        $stmt = $pdo->prepare("
+            INSERT INTO transacoes (
+                usuario_id,
+                nome, 
+                data_vencimento, 
+                valor, 
+                tipo, 
+                forma_pagamento, 
+                descricao, 
+                ano, 
+                mes, 
+                pago, 
+                data_registro,
+                base_contribuicao
+            ) VALUES (
+                :usuario_id,
+                :nome, 
+                :data_vencimento, 
+                :valor, 
+                :tipo, 
+                :forma_pagamento, 
+                :descricao, 
+                :ano, 
+                :mes, 
+                :pago, 
+                :data_registro,
+                :base_contribuicao
+            )
+        ");
+        $stmt->execute($dadosFinanceiros);

@@ -1,0 +1,484 @@
+/* =============================
+   layout_list_manutencoes.css
+   Estilos principais para a página
+   de listagem de manutenções
+   ============================= */
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* font-family: Arial, Helvetica, sans-serif; */
+    /* background-color: #f8f9fa; */
+    /* color: #333; */
+    line-height: 1.4;
+}
+
+/* ====== CABEÇALHO ====== */
+.page-header {
+    position: sticky;
+    top: 0;
+
+    background: #466380;
+    color: #fff;
+    padding: 1rem;
+}
+
+.car-title {
+    font-size: 1.6rem;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* ====== BREADCRUMB ====== */
+.breadcrumb {
+    font-size: 0.9rem;
+    color: #8d8d8d;
+    margin: 0.8rem 0;
+}
+
+.breadcrumb span {
+    color: #c9c9c9;
+}
+
+/* ====== LAYOUT GERAL ====== */
+.layout {
+    display: flex;
+    flex-direction: row;
+    min-height: calc(100vh - 100px);
+    /* menos o header */
+}
+
+/* ====== SIDEBAR ====== */
+/* .sidebar {
+    background: #34495e;
+    color: #fff;
+    min-width: 220px;
+    padding: 1rem;
+    flex-shrink: 0;
+}
+
+.sidebar nav ul {
+    list-style: none;
+}
+
+.sidebar nav ul li {
+    margin-bottom: 1rem;
+}
+
+.sidebar nav ul li a {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.sidebar nav ul li a:hover {
+    color: #1abc9c;
+} */
+
+
+
+/* ================================================================= */
+/* Sidebar base */
+.sidebar {
+  position: fixed;
+  top: 142px;
+  left: 0;
+  height: calc(100% - 142px);
+  width: 80px; /* largura reduzida por padrão */
+  background-color: #1e293b;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease;
+  overflow-x: hidden;
+  z-index: 1000;
+}
+
+/* Quando expandido */
+.sidebar.expanded {
+  width: 260px;
+}
+
+/* Botão toggle */
+.sidebar-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  cursor: pointer;
+  background-color: #334155;
+}
+.sidebar-toggle .arrow {
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+.sidebar.expanded .sidebar-toggle .arrow {
+  transform: rotate(180deg);
+}
+
+/* Menu */
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+}
+.menu li {
+  margin: 8px 0;
+}
+.menu a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  color: #fff;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.menu a:hover {
+  background-color: #475569;
+  border-radius: 8px;
+}
+
+/* Ícone sempre visível */
+.menu .icon {
+  font-size: 1.5rem;
+}
+
+/* Texto escondido quando colapsado */
+.menu .label {
+  opacity: 0;
+  visibility: hidden;
+  white-space: nowrap;
+  transition: opacity 0.2s, visibility 0.2s;
+}
+
+/* Exibir texto apenas no expandido */
+.sidebar.expanded .menu .label {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ================================================= */
+
+
+/* ====== CONTEÚDO PRINCIPAL ====== */
+.content {
+    flex: 1;
+    background: #fff;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    margin-top: 0;
+}
+
+/* ====== CARD RESUMO ====== */
+.sidebar-right {
+    min-width: 260px;
+    padding: 1rem;
+    background: #f4f6f7;
+
+    height: calc(100% - 142px);
+}
+
+.card-resumo {
+    margin-bottom: 10px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+.card-resumo h3 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.card-resumo p {
+    text-align: right;
+    margin-bottom: 0.6rem;
+    font-size: 0.95rem;
+}
+
+/* ====== TABELA MANUTENÇÕES ====== */
+
+/* === Tabela === */
+table,
+thead,
+tbody,
+th,
+td,
+tr {
+    display: block;
+}
+
+thead {
+    display: none;
+}
+
+tr {
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    padding: 1.5rem;
+    background: var(--cor5);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+td {
+    border: none;
+    padding: 0.4rem 0;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+}
+
+td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: var(--cor1);
+}
+
+.table-manutencoes {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.table-manutencoes th,
+.table-manutencoes td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+.table-manutencoes th {
+    background: #f0f0f0;
+    font-weight: 600;
+}
+
+.table-manutencoes tr:hover {
+    background: #f9f9f9;
+}
+
+/* ====== BOTÃO MENU MOBILE ====== */
+.mobile-menu-btn {
+    box-sizing: border-box;
+    border: none;
+    border-radius: 50%;
+    font-size: 30px;
+    margin: 0;
+    padding: 10px;
+    background: none;
+    color: var(--cor1);
+    cursor: pointer;
+}
+
+.mobile-menu-btn:hover {
+    box-sizing: border-box;
+    /* background-color: var(--cor3); */
+    border: none;
+    color: var(--cor1);
+    font-weight: 600;
+}
+
+.button-icon {
+    font-size: 20px;
+}
+
+
+/* ===== Modal =====
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2000;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px; right: 15px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.modal-content h2 {
+  margin-bottom: 15px;
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal-content input,
+.modal-content select,
+.modal-content textarea {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+}
+
+.modal-content .btn-submit {
+  background: #007BFF;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.modal-content .btn-submit:hover {
+  background: #0056b3; 
+}*/
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+
+
+/* =============================
+   MEDIA QUERIES
+   ============================= */
+
+/* ====== TELAS MENORES QUE 992px ====== */
+@media (max-width: 991px) {
+    .layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        display: none;
+        /* Oculta sidebar no mobile */
+    }
+
+    .sidebar-right {
+        display: none;
+        /* Oculta card resumo no mobile */
+    }
+
+    .content {
+        border: none;
+        padding: 1rem;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .mobile-menu-btn {
+        display: block; /* Mostra botão menu */
+        width: 45px;
+        /* margin: auto; */
+    }
+
+    .menu-link {
+        display: block;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .menu-link:hover {
+        background-color: var(--cor3);
+        color: var(--cor1);
+        font-weight: 600;
+    }
+
+    .breadcrumb {
+        text-align: center;
+        margin: 0.5rem 0 1rem;
+    }
+
+    /* Tabela responsiva no mobile */
+    .table-manutencoes {
+        font-size: 0.85rem;
+        overflow-x: auto;
+    }
+
+    .table-manutencoes th,
+    .table-manutencoes td {
+        padding: 0.5rem;
+    }
+}
+
+/* ====== TELAS GRANDES (DESKTOP ≥992px) ====== */
+@media (min-width: 992px) {
+    .layout {
+        flex-direction: row;
+    }
+
+    .car-title {
+        text-align: left;
+    }
+
+    .sidebar {
+        display: block;
+    }
+
+    .sidebar-right {
+        display: block;
+
+        position: fixed;
+        top: 142px;
+        right: 0;
+    }
+
+    .content {
+        /* margin: 0 1rem; */
+        background: var(--cor5);
+
+        margin-left: 80px; /* mesma largura do menu colapsado */
+        margin-top: 0;
+        /* padding: 20px; */
+        transition: margin-left 0.3s ease;
+    }
+
+    /* Quando o menu expande */
+    .sidebar.expanded ~ .content {
+        margin-left: 260px; /* mesma largura do menu expandido */
+    }
+
+    .menu-link {
+        display: block;
+    }
+
+    .mobile-menu-container {
+        display: none;
+    }
+
+    .manutencoes-container {
+        /* background-color: red; */
+        margin-left: 50px;
+        margin-right: 490px;
+    }
+}

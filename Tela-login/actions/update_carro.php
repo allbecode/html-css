@@ -12,19 +12,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usuarioId = $_SESSION['usuario_id'];
     $id = $_POST['id'] ?? null;
 
-    // if (!$id) {
-    //     $_SESSION['carro_mensagem'] = "ID do carro não informado.";
-    //     $_SESSION['carro_tipo'] = "error";
-    //     header("Location: ../pages/cadastro_carros.php");
-    //     exit;
-    // }
+    if (!$id) {
+        $_SESSION['carro_mensagem'] = "ID do carro não informado.";
+        $_SESSION['carro_tipo'] = "error";
+        header("Location: ../pages/cadastro_carros.php");
+        exit;
+    }
 
     $marca   = trim($_POST['marca']);
     $modelo  = trim($_POST['modelo']);
     $ano     = (int) $_POST['ano']; // garante inteiro
     $placa   = strtoupper(trim($_POST['placa']));
-    // $renavan = !empty($_POST['renavan']) ? trim($_POST['renavan']) : null;
-    // $apelido = !empty($_POST['apelido']) ? trim($_POST['apelido']) : null;
     $renavan = isset($_POST['renavan']) && $_POST['renavan'] !== '' ? trim($_POST['renavan']) : null;
     $apelido = isset($_POST['apelido']) && $_POST['apelido'] !== '' ? trim($_POST['apelido']) : null;
 
@@ -69,9 +67,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } catch (PDOException $e) {
         setAlert("Erro ao atualizar o carro: " . $e->getMessage(), 'error');
     }
-
-    // $_SESSION['carro_mensagem'] = $mensagem;
-    // $_SESSION['carro_tipo'] = $tipoMensagem;
 
     header("Location: ../pages/cadastro_carros.php");
     exit;

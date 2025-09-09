@@ -2,8 +2,8 @@
 
 function verificarDuplicidadeCarro(PDO $pdo, int $usuarioId, string $placa, ?string $renavan = null, ?int $carroId = null): array
 {
-    // $placa = strtoupper(trim($placa));
-    // $renavan = $renavan !== null ? trim($renavan) : null;
+    $placa = strtoupper(trim($placa));
+    $renavan = $renavan !== null ? trim($renavan) : null;
 
     try {
         // 1️⃣ Verifica duplicidade da placa para o próprio usuário

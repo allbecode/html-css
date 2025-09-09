@@ -1,74 +1,61 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require_once '../acsses_control/includes/db.php';
+require_once '../acsses_control/includes/session.php';
+require_once '../acsses_control/includes/auth.php';
 
-$id = $_POST['id'] ?? 0;
-$tipo = $_POST['tipo'] ?? '';
-$descricao = $_POST['descricao'] ?? '';
-$data = $_POST['data'] ?? '';
-$km = $_POST['km'] ?? null;
-$valor = $_POST['valor'] ?? null;
-$pago = $_POST['pago'] ?? 0;
-$proxima_data = $_POST['proxima_manut_data'] ?? null;
-$proxima_km = $_POST['proxima_manut_km'] ?? null;
+header('Content-Type: application/json; charset=utf-8');
 
-try {
-    $stmt = $pdo->prepare("UPDATE manutencoes_carro 
-        SET tipo=?, descricao=?, data=?, km=?, valor=?, pago=?, proxima_manut_data=?, proxima_manut_km=?
-        WHERE id=?");
-    $stmt->execute([$tipo, $descricao, $data, $km, $valor, $pago, $proxima_data, $proxima_km, $id]);
+verificaUsuarioLogado();
 
-    echo "success";
-} catch (Exception $e) {
-    echo "Erro: " . $e->getMessage();
+$usuarioId = $_SESSION['usuario_id'] ?? 0;
+$dados = $_POST;
+
+if (!isset($dados['id'], $dados['carro_id'])) {
+   echo json_encode(['status' => 'error', 'mensagem' => 'Parâmetros inválidos.']);
+    exit;
 }
 
-// require_once '../acsses_control/includes/db.php';
+$manutencaoId = (int)$dados['id'];
+$carroId = (int)$dados['carro_id'];
 
-// header('Content-Type: application/json');
+try {
+    $stmt = $pdo->prepare("
+        UPDATE manutencoes_carro
+        SET data = :data,
+            tipo_id = :tipo_id,
+            descricao = :descricao,
+            km = :km,
+            valor = :valor,
+            local = :local,
+            pago = :pago,
+            proxima_manut_data = :proxima_manut_data,
+            proxima_manut_km = :proxima_manut_km
+        WHERE id = :id AND carro_id = :carro_id AND usuario_id = :usuario_id
+    ");
 
-// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//     $id = intval($_POST['id']);
-//     $data = $_POST['data'] ?? null;
-//     $tipo = $_POST['tipo'] ?? null;
-//     $km = $_POST['km'] ?? null;
-//     $valor = $_POST['valor'] ?? null;
-//     $pago = $_POST['pago'] ?? 0;
-//     $proxima_manut_data = $_POST['proxima_manut_data'] ?? null;
-//     $proxima_manut_km = $_POST['proxima_manut_km'] ?? null;
-//     $descricao = $_POST['descricao'] ?? null;
+    // Normaliza valor opcionais para NULL
+    $dadosNormalizados = [
+        'id'                    => $manutencaoId,
+        'carro_id'              => $carroId,
+        'usuario_id'            => $usuarioId,
+        'tipo_id'               => $dados['tipo_id'] ?? null,
+        'data'                  => $dados['data'] ?? null,
+        'descricao'             => !empty($dados['descricao']) ? $dados['descricao']: null,
+        'km'                    => !empty($dados['km']) ? $dados['km'] : null,
+        'valor'                 => !empty($dados['valor']) ? $dados['valor'] : null,
+        'local'                 => !empty($dados['local']) ? $dados['local'] : null,
+        'pago'                  => isset($dados['pago']) ? 1 : 0,
+        'proxima_manut_data'    => !empty($dados['proxima_manut_data']) ? $dados['proxima_manut_data'] : null,
+        'proxima_manut_km'      => !empty($dados['proxima_manut_km']) ? $dados['proxima_manut_km'] : null,
+    ];
 
-//     try {
-//         $stmt = $pdo->prepare("
-//             UPDATE manutencoes_carro
-//             SET 
-//                 data = :data,
-//                 tipo = :tipo,
-//                 km = :km,
-//                 valor = :valor,
-//                 pago = :pago,
-//                 proxima_manut_data = :proxima_manut_data,
-//                 proxima_manut_km = :proxima_manut_km,
-//                 descricao = :descricao
-//             WHERE id = :id
-//         ");
+    $stmt->execute($dadosNormalizados);
 
-//         $stmt->execute([
-//             ':data' => $data,
-//             ':tipo' => $tipo,
-//             ':km' => $km,
-//             ':valor' => $valor,
-//             ':pago' => $pago,
-//             ':proxima_manut_data' => $proxima_manut_data,
-//             ':proxima_manut_km' => $proxima_manut_km,
-//             ':descricao' => $descricao,
-//             ':id' => $id
-//         ]);
-
-//         echo json_encode(["sucesso" => true]);
-//     } catch (Exception $e) {
-//         echo json_encode(["sucesso" => false, "mensagem" => $e->getMessage()]);
-//     }
-// } else {
-//     echo json_encode(["sucesso" => false, "mensagem" => "Método inválido"]);
-// }
-
+    echo json_encode(['status' => 'success', 'mensagem' => 'Manutenção atualizada com sucesso!']);
+} catch (Throwable $e) {
+    echo json_encode(['status' => 'error', 'mensagem' => 'Erro ao atualizar manutenção: ' . $e->getMessage()]);
+}

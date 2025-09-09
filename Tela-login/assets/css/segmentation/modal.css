@@ -1,137 +1,108 @@
-
-/* Overlay que cobre a tela */
+/* Modal overlay */
 .modal {
-  display: none; /* escondido por padrão */
-  position: fixed; /* fixo na tela */
-  z-index: 1000; /* acima de tudo */
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto; /* se precisar rolar */
-  background-color: rgba(0, 0, 0, 0.5); /* fundo escuro semi-transparente */
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
 }
 
-/* Conteúdo central do modal */
+/* Conteúdo central */
 .modal-content {
-  background-color: #fff;
-  margin: 10% auto; /* centralizar vertical/horizontal */
-  padding: 20px;
+  background: #fff;
   border-radius: 12px;
-  width: 90%;
-  max-width: 900px; /* largura máxima */
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-.button-modal {
-  background: none;
-  font-family: var(--font-principal);
-  color: var(--cor1);
-  border: none;
-  box-sizing: border-box;
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-.button-modal:hover {
-  border: none;
-  font-weight: 600;
+  padding: 1.5rem;
+  max-width: 800px;
+  width: 95%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  position: relative;
 }
 
 /* Botão fechar */
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+.modal-content .close,
+.modal-content .close-modal {
+  position: absolute;
+  top: 12px; right: 16px;
+  font-size: 2rem;
   cursor: pointer;
 }
 
-.close:hover {
-  color: #000;
+/* ===== Form ===== */
+.modal-content form {
+  display: grid;
+  gap: 1rem;
 }
 
-
-/* Animação opcional */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Cada label+campo em coluna */
+.modal-content label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  display: block;
 }
 
-@media screen and (min-width: 768px) {
- 
-  .modal-content {
-    background: #fff;
-    border-radius: 10px;
-    padding: 15px;
-    max-width: 70%;
-    width: 100%;
-    display: flex;
-    gap: 20px;
-  }
+.modal-content input,
+.modal-content select,
+.modal-content textarea {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+}
 
-  .form-grid {
-    flex: 1;
-  }
+/* Botão salvar */
+.modal-content button[type="submit"] {
+  grid-column: span 2; /* ocupa duas colunas em telas grandes */
+  padding: 0.6rem 1.2rem;
+  background: #2d89ef;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.modal-content button[type="submit"]:hover {
+  background: #1b5fbf;
+}
 
-  .grid-2cols {
-    display: grid;
+/* ===== Responsividade ===== */
+
+/* >= 768px → duas colunas */
+@media (min-width: 768px) {
+  .modal-content form {
     grid-template-columns: 1fr 1fr;
-    gap: 15px;
+    gap: 1rem 2rem;
   }
 
-  .form-grid label {
-    font-size: 0.9rem;
-    display: block;
-    margin-bottom: 5px;
-    /* font-weight: 500; */
+  .modal-content label {
+    margin-bottom: 0.4rem;
   }
 
-  .form-grid input,
-  .form-grid select,
-  .form-grid textarea {
-    width: 100%;
-    padding: 6px 8px;
-    font-size: 0.9rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-  }
-
-  .form-grid textarea {
-    min-height: 60px;
-    resize: vertical;
-  }
-
-  .full-width {
+  /* textarea ocupa as duas colunas */
+  .modal-content textarea {
     grid-column: span 2;
   }
+}
 
-  .form-actions {
-    margin-top: 15px;
-    text-align: right;
+/* < 768px → coluna única */
+@media (max-width: 767px) {
+  .modal-content {
+    max-width: 95%;
+    padding: 1rem;
   }
 
-  .historico {
-    flex: 1;
-    max-height: 70vh;
-    overflow-y: auto;
-    border-left: 1px solid #ccc;
-    padding-left: 15px;
+  .modal-content form {
+    grid-template-columns: 1fr;
   }
 
-  .historico h3 {
-    margin-top: 0;
-    font-size: 1.1rem;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 5px;
+  .modal-content button[type="submit"] {
+    grid-column: span 1;
   }
-
-
 }

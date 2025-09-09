@@ -56,7 +56,7 @@ $bemVindo = (str_ends_with(strtolower($primeiro_nome), 'a')) ? 'Bem vinda' : 'Be
                 <a href="#">Manutenção do Carro</a>
                 <ul class="dropdown-menu">
                     <li><a href="../pages/cadastro_carros.php">Cadastrar Carro</a></li>
-                    <li><a href="../actions/add_manutencao.php">Cadastrar Manutenção</a></li>
+                    <!-- <li><a href="../pages/list_manutencoes.php">Cadastrar Manutenção</a></li> -->
                 </ul>
             </li>
 

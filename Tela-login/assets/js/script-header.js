@@ -16,3 +16,19 @@ function clickMenu() {
     }
 }
 
+// Função para popular o badge-manutenção no header.php
+document.addEventListener("DOMContentLoaded", () => {
+  fetch("../actions/count_manutencoes.php")
+    .then(res => res.json())
+    .then(data => {
+      const badge = document.getElementById("badge-manutencao");
+      const vencidas = data.vencidas ?? 0;
+
+      badge.textContent = vencidas;
+
+      // Se preferir esconder o badge quando for 0:
+      badge.style.display = vencidas > 0 ? "inline-block" : "none";
+    })
+    .catch(err => console.error("Erro ao carregar badge:", err));
+});
+

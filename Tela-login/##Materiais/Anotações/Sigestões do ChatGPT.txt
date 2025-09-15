@@ -34,6 +34,10 @@ Deseja isso?
 Quer que eu prepare também um alerta estilizado no modal (igual ao de edição) em vez de usar alert() para as mensagens de exclusão?
 
 
+PÁGINA DE LEMBRETES
+Quer que eu prepare também a versão mobile desses cartões (responsividade com grid → lista vertical)
+
+
 ----------------------------------------------------------
 Dados do usuário:
 
@@ -139,6 +143,14 @@ CREATE TABLE manutencoes_carro (
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );
 
+ADIÇÃO DA COLUNA forma_pagamento_id -------------------------------------->
+
+ALTER TABLE manutencoes_carro 
+ADD COLUMN forma_pagamento_id INT NULL,
+ADD CONSTRAINT fk_forma_pagamento
+  FOREIGN KEY (forma_pagamento_id) REFERENCES forma_pagamentos(id)
+  ON DELETE SET NULL;
+
 
 DESCRIBE manutencoes_carro; (mostra a estrutura da tabela no MySQL)
 
@@ -158,8 +170,23 @@ proxima_manut_data	date	        YES		NULL
 proxima_manut_km	int(11)	        YES		NULL		
 criado_em	        timestamp	    NO		current_timestamp()		
 
+<------------------- TABELA FORMA_PAGAMENTO ------------------------------->
 
+CREATE TABLE forma_pagamento (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL
+);
 
+INSERT INTO forma_pagamento (nome)
+VALUES
+('Boleto Bancário'),
+('Cartão de Crédito'),
+('Cheque'),
+('Crédito em Conta'),
+('Débito Automático'),
+('Débito em Conta'),
+('Espécie'),
+('PIX');
 
 ----------------------------------------------------------
 

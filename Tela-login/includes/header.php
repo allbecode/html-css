@@ -27,6 +27,22 @@ $bemVindo = (str_ends_with(strtolower($primeiro_nome), 'a')) ? 'Bem vinda' : 'Be
 
     <script src="../assets/js/script-header.js" defer></script>
     <script src="https://kit.fontawesome.com/ba16269ee8.js" crossorigin="anonymous"></script>
+
+
+    <style>
+        /* Badge genérico */
+        .badge {
+            background: #e63946;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 2px 7px;
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+    </style>
+
 </head>
 
 <body onresize="mudouTamanho()">
@@ -41,9 +57,9 @@ $bemVindo = (str_ends_with(strtolower($primeiro_nome), 'a')) ? 'Bem vinda' : 'Be
         <nav id="itens">
             <ul id="nav-links">
                 <li class="dropdown">
-                    <a href="#">Financeiro</a>
+                    <a href="#">Home</a>
                     <ul class="dropdown-menu">
-                        <li><a href="../pages/index.php">Início</a></li>
+                        <li><a href="../pages/index.php">Financeiro</a></li>
                         <li><a href="../pages/form_add_transaction.php">Adicionar Transação</a></li>
                         <li><a href="../pages/add_contribuicoes.php">Contribuições</a></li>
                         <li><a href="../pages/list_transactions.php">Lista de Transações</a></li>
@@ -53,10 +69,12 @@ $bemVindo = (str_ends_with(strtolower($primeiro_nome), 'a')) ? 'Bem vinda' : 'Be
             </ul>
 
             <li class="dropdown">
-                <a href="#">Manutenção do Carro</a>
+                <a href="#">
+                    Manutenção do Carro
+                    <span class="badge" id="badge-manutencao"></span>
+                </a>
                 <ul class="dropdown-menu">
                     <li><a href="../pages/cadastro_carros.php">Cadastrar Carro</a></li>
-                    <!-- <li><a href="../pages/list_manutencoes.php">Cadastrar Manutenção</a></li> -->
                 </ul>
             </li>
 
@@ -68,7 +86,7 @@ $bemVindo = (str_ends_with(strtolower($primeiro_nome), 'a')) ? 'Bem vinda' : 'Be
                     <br>
                     <p>Olá <strong><?php echo htmlspecialchars($primeiro_nome); ?></strong></p><br>
                     <li><a href="../acsses_control/pages/perfil.php">Meu Perfil</a></li>
-                    <li><a href="../acsses_control/pages/logout.php">Sair</a></li>
+                    <li><a href="../acsses_control/pages/logout.php">Logout</a></li>
                 </ul>
             </li>
         </nav>

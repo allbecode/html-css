@@ -24,12 +24,15 @@ $carro = buscarCarroPorId($pdo, $carroId, $usuarioId);
 $manutencoes = buscarManutencoesPorCarro($pdo, $carroId, $usuarioId);
 $resumoCustos = calcularResumoCustos($pdo, $carroId, $usuarioId);
 
-// $editId = isset($_GET['edit']) ? (int)$_GET['edit'] : null;
-
 $stmt = $pdo->prepare("
-    SELECT m.*, t.nome AS tipo_nome
+    SELECT 
+        m.*, 
+        t.nome AS tipo_nome,
+        fp.id AS forma_pagamento_id,
+        fp.nome AS forma_pagamento_nome
     FROM manutencoes_carro m
     LEFT JOIN tipos_manutencao t ON m.tipo_id = t.id
+    LEFT JOIN forma_pagamento fp ON m.forma_pagamento_id = fp.id
     WHERE m.carro_id = :carro_id AND m.usuario_id = :usuario_id
     ORDER BY m.data DESC
 ");
@@ -38,6 +41,8 @@ $stmt->execute([
     'usuario_id' => $usuarioId
 ]);
 $manutencoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
 
 ?>
 
@@ -58,9 +63,7 @@ $manutencoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="../assets/css/segmentation/modal.css">
 
     <style>
-        .hidden {
-            display: none;
-        }
+       
     </style>
 
 
@@ -80,21 +83,6 @@ $manutencoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <div class="layout">
 
-        <!-- Sidebar Desktop -->
-        <!-- <aside class="sidebar">
-            <nav class="menu">
-                <a href="list_manutencoes.php?carro_id=<?= $carroId ?>" class="menu-link">Histórico</a>
-
-                <a href="#" class="menu-link abrir-modal-manutencao">➕ Nova Manutenção</a>
-
-                <a href="lembretes.php?carro_id=<?= $carroId ?>" class="menu-link">Lembretes</a>
-
-                <a href="../relatorios/index.php?carro_id=<?= $carroId ?>" class="menu-link">Relatórios</a>
-
-                <a href="../pages/cadastro_carros.php" class="menu-link">Veículos</a>
-            </nav>
-        </aside> -->
-
         <!-- Botão para expandir/colapsar -->
         <div id="sidebar" class="sidebar">
             <div class="sidebar-toggle" id="toggleSidebar">
@@ -109,14 +97,14 @@ $manutencoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </a>
                 </li>
                 <li>
-                    <a href="#" 
+                    <a href="#"
                         class="menu-link abrir-modal-manutencao">
                         <span class="icon">➕</span>
                         <span class="label">Nova Manutenção</span>
                     </a>
                 </li>
                 <li>
-                    <a href="list_manutencoes.php?carro_id=<?= $carroId ?>" class="menu-link">
+                    <a href="../pages/lembretes.php?carro_id=<?= $carroId?>" class="menu-link">
                         <span class="icon">⏱️</span>
                         <span class="label">Lembretes</span>
                     </a>
@@ -151,8 +139,6 @@ $manutencoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <nav id="mobileMenu" class="mobile-menu hidden">
                 <a href="list_manutencoes.php?carro_id=<?= $carroId ?>" class="menu-link">Histórico</a>
 
-                <!-- <a href="nova.php?carro_id=<?= $carroId ?>" class="menu-link">Nova manutenção</a> -->
-
                 <a href="#" class="menu-link abrir-modal-manutencao">Nova Manutenção</a>
 
                 <a href="lembretes.php?carro_id=<?= $carroId ?>" class="menu-link">Lembretes</a>
@@ -181,27 +167,32 @@ $manutencoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <tbody>
                         <?php if (!empty($manutencoes)): ?>
                             <?php foreach ($manutencoes as $m): ?>
+                                <?php
+                                // Linha extra de alerta
+                                echo alertManutencaoLinha($m['proxima_manut_data'], $m['tipo_nome']);
+                                ?>
                                 <tr>
                                     <td data-label="Data"><?= !empty($m['data']) ? date('d/m/Y', strtotime($m['data'])) : '—' ?></td>
 
                                     <td data-label="Serviço"><?= htmlspecialchars($m['tipo_nome']) ?></td>
 
-
                                     <td class="detalhes hidden" data-label="Valor"><?= isset($m['valor']) ? 'R$ ' . number_format((float)$m['valor'], 2, ',', '.') : '—' ?></td>
+
+                                    <td class="detalhes hidden" data-label="Forma de pagamento">
+                                        <?= htmlspecialchars($m['forma_pagamento_nome'] ?? '', ENT_QUOTES, 'UTF-8') ?>
+                                    </td>
 
                                     <td class="detalhes hidden" data-label="Odômetro"><?= isset($m['km']) ? number_format((float)$m['km'], 0, ',', '.') . ' km' : '—' ?></td>
 
-                                    <td class="detalhes hidden" data-label="Próxima Manutenção(data)"><?= !empty($m['proxima_manut_data']) ? date('d/m/Y', strtotime($m['proxima_manut_data'])) : '—' ?></td>
+                                    <td class="detalhes hidden <?= classAlertaColuna($m['proxima_manut_data'])?>" data-label="Próxima Manutenção(data)"><?= !empty($m['proxima_manut_data']) ? date('d/m/Y', strtotime($m['proxima_manut_data'])) : '—' ?></td>
 
-                                    <td class="detalhes hidden" data-label="Próxima Manutenção(km)"><?= isset($m['proxima_manut_km']) ? number_format((float)$m['proxima_manut_km'], 0, ',', '.') . ' km' : '—' ?></td>
+                                    <td class="detalhes hidden <?= classAlertaColuna($m['proxima_manut_data'])?>" data-label="Próxima Manutenção(km)"><?= isset($m['proxima_manut_km']) ? number_format((float)$m['proxima_manut_km'], 0, ',', '.') . ' km' : '—' ?></td>
 
                                     <td class="detalhes hidden" data-label="Local"><?= htmlspecialchars($m['local'] ?? '—') ?></td>
 
                                     <td class="detalhes hidden" data-label="Descrição"><?= htmlspecialchars($m['descricao'] ?? '—') ?></td>
 
                                     <td class="detalhes hidden" data-label="Pago ?"><?= isset($m['pago']) && $m['pago'] ? 'Sim' : 'Não' ?></td>
-
-
                                     <td>
                                         <!-- Botão para abrir modal -->
                                         <button class="button-icon edit-btn"
@@ -212,11 +203,13 @@ $manutencoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                             data-descricao="<?= esc($m['descricao']) ?>"
                                             data-km="<?= $m['km'] ?>"
                                             data-valor="<?= $m['valor'] ?>"
+                                            data-form-pgto="<?= $m['forma_pagamento_id'] ?>"
                                             data-local="<?= $m['local'] ?>"
                                             data-pago="<?= $m['pago'] ?>"
                                             data-prox-data="<?= $m['proxima_manut_data'] ?>"
                                             data-prox-km="<?= $m['proxima_manut_km'] ?>"
-                                            data-carro="<?= $carroId ?>">
+                                            data-carro="<?= $carroId ?>"
+                                            title="Editar manutenção">
                                             ✏️
                                         </button>
 
@@ -224,16 +217,19 @@ $manutencoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                             class="delete-btn button-icon"
                                             data-id="<?= $m['id'] ?>"
                                             data-carro="<?= $m['carro_id'] ?>"
-                                            title="Excluir">🗑️
+                                            title="Excluir manutenção">
+                                            🗑️
                                         </button>
 
                                         <button
                                             class="toggle-details button-icon"
                                             aria-expanded="false"
-                                            title="Visualizar Detalhes">👁️
+                                            title="Visualizar Detalhes">
+                                            👁️
                                         </button>
                                     </td>
                                 </tr>
+                                
                             <?php endforeach; ?>
                         <?php else: ?>
                             <tr class="no-data">
@@ -263,7 +259,7 @@ $manutencoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="modal-content">
             <span class="close-modal" id="fecharModalManutencao">&times;</span>
             <h2>Adicionar Manutenção</h2>
-            <div id="alerta" class="hidden"></div>
+            <div id="alerta" class="hidden msg"></div>
             <form id="form-manutencao" action="../actions/add_manutencao.php" method="post">
                 <input type="hidden" name="carro_id" value="<?= isset($carroId) ? $carroId : '' ?>">
 
@@ -277,7 +273,10 @@ $manutencoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <input type="number" name="km" id="km">
 
                 <label for="valor">Valor (R$):</label>
-                <input type="number" step="0.01" name="valor" id="valor">
+                <input type="number" step="0.01" name="valor" id="valor" required>
+
+                <label for="forma_pagamento_id">Forma de Pagamento:</label>
+                <select name="forma_pagamento_id" id="forma_pagamento" required></select>
 
                 <label for="local">Local:</label>
                 <input type="text" name="local" id="local">
@@ -306,7 +305,7 @@ $manutencoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="modal-content">
             <span class="close" id="fecharModalEdicao">&times;</span>
             <h2>Editar Manutenção</h2>
-            <div id="alerta-edicao" class="hidden"></div>
+            <div id="alerta-edicao" class="hidden msg"></div>
             <form id="form-editar-manutencao" method="post" action="../actions/edit_manutencao.php">
                 <input type="hidden" name="id" id="edit-id">
                 <input type="hidden" name="carro_id" id="edit-carro">
@@ -322,6 +321,9 @@ $manutencoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 <label>Valor</label>
                 <input type="number" step="0.01" name="valor" id="edit-valor">
+
+                <label>Forma de Pagamento</label>
+                <select name="forma_pagamento_id" id="edit-form-pgto"></select>
 
                 <label>Local</label>
                 <input type="text" name="local" id="edit-local">

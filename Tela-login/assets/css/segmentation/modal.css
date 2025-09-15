@@ -48,12 +48,40 @@
 
 .modal-content input,
 .modal-content select,
-.modal-content textarea {
+.modal-content textarea, 
+.modal-content select {
   width: 100%;
   padding: 0.5rem 0.75rem;
   border-radius: 6px;
   border: 1px solid #ccc;
   font-size: 0.9rem;
+  font-family: var(--font-pricipal);
+}
+
+.modal-content select {
+  background: var(--cor4);
+}
+
+.modal-content textarea {
+  height: 50px;
+  resize: none;
+}
+
+input[tipe="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+input[type="checkbox"] {
+  content: "";
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  margin-right: 8px;
+  background-color: var(--cor5);
+  border: 1px solid #ccc;
 }
 
 /* Botão salvar */
@@ -70,6 +98,14 @@
 }
 .modal-content button[type="submit"]:hover {
   background: #1b5fbf;
+}
+
+.msg{
+  margin: 10px auto;
+  padding: 15px; 
+  border-radius: 3px;
+  text-align: center;
+  background: #bbffbb;
 }
 
 /* ===== Responsividade ===== */

@@ -8,7 +8,7 @@ async function carregarOpcoesFormaPagamento() {
 
         dados.forEach(opcao => {
             let elemento = document.createElement("option");
-            elemento.value = opcao.id;
+            elemento.value = opcao.nome;
             elemento.textContent = opcao.nome;
             select.appendChild(elemento);
         });

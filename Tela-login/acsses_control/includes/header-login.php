@@ -44,13 +44,13 @@ $tipo = $_SESSION['tipo'];
          <i class="fa-solid fa-bars menu-toggle" onclick="clickMenu()" id="menu"></i>
         <nav id="itens">
             <ul>
-                <li><a href="../../index.php">Início</a></li>
+                <li><a href="../../index.php">Financeiro</a></li>
                 <?php if ($tipo === 'admin'): ?>
                     <li><a href="perfil.php">Meu Perfil</a></li>
                     <li><a href="dashboard.php">Dashboard</a></li>
                     <li><a href="painel_admin.php">Painel Administrativo</a></li>
                 <?php endif; ?>
-                <li><a href="logout.php">Sair</a></li>
+                <li><a href="logout.php">Logout</a></li>
             </ul>
         </nav>
     </header>

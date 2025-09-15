@@ -59,3 +59,58 @@ Vamos começar com esta primeira página.
             )
         ");
         $stmt->execute($dadosFinanceiros);
+
+
+        DESCRIBE forma_pagamento;
+
+        id	int(11)	NO	PRI	NULL	auto_increment	
+        nome	varchar(100)	NO		NULL		
+
+
+        
+        DESCRIBE manutencoes_carro;
+
+        id	int(11)	NO	PRI	NULL	auto_increment	
+        carro_id	int(11)	NO	MUL	NULL		
+        usuario_id	int(11)	NO	MUL	NULL		
+        tipo_id	int(11)	NO		NULL		
+        descricao	text	YES		NULL		
+        data	date	NO		NULL		
+        km	int(11)	YES		NULL		
+        valor	decimal(10,2)	YES		NULL		
+        local	varchar(100)	YES		NULL		
+        pago	tinyint(1)	YES		0		
+        proxima_manut_data	date	YES		NULL		
+        proxima_manut_km	int(11)	YES		NULL		
+        criado_em	timestamp	NO		current_timestamp()		
+        transacao_id	int(11)	YES		NULL		
+        forma_pagamento_id	int(11)	YES	MUL	NULL		
+
+
+        
+        Mostrando registros 0 -  2 (3 no total, Consulta levou 0.0003 segundos.)
+
+        Mostrando registros 0 -  7 (8 no total, Consulta levou 0.0002 segundos.)
+
+        SELECT id, forma_pagamento_id FROM manutencoes_carro;
+
+        id	forma_pagamento_id	
+        76	1	
+        77	2	
+        78	8	
+
+
+        SELECT * FROM forma_pagamento;
+        
+        id	nome
+        1	Boleto Bancário	
+        2	Cartão de Crédito	
+        3	Cheque	
+        4	Crédito em Conta	
+        5	Débito Automático	
+        6	Débito em Conta	
+        7	Espécie	
+        8	PIX	
+
+
+

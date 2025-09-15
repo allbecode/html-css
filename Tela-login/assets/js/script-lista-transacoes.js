@@ -58,6 +58,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Editar transações
     async function ativarModoEdicao(linha) {
+
+        // 🔒 Bloqueia se a linha for vinculada a manutenção
+        if (linha.dataset.vinculo === "manutencao") {
+            alert("Esta transação está vinculada a uma manutenção e só pode ser editada pelo módulo de Manutenções.");
+            return;
+        }
+
         const campos = linha.querySelectorAll('[data-field]');
         const botaoSalvar = linha.querySelector('.button-icon.salvar');
         const botaoExcluir = linha.querySelector('.button-icon.delete');
@@ -262,5 +269,5 @@ document.addEventListener('DOMContentLoaded', function () {
             atualizarSelecao(linhaSelecionadaIndex);
         }
     });
- focarPrimeiroCampo();
+    focarPrimeiroCampo();
 });

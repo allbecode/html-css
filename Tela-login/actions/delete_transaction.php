@@ -14,6 +14,28 @@ $usuario_id = $_SESSION['usuario_id'] ?? $_SESSION['id'] ?? null; // Captura o I
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
     $id = $_POST['id'];
 
+// 🔒 Verifica se a transação está vinculada a uma manutenção
+    $stmtCheck = $pdo->prepare("
+        SELECT m.id AS manutencao_id
+        FROM transacoes t
+        LEFT JOIN manutencoes_carro m ON m.transacao_id = t.id
+        WHERE t.id = :id AND t.usuario_id = :usuario_id
+    ");
+    $stmtCheck->execute([
+        ':id' => $id,
+        ':usuario_id' => $usuario_id
+    ]);
+    $vinculo = $stmtCheck->fetch(PDO::FETCH_ASSOC);
+
+    if ($vinculo && !empty($vinculo['manutencao_id'])) {
+        echo json_encode([
+            'status' => 'erro',
+            'mensagem' => 'Esta transação está vinculada a uma manutenção e não pode ser excluída pelo módulo financeiro.'
+        ]);
+        exit;
+    }
+
+    // 🔹 Só executa se não tiver vínculo
     $stmt = $pdo->prepare("DELETE FROM transacoes WHERE id = :id AND usuario_id = :usuario_id");
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->bindParam(':usuario_id', $usuario_id, PDO::PARAM_INT);

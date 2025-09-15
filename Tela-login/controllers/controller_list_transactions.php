@@ -12,11 +12,11 @@ $anoAtual = date('Y');
 
 $usuarioId = $_SESSION['usuario_id'] ?? $_SESSION['id'] ?? null; // Captura o ID do usuário logado
 
-$condicoes = ["usuario_id = :usuario_id"]; // Filtro obrigatório
+$condicoes = ["t.usuario_id = :usuario_id"]; // Filtro obrigatório
 $params = [':usuario_id' => $usuarioId];
 
 if (!empty($_GET['tipo'])) {
-    $condicoes[] = "tipo = :tipo";
+    $condicoes[] = "t.tipo = :tipo";
     $params[':tipo'] = $_GET['tipo'];
 }
 
@@ -31,18 +31,27 @@ if (!empty($_GET['mes'])) {
 }
 
 if (!empty($_GET['nome'])) {
-    $condicoes[] = "nome LIKE :nome";
+    $condicoes[] = "t.nome LIKE :nome";
     $params[':nome'] = '%' . $_GET['nome'] . '%';
 }
 
 if (isset($_GET['pago']) && $_GET['pago'] !== '') {
-    $condicoes[] = "pago = :pago";
+    $condicoes[] = "t.pago = :pago";
     $params[':pago'] = $_GET['pago'];
 }
 
 $whereSQL = 'WHERE ' . implode(' AND ', $condicoes);
 
-$sql = "SELECT * FROM transacoes $whereSQL ORDER BY data_vencimento ASC";
+// 🔹 Query ajustada com LEFT JOIN para buscar vínculo com manutenção
+$sql = "SELECT 
+            t.*, 
+            m.id AS manutencao_id
+        FROM transacoes t
+        LEFT JOIN manutencoes_carro m 
+            ON m.transacao_id = t.id
+        $whereSQL 
+        ORDER BY t.data_vencimento ASC";
+
 $stmt = $pdo->prepare($sql);
 $stmt->execute($params);
 $transacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);

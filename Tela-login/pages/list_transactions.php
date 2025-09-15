@@ -78,7 +78,9 @@ include '../includes/header.php';
                     </thead>
                     <tbody>
                         <?php foreach ($transacoes as $transacao): ?>
-                            <tr data-id="<?= $transacao['id'] ?>" class="transacao-linha">
+                            <tr class="transacao-linha"
+                            data-id="<?= $transacao['id'] ?>"  
+                            data-vinculo="<?= !empty($transacao['manutencao_id']) ? 'manutencao' : 'livre' ?>">
                                 <td data-field="nome">
                                     <?php echo htmlspecialchars($transacao['nome']); ?>
                                 </td>

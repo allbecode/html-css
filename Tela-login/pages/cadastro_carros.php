@@ -40,11 +40,93 @@ $carros = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="../assets/css/segmentation/carros.css">
     <link rel="stylesheet" href="../assets/css/segmentation/modal.css">
 
+
     <style>
+        .hidden {
+            display: none;
+        }
+
+        #form-carro {
+            margin-top: 15px;
+            padding: 15px;
+            /* border: 1px solid #ddd; */
+            border-radius: 10px;
+            /* background: #f9f9f9; */
+
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: all 0.4s ease;
+
+        }
+
+        #form-carro.show {
+            max-height: 600px;
+            opacity: 1;
+        }
+
+        #form-carro > p {
+            margin: 0 auto;
+            margin-bottom: 20px;
+        }
+
+
+        button.btn-abrir {
+            background: green;
+            text-align: center;
+            color: while;
+            width: 50px;
+            height: 50px;
+            padding: 3px 8px;
+            font-weight: 600;
+
+            border: 2px solid green;
+            border: none;
+            border-radius: 50%;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        button.btn-abrir:hover {
+            background: none;
+            border: 2px solid green;
+            color: green;
+        }
+
+        form p {
+            grid-column: span 2;
+            justify-self: center;
+
+        }
+
+        .container-btn-abrir p {
+            margin-top: 10px;
+            color: green;
+        }
+
+        .badge-carro {
+            display: inline-block;
+            min-width: 20px;
+            min-height: 20px;
+            padding: 2px 7px;
+            border-radius: 50%;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 8px;
+            vertical-align: middle;
+            text-align: center;
+            background: #e63946;
+            color: #fff;
+            line-height: 1;
+        }
+
+
 
     </style>
 
     <script src="../assets//js//script-manutencoes.js" defer></script>
+    <script src="../assets//js/script-carros.js" defer></script>
 
 </head>
 
@@ -56,45 +138,59 @@ $carros = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             <!-- Formulário de Cadastro -->
 
-            <p>Por favor, preencha os campos abaixo:</p>
+            <!-- <p>Por favor, preencha os campos abaixo:</p> -->
 
-            <form method="post" action="../actions/add_carro.php" class="form-geral">
-                <!-- <label>Marca:</label> -->
+            <!-- Botão para abrir o formulário -->
+            <div class="container-btn-abrir">
+                <button
+                    class="btn-abrir"
+                    id="btn-novo-carro"
+                    type="button">
+                    +
+                </button>
+                <p>Novo Carro</p>
+            </div>
+
+            <!-- Formulário inicialmente oculto -->
+            <form id="form-carro" method="post" action="../actions/add_carro.php" >
+                
+                    <p>Por favor, preencha os campos abaixo:</p>
+
+                <input type="text" name="apelido" placeholder="Nome (opcional)">
+                
                 <input type="text" name="marca" required placeholder="Marca">
 
-                <!-- <label>Modelo:</label> -->
                 <input type="text" name="modelo" required placeholder="Modelo">
 
-                <!-- <label>Ano:</label> -->
                 <select name="ano" id="ano" required>
                     <option value="">Ano</option>
-                    <?php for ($a = (date('Y') - 60); $a <= (date('Y') + 1); $a++) {; ?>
+                    <?php for ($a = (date('Y') - 60); $a <= (date('Y') + 1); $a++) { ?>
                         <option value="<?= $a ?>"><?= $a ?></option>
-                    <?php }; ?>
+                    <?php } ?>
                 </select>
-                <!-- <label>Placa:</label> -->
+
                 <input type="text" name="placa" maxlength="10" required placeholder="Placa">
 
-                <!-- <label>Renavan:</label> -->
-                <input type="text" name="renavan" maxlength="20" placeholder="Renava (opcional)">
+                <input type="text" name="renavan" maxlength="20" placeholder="Renavam (opcional)">
 
-                <!-- <label>Apelido (opcional):</label> -->
-                <input type="text" name="apelido" placeholder="Apelido (opcional)">
+                
 
                 <button type="submit">Adicionar Carro</button>
+
             </form>
+
 
             <!-- Listagem de Carros -->
             <h3>Meus Carros</h3>
             <table>
                 <thead>
                     <tr>
+                        <th>Apelido</th>
                         <th>Marca</th>
                         <th>Modelo</th>
                         <th>Ano</th>
                         <th>Placa</th>
                         <th>Renavan</th>
-                        <th>Apelido</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -104,24 +200,30 @@ $carros = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <!-- Linha em modo edição -->
                             <form method="post" action="../actions/update_carro.php">
                                 <tr>
+                                    <td data-label="Nome">
+                                        <input type="text" name="apelido" value="<?= esc($carro['apelido']) ?>">
+                                    </td>
+
                                     <td data-label="Marca">
                                         <input type="text" name="marca" value="<?= esc($carro['marca']) ?>" required>
                                     </td>
+
                                     <td data-label="Modelo">
                                         <input type="text" name="modelo" value="<?= esc($carro['modelo']) ?>" required>
                                     </td>
+
                                     <td data-label="Ano">
                                         <input type="number" name="ano" value="<?= esc($carro['ano']) ?>" required>
                                     </td>
+
                                     <td data-label="Placa">
                                         <input type="text" name="placa" value="<?= esc($carro['placa']) ?>" required>
                                     </td>
+
                                     <td data-label="Renavan">
                                         <input type="text" name="renavan" value="<?= esc($carro['renavan']) ?>">
                                     </td>
-                                    <td data-label="Apelido">
-                                        <input type="text" name="apelido" value="<?= esc($carro['apelido']) ?>">
-                                    </td>
+                                    
                                     <td data-label="Ações">
                                         <input type="hidden" name="id" value="<?= $carro['id'] ?>">
                                         <button class="button-icon" type="submit" title="Salvar">💾</button>
@@ -131,16 +233,23 @@ $carros = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             </form>
                         <?php else: ?>
                             <!-- Linha normal -->
-                            <tr>
+                            <tr data-carro-id="<?= (int)$carro['id']?>">
+                                <td>
+                                    <span class="badge-carro" id="badge-carro-<?= (int)$carro['id'] ?>" style="display:none" aria-hidden="true"></span>
+                                </td>
+                                <td data-label="Nome">
+                                    <!-- <span class="badge-carro" id="badge-carro-<?= (int)$carro['id'] ?>" style="display:none" aria-hidden="true"></span> -->
+                                    <?= esc($carro['apelido']) ?>
+                                    
+                                </td>
                                 <td data-label="Marca"><?= esc($carro['marca']) ?></td>
                                 <td data-label="Modelo"><?= esc($carro['modelo']) ?></td>
                                 <td data-label="Ano"><?= esc($carro['ano']) ?></td>
                                 <td data-label="Placa"><?= esc($carro['placa']) ?></td>
                                 <td data-label="Renavan"><?= esc($carro['renavan']) ?></td>
-                                <td data-label="Apelido"><?= esc($carro['apelido']) ?></td>
                                 <td data-label="Ações">
                                     <a class="button-icon" href="cadastro_carros.php?edit=<?= $carro['id'] ?>" title="Editar">✏️</a>
-                                   
+
                                     <a class="button-icon" href="../actions/delete_carro.php?id=<?= $carro['id'] ?>"
                                         onclick="return confirm('Excluir este carro?')" title="Excluir">🗑️</a>
 
